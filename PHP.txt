@@ -1,0 +1,28 @@
+- Local Host 127.0.0.1 >> "There is no place like 127.0.0.1"
+
+- at pure PHP web pages we omit the closing tag of php script "?>"
+
+- Don't nest multi line comments
+
+- String Concatanation $s .= 'Bisho'  ==>  $s = $s + 'Bisho' 
+
+- Getting variable type
+  # gettype() >> to get the type of a variable briefly
+  # var_dump() >> to get the type of a variable in details
+
+- Resource datatype >> An variable that calls an external file or database out of the PHP code. It becomes a 
+  resource variable when the connection success but it becomes a False-Boolean variable when the connection fails.
+  Example : $conn = mysqli('localhost', 'root', 'password', 'Mydb');
+            $fp   = fopen('bisho.txt', 'r');
+
+
+
+- Difference between single and double quoted strings
+  
+  # Single quotes >> The interpreter doesn't try to evaluate the variables in it like 
+    'Hi His is $Dollar' >>> Hi His is $Dollar
+  # Double quotes >> The interpreter tries to evaluate the variables in it like 
+    'Hi His is $Dollar' >>> No variable called $Dollar (Assuming that no variable $Dollar declared)
+
+-Defining a constant >> define("CONSTANT NAME" , constant value or variable);
+
