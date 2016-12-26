@@ -4,7 +4,7 @@
 
 - Don't nest multi line comments
 
-- String Concatanation $s .= 'Bisho'  ==>  $s = $s + 'Bisho' 
+- String Concatanation $s .= 'Bisho';  ==>  $s = $s . 'Bisho'; 
 
 - Getting variable type
   # gettype() >> to get the type of a variable briefly
@@ -15,8 +15,6 @@
   Example : $conn = mysqli('localhost', 'root', 'password', 'Mydb');
             $fp   = fopen('bisho.txt', 'r');
 
-
-
 - Difference between single and double quoted strings
   
   # Single quotes >> The interpreter doesn't try to evaluate the variables in it like 
@@ -24,5 +22,51 @@
   # Double quotes >> The interpreter tries to evaluate the variables in it like 
     'Hi His is $Dollar' >>> No variable called $Dollar (Assuming that no variable $Dollar declared)
 
--Defining a constant >> define("CONSTANT NAME" , constant value or variable);
+- Defining a constant >> define("CONSTANT NAME" , constant value or variable);
+  Constants are global and used in website config.
 
+- __FILE__ >> constant contains current file name
+  __DIR__ >>  constant contains the current directory name
+  __METHOD__, __FUCTION__,__NAMESPACE__.
+
+- $a ==  $b is the equal operator. It returns true if only the two values are equal
+  $a === $b is the identity operator. It returns true if the two values and data types are equal
+  Example : $a = 5; $b = '5'; 
+            $a == $b >> true .... but $a === $b >> false
+
+- Difference between 'and' and && 
+  
+  # and >> has lower precedence than equal operator '='
+    example : $a = true and false >> ($a = true) and false .... so $a equals true and that is wrong.
+  # &&  >> best practice to use it because it has higher precedence than equal operator. It doesn's cause any   
+    problem with using assignment and logical operators.
+
+- die(string status) === exit(). It stops the excution of the current script, excutes the destructors and shutdown
+  functions and if there is a status between parentheses It will be displayed. 
+
+- Error control operator '@'. It turns off the errors in php statement.
+  $fp = @fopen('Bisho.txt', 'r') or die('There is no file')
+  note : '=' is higher precedence than 'or' so the interpreter tries to evaluate fopen() first. If it returned true it will leave the statement otherwise it will turn off the error and excute the after-or statement.
+  It may be used with include(), fopen() and database connection
+
+- We can use variable functions. 
+  Example : $x = 'hello'; $x(); >> This will trigger the function hello. It's like using hello();
+
+- Difference between echo and print 
+  
+  # They are both php constructs and doesn't need parentheses
+  # print can have many arguments not like echo.
+  # print have a return value so it's little slower than echo
+  # echo can't used in more complex expressions like $b ? print 'TRUE' : print 'FALSE'
+
+- Super global variables 
+    
+    $GLOBALS >> An assocaiative array that has all variable names in the global scope of the scope as its keys and global values as its values
+    $_SERVER >> An assocaiative array that has all server information needed
+    $_GET, $_POST, $_FILES >> has all variable sent to script from these http headers
+    More like $_ENV, $_SESSION, $_COOCKIE and $_REQUEST
+
+- htmlentities() function that escapes all html dangerous characters that passed to it.
+
+- Ternary operator ? is used like if statement with vaiable assignment
+  Example : $x = $x > $new ? $x : $new; >> This checks for the condition ($x > $new) and assign variable $x based on this condition.
