@@ -7,11 +7,11 @@
 - String Concatanation $s .= 'Bisho';  ==>  $s = $s . 'Bisho'; 
 
 - Getting variable type
-  # gettype() >> to get the type of a variable briefly
-  # var_dump() >> to get the type of a variable in details
+  # gettype() >> to get only the type of a variable.
+  # var_dump() >> to get the type and the contents of a variable in details
 
-- Resource datatype >> An variable that calls an external file or database out of the PHP code. It becomes a 
-  resource variable when the connection success but it becomes a False-Boolean variable when the connection fails.
+- Resource datatype >> A variable that calls an external file or database out of the PHP code. It becomes a 
+  resource variable when the connection succeeds but it becomes a False-Boolean variable when the connection fails.
   Example : $conn = mysqli('localhost', 'root', 'password', 'Mydb');
             $fp   = fopen('bisho.txt', 'r');
 
@@ -41,8 +41,8 @@
   # &&  >> best practice to use it because it has higher precedence than equal operator. It doesn's cause any   
     problem with using assignment and logical operators.
 
-- die(string status) === exit(). It stops the excution of the current script, excutes the destructors and shutdown
-  functions and if there is a status between parentheses It will be displayed. 
+- die(string status) === exit(). It stops the excution of the current script, excutes the destructors and   
+  shutdown functions and if there is a status between parentheses It will be displayed. 
 
 - Error control operator '@'. It turns off the errors in php statement.
   $fp = @fopen('Bisho.txt', 'r') or die('There is no file')
@@ -70,3 +70,125 @@
 
 - Ternary operator ? is used like if statement with vaiable assignment
   Example : $x = $x > $new ? $x : $new; >> This checks for the condition ($x > $new) and assign variable $x based on this condition.
+
+- foreach($array_name as value) >> loops through the values of the array
+  foreach($array_name as $key => $value) >> loops through the keys and values of the associative array.
+
+- To loop through rows of a database, We can use a nested foreach loop :
+    Example : foreach($b as $key => $row)
+              {
+                echo $key . "<br>";            
+                foreach($row as $field => $value)
+                {
+                  echo $field . '---->' . $value . '<br>';
+                }
+                echo '----------------------------------------<br>';
+              }
+
+- var_dump(A no-value-returning-function) >> NULL
+
+- rand(from, to) >> getting random value from the range inputted.
+
+- Difference between require and include:
+    # including file with require stops the whole script if the file doesn't exist, require_once includes the 
+      file just once.
+    # including file with include doesn't stop the script if the file doesn't exist and just shows a warning 
+      that the file doesn't exist, include_once includes the file just once.
+
+- We musn't include any file twice or more, It will cause an error because we will declare the variables and 
+  the functions in the main script more than one time. 
+
+- phpversion() >> shows the php version of your current server.
+
+- phpinfo() >> shows info about your server, php version, server configs and more. It 's usually disabled in 
+  the production stage.      
+
+- print_r() >> prints any type of arrays in a human readable format. It is usually used within <pre></pre> to 
+  be printed in the write way in html. 
+
+- count($array) >> returns the length of an array.
+
+- We can overwrite a value of the array. $array[0] = 'Bisho';
+
+- We can add an element to the end of an indexed array with $array[] = 'Bisho' and 
+                        to the end of associative array with $array[key] = value;
+
+- floating point can't be assigned as keys in associative array. The array ignores the floating point part and 
+  deals with it as int;
+
+- Array searching methods: 
+    # in_array($item, $array) >> returns true if the item is in the array, false if not.
+    # array_search($item, $array) >> returns the index of the item in the array if exists, else returns false.
+    # array_key_exists($key, $array) >> returns true if the key exists in the array, false if not.
+
+- list() is used to assign a list of variables in one operation and it only works on numerical arrays.
+  Example : list($drink, $color, $power) = $info;
+            echo "$drink is $color and $power makes it special.\n"; >> coffee is brown and caffeine makes it 
+            special1
+
+- Adding elements to the array 
+
+  # array_push($array, $item1, ...) >> adding item to the end of the array.
+  # array_unshift($array, $item1, ...); >> adding item to the top of the array.
+
+- Removing elements from the array 
+    # array_pop($array, $item1, ...) >> removing item from the end of the array.
+    # array_popshift($array, $item1, ...); >> removing item from the top of the array.
+
+- sort($array, $sort_type) , rsort($array, $sort_type) "Reversed Sort" >> 
+    * SORT_REGULAR - compare items normally >> doesn't change types of data (orders string fistly then int).
+    * SORT_STRING - compare items as strings >> changes the whole array to strings then orders it.
+
+- asort($array, $sort_type),rasort($array, $sort_type) >> sorts associative array values normally and reversed 
+  ksort($array, $sort_type),rksort($array, $sort_type) >> sorts associative array keys normally and reversed
+
+- count($array, $mode = 0) >> counts the elements of an array 
+    * $mode = 0 or COUNT_NORMAL >> counts only the first  level of the array.
+    * $mode = 1 or COUNT_RECURSIVE >> counts recursively all the elements of the arrays in the indexes of the 
+                                      main array
+
+- explode($delimite, $array, [$limit]) >> it splits the string about the delimiter and returned it to an array
+  * if limit > 0, it will split the string to maximum indecies of that limit.
+  * if limit < 0, it will split the string ignoring the limit number inputted from the end of the array
+
+- array_reverse($array); >> returns a reversed array.
+
+- shuffle($array); >> shuffles the array inputted.
+
+- array_fill($start, $number, $value); >> returns an array filled with the value repeated from the start 
+  position and repeated $number times.
+
+- array_sum($array); >> returns the sum of the values in the array "ignores strings".
+
+- array_rand($array, $num = 1) >> returns an array of $number random keys from the main array. If $num = 1 it  
+  will return only int not an array.
+
+- array_unique($array); >> returns the main array without repeated elements.
+
+- extract($array, $mode, $prefix) >> it turns the key value pairs in the associative array to a variables and 
+  values in the current script.
+    * EXTR_OVERWRITE   >> If there is a collision, overwrite the existing variable. 
+    * EXTR_SKIP        >> If there is a collision, don't overwrite the existing variable.
+    * EXTR_PREFIX_ALL  >> Prefix all variable names with prefix.
+    * EXTR_PREFIX_SAME >> If there is a collision, prefix the variable name with prefix.
+
+- compact($array_of_strings = 'str1','str2'....); returns an associative array with pairs of keys from the 
+  variable name from the string inputted and a value from the corresponding variable value.
+  It is usually used for debugging a script
+  Example : $arr = compact(explode(' ', 'var1 var2 var3'));
+
+- join() = implode($delimiter, $array) >> the opposite of explode .. It returns a string from concatanating 
+  all the elements in the array seperated by the delimiter inputted.
+
+- reset($array) >> returns the first element of that array.
+  end($array)   >> returns the last element of that array.
+
+- str_split($str, $length = 1); >> splits the string to chunks of length chars and put them in an array.
+
+- chunk_split($str, $length, $delimiter = '\n'); >> returns the string with the $delimiter between every   
+  $length characters of it. 
+ 
+
+
+
+
