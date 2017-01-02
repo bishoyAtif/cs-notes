@@ -1,0 +1,48 @@
+-----------------------------
+<<<<<<<    General    >>>>>>>
+-----------------------------
+
+- <DOCTYPE html> "renders the page as html5 page"
+
+
+
+
+
+-------------------------------
+<<<<<<<    Text tags    >>>>>>>
+-------------------------------
+
+- <h1> ... <h6> "Heading : affects SEO"
+
+- <i>, <em>       "Italic"
+  <b>, <strong>   "Bold" 
+  <u>, <ins>      "Underlined or inserted" 
+  <small>         "Small text"
+  <mark>          "Highlight" 
+  <sub>           "Sub text" 
+  <sub>           "Super text" 
+  <del>           "Strike-out text"
+
+- <img> "Show image in the page"
+  attr:
+    # src="path/to/image"
+    # alt="text for screen readers"
+    # title="text appears when the mouse points to it" 
+    # width="..px" ... height="..px" 
+
+
+- <a> Text appears in the page </a> "Anchor link"
+  attr:
+    # href="Link or # (id of an element to go in the same page)"
+    # target="self >> opens the link in the same tab ... blank >> opens the link in another tab"
+
+- <ul type="circle, square, bullet"></ul> "Unordered list"
+  <li></li> "List item"
+
+
+
+
+
+
+
+

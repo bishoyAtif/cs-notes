@@ -1,8 +1,14 @@
+============================================================================================================
+
+                                    -----------------------------
+                                    <<<<<<<    General    >>>>>>>
+                                    -----------------------------
+
 - Local Host 127.0.0.1 >> "There is no place like 127.0.0.1"
 
 - at pure PHP web pages we omit the closing tag of php script "?>"
 
-- Don't nest multi line comments
+
 
 - String Concatanation $s .= 'Bisho';  ==>  $s = $s . 'Bisho'; 
 
@@ -15,12 +21,6 @@
   Example : $conn = mysqli('localhost', 'root', 'password', 'Mydb');
             $fp   = fopen('bisho.txt', 'r');
 
-- Difference between single and double quoted strings
-  
-  # Single quotes >> The interpreter doesn't try to evaluate the variables in it like 
-    'Hi His is $Dollar' >>> Hi His is $Dollar
-  # Double quotes >> The interpreter tries to evaluate the variables in it like 
-    'Hi His is $Dollar' >>> No variable called $Dollar (Assuming that no variable $Dollar declared)
 
 - Defining a constant >> define("CONSTANT NAME" , constant value or variable);
   Constants are global and used in website config.
@@ -34,12 +34,6 @@
   Example : $a = 5; $b = '5'; 
             $a == $b >> true .... but $a === $b >> false
 
-- Difference between 'and' and && 
-  
-  # and >> has lower precedence than equal operator '='
-    example : $a = true and false >> ($a = true) and false .... so $a equals true and that is wrong.
-  # &&  >> best practice to use it because it has higher precedence than equal operator. It doesn's cause any   
-    problem with using assignment and logical operators.
 
 - die(string status) === exit(). It stops the excution of the current script, excutes the destructors and   
   shutdown functions and if there is a status between parentheses It will be displayed. 
@@ -49,27 +43,34 @@
   note : '=' is higher precedence than 'or' so the interpreter tries to evaluate fopen() first. If it returned true it will leave the statement otherwise it will turn off the error and excute the after-or statement.
   It may be used with include(), fopen() and database connection
 
+============================================================================================================
+
+                            -------------------------------------------
+                            <<<<<<<    Variables & Operators    >>>>>>>
+                            -------------------------------------------
+
 - We can use variable functions. 
   Example : $x = 'hello'; $x(); >> This will trigger the function hello. It's like using hello();
 
-- Difference between echo and print 
-  
-  # They are both php constructs and doesn't need parentheses
-  # print can have many arguments not like echo.
-  # print have a return value so it's little slower than echo
-  # echo can't used in more complex expressions like $b ? print 'TRUE' : print 'FALSE'
-
-- Super global variables 
-    
+- Super global variables     
     $GLOBALS >> An assocaiative array that has all variable names in the global scope of the scope as its keys and global values as its values
     $_SERVER >> An assocaiative array that has all server information needed
     $_GET, $_POST, $_FILES >> has all variable sent to script from these http headers
     More like $_ENV, $_SESSION, $_COOCKIE and $_REQUEST
 
-- htmlentities() function that escapes all html dangerous characters that passed to it.
+============================================================================================================
 
-- Ternary operator ? is used like if statement with vaiable assignment
-  Example : $x = $x > $new ? $x : $new; >> This checks for the condition ($x > $new) and assign variable $x based on this condition.
+                                    ----------------------------
+                                    <<<<<<<    Arrays    >>>>>>>
+                                    ----------------------------
+
+- We can add an element to the end of an indexed array with $array[] = 'Bisho' and 
+                        to the end of associative array with $array[key] = value;
+
+- We can overwrite a value of the array. $array[0] = 'Bisho';
+
+- floating point can't be assigned as keys in associative array. The array ignores the floating point part and 
+  deals with it as int;
 
 - foreach($array_name as value) >> loops through the values of the array
   foreach($array_name as $key => $value) >> loops through the keys and values of the associative array.
@@ -85,51 +86,28 @@
                 echo '----------------------------------------<br>';
               }
 
-- var_dump(A no-value-returning-function) >> NULL
+- extract($array, $mode, $prefix) >> it turns the key value pairs in the associative array to a variables and 
+  values in the current script.
+    * EXTR_OVERWRITE   >> If there is a collision, overwrite the existing variable. 
+    * EXTR_SKIP        >> If there is a collision, don't overwrite the existing variable.
+    * EXTR_PREFIX_ALL  >> Prefix all variable names with prefix.
+    * EXTR_PREFIX_SAME >> If there is a collision, prefix the variable name with prefix.
 
-- rand(from, to) >> getting random value from the range inputted.
+- compact($array_of_strings = 'str1','str2'....); returns an associative array with pairs of keys from the 
+  variable name from the string inputted and a value from the corresponding variable value.
+  It is usually used for debugging a script
+  Example : $arr = compact(explode(' ', 'var1 var2 var3'));
 
-- Difference between require and include:
-    # including file with require stops the whole script if the file doesn't exist, require_once includes the 
-      file just once.
-    # including file with include doesn't stop the script if the file doesn't exist and just shows a warning 
-      that the file doesn't exist, include_once includes the file just once.
+- count($array, $mode = 0) >> counts the elements of an array 
+    * $mode = 0 or COUNT_NORMAL >> counts only the first  level of the array.
+    * $mode = 1 or COUNT_RECURSIVE >> counts recursively all the elements of the arrays in the indexes of the 
+                                      main array
 
-- We musn't include any file twice or more, It will cause an error because we will declare the variables and 
-  the functions in the main script more than one time. 
-
-- phpversion() >> shows the php version of your current server.
-
-- phpinfo() >> shows info about your server, php version, server configs and more. It 's usually disabled in 
-  the production stage.      
-
-- print_r() >> prints any type of arrays in a human readable format. It is usually used within <pre></pre> to 
-  be printed in the write way in html. 
-
-- count($array) >> returns the length of an array.
-
-- We can overwrite a value of the array. $array[0] = 'Bisho';
-
-- We can add an element to the end of an indexed array with $array[] = 'Bisho' and 
-                        to the end of associative array with $array[key] = value;
-
-- floating point can't be assigned as keys in associative array. The array ignores the floating point part and 
-  deals with it as int;
-
-- Array searching methods: 
-    # in_array($item, $array) >> returns true if the item is in the array, false if not.
-    # array_search($item, $array) >> returns the index of the item in the array if exists, else returns false.
-    # array_key_exists($key, $array) >> returns true if the key exists in the array, false if not.
-
-- list() is used to assign a list of variables in one operation and it only works on numerical arrays.
-  Example : list($drink, $color, $power) = $info;
-            echo "$drink is $color and $power makes it special.\n"; >> coffee is brown and caffeine makes it 
-            special1
+- array_reverse($array); >> returns a reversed array.
 
 - Adding elements to the array 
-
-  # array_push($array, $item1, ...) >> adding item to the end of the array.
-  # array_unshift($array, $item1, ...); >> adding item to the top of the array.
+    # array_push($array, $item1, ...) >> adding item to the end of the array.
+    # array_unshift($array, $item1, ...); >> adding item to the top of the array.
 
 - Removing elements from the array 
     # array_pop($array, $item1, ...) >> removing item from the end of the array.
@@ -142,16 +120,10 @@
 - asort($array, $sort_type),rasort($array, $sort_type) >> sorts associative array values normally and reversed 
   ksort($array, $sort_type),rksort($array, $sort_type) >> sorts associative array keys normally and reversed
 
-- count($array, $mode = 0) >> counts the elements of an array 
-    * $mode = 0 or COUNT_NORMAL >> counts only the first  level of the array.
-    * $mode = 1 or COUNT_RECURSIVE >> counts recursively all the elements of the arrays in the indexes of the 
-                                      main array
-
-- explode($delimite, $array, [$limit]) >> it splits the string about the delimiter and returned it to an array
-  * if limit > 0, it will split the string to maximum indecies of that limit.
-  * if limit < 0, it will split the string ignoring the limit number inputted from the end of the array
-
-- array_reverse($array); >> returns a reversed array.
+- Array searching methods: 
+    # in_array($item, $array) >> returns true if the item is in the array, false if not.
+    # array_search($item, $array) >> returns the index of the item in the array if exists, else returns false.
+    # array_key_exists($key, $array) >> returns true if the key exists in the array, false if not.
 
 - shuffle($array); >> shuffles the array inputted.
 
@@ -165,29 +137,133 @@
 
 - array_unique($array); >> returns the main array without repeated elements.
 
-- extract($array, $mode, $prefix) >> it turns the key value pairs in the associative array to a variables and 
-  values in the current script.
-    * EXTR_OVERWRITE   >> If there is a collision, overwrite the existing variable. 
-    * EXTR_SKIP        >> If there is a collision, don't overwrite the existing variable.
-    * EXTR_PREFIX_ALL  >> Prefix all variable names with prefix.
-    * EXTR_PREFIX_SAME >> If there is a collision, prefix the variable name with prefix.
+- reset($array) >> returns the first element of that array.
+  end($array)   >> returns the last element of that array.
 
-- compact($array_of_strings = 'str1','str2'....); returns an associative array with pairs of keys from the 
-  variable name from the string inputted and a value from the corresponding variable value.
-  It is usually used for debugging a script
-  Example : $arr = compact(explode(' ', 'var1 var2 var3'));
+
+============================================================================================================
+
+                                    -----------------------------
+                                    <<<<<<<    Strings    >>>>>>>
+                                    -----------------------------
+
+- explode($delimite, $array, [$limit]) >> it splits the string about the delimiter and returned it to an array
+  * if limit > 0, it will split the string to maximum indecies of that limit.
+  * if limit < 0, it will split the string ignoring the limit number inputted from the end of the array
 
 - join() = implode($delimiter, $array) >> the opposite of explode .. It returns a string from concatanating 
   all the elements in the array seperated by the delimiter inputted.
 
-- reset($array) >> returns the first element of that array.
-  end($array)   >> returns the last element of that array.
 
 - str_split($str, $length = 1); >> splits the string to chunks of length chars and put them in an array.
 
 - chunk_split($str, $length, $delimiter = '\n'); >> returns the string with the $delimiter between every   
-  $length characters of it. 
- 
+  $length characters of it.
+
+- str_replace($replaced_string_array, $replace_with, $str, $count); works on strings and the values of an array
+    # If $replaced was array and $replace_with was a string it will search for all the strings in the array 
+      and replace it with the string.
+    # If $replaced was array and $replace_with was an array it will replace each value of the first array with 
+      the corresponding value in the second array "If the second array was smaller than the first, the values 
+      that have no corresponding replaces will be replaced with empty strings" 
+  Example : changing the '\n' to '<br>' in html forms to be viewd in the page as a new line.
+            $str = str_replace('/n', '<br>', $str);
+
+- str_repeat($str, $num) >> returns a string with value $str repeated $num times.
+
+- str_shuffle($str) >> returns the string $str shuffled
+
+- strlen($str) >> returns the string length
+
+- strtolower(), strtoupper() >> returns the string in lower case or upper case
+
+- ucfirst() >> upper case first, lcfirst() >> lower case first
+
+- ucwords() >> returns the string with all its words upper case.
+
+
+
+
+
+
+============================================================================================================
+
+                              --------------------------------------------
+                              <<<<<<<    What 's the difference    >>>>>>>
+                              --------------------------------------------
+
+- Difference between echo and print   
+    # They are both php constructs and doesn't need parentheses
+    # print can have many arguments not like echo.
+    # print have a return value so it's little slower than echo
+    # echo can't used in more complex expressions like $b ? print 'TRUE' : print 'FALSE'
+
+- Difference between require and include:
+    # including file with require stops the whole script if the file doesn't exist, require_once includes the 
+      file just once.
+    # including file with include doesn't stop the script if the file doesn't exist and just shows a warning 
+      that the file doesn't exist, include_once includes the file just once.
+
+- Difference between single and double quoted strings 
+    # Single quotes >> The interpreter doesn't try to evaluate the variables in it like 
+      'Hi His is $Dollar' >>> Hi His is $Dollar
+    # Double quotes >> The interpreter tries to evaluate the variables in it like 
+      'Hi His is $Dollar' >>> No variable called $Dollar (Assuming that no variable $Dollar declared)
+
+- Difference between 'and' and && 
+    # and >> has lower precedence than equal operator '='
+      example : $a = true and false >> ($a = true) and false .... so $a equals true and that is wrong.
+    # &&  >> best practice to use it because it has higher precedence than equal operator. It doesn's cause 
+      any problem with using assignment and logical operators.
+
+============================================================================================================
+
+
+
+- htmlentities() function that escapes all html dangerous characters that passed to it.
+
+- Ternary operator ? is used like if statement with vaiable assignment
+  Example : $x = $x > $new ? $x : $new; >> This checks for the condition ($x > $new) and assign variable $x based on this condition.
+
+
+
+
+- rand(from, to) >> getting random value from the range inputted.
+
+
+
+- phpversion() >> shows the php version of your current server.
+
+- phpinfo() >> shows info about your server, php version, server configs and more. It 's usually disabled in 
+  the production stage.      
+
+
+
+
+
+- list() is used to assign a list of variables in one operation and it only works on numerical arrays.
+  Example : list($drink, $color, $power) = $info;
+            echo "$drink is $color and $power makes it special.\n"; >> coffee is brown and caffeine makes it 
+            special1
+
+
+============================================================================================================
+
+                                      -------------------------------
+                                      <<<<<<<    Debugging    >>>>>>>
+                                      -------------------------------
+
+- var_dump(A no-value-returning-function) >> NULL
+
+- We musn't include any file twice or more, It will cause an error because we will declare the variables and 
+  the functions in the main script more than one time. 
+
+- Don't nest multi line comments
+
+- print_r() >> prints any type of arrays in a human readable format. It is usually used within <pre></pre> to 
+  be printed in the write way in html. 
+
+=============================================================================================================
 
 
 
