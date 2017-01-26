@@ -1,0 +1,43 @@
+
+# Types of using css with html
+
+  - head >> <link href="path/to/file" rel="stylesheet">
+
+  - <p style="color:red;font-size:30px">This is a paragraph</p>
+
+  - head >> <style>
+              p
+              {
+                color:red;
+                font-size:30px
+              }            
+            </style>
+
+# Overriding styling
+  - The later declaration of a value will override the previous ones.
+  - This works even on the included style sheets .. the later file included ' vlues will override the values 
+    of the previous ones. 
+  - The inline-styling is the most powerful one.
+  - It can used to overwrite some values in frameworks like bootstrap by including the overwriting file after 
+    it
+
+# id & class
+  - In .css :
+    #id_name {}
+    .class_name {}
+
+# Div properties
+  - background-color: red || #FF0056 || rgb(255,220,126) || rgba(255,210,21,0.2 : opicity);
+  - background-image: url('path/to/image');
+  - background-repeat: repeat(default) || no-repeat || repeat-x || repeat-y >> modify the repeat action of the 
+    photo in a div bigger than the photo.
+  - backfround-attachment: scroll(default) || fixed
+  - background-position: X% Y% >> makes the center of the background image as a percentage of the div height 
+    and width.
+
+  It can be defined in one line :
+  background: url() || none _ repeat mode _ Position _ Attachment _ Color
+
+# Text properties
+  - direction: ltr | rtl  
+  - Letter spacing

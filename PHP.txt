@@ -1,3 +1,9 @@
+// O'reilly PHP,MySQL :
+    1- Objects
+    2- Practical PHP
+    3- Mastering mysql
+
+
 ============================================================================================================
 
                                     -----------------------------
@@ -43,6 +49,7 @@
   note : '=' is higher precedence than 'or' so the interpreter tries to evaluate fopen() first. If it returned true it will leave the statement otherwise it will turn off the error and excute the after-or statement.
   It may be used with include(), fopen() and database connection
 
+- header('REFRESH:;URL=bisho.php'); >> redirects to bisho.php after seconds. 
 ============================================================================================================
 
                             -------------------------------------------
@@ -57,6 +64,25 @@
     $_SERVER >> An assocaiative array that has all server information needed
     $_GET, $_POST, $_FILES >> has all variable sent to script from these http headers
     More like $_ENV, $_SESSION, $_COOCKIE and $_REQUEST
+
+- Global variables can't be accessed directly in function scope. It can be only accessed with 
+  $GLOBALS['variable_name'].
+
+- $_SERVER['REQUEST_METHOD'] >> GET, POST, PUT and so on.
+  $_SERVER['SERVER_ADDR']    >> server ip. like 127.0.0.1.
+  $_SERVER['SERVER_NAME']    >> server name. like localhost.
+  $_SERVER['PHP_SELF']       >> returns the path to the php script.
+  $_SERVER['QUERY_STRING']   >> returns the query string attached to the link requested .. ?name=bisho&...
+
+- $_GET >> Array contains all parameters sent from the form to the current php script. It is shown in the link.
+
+- $_POST >> Array contains all parameters sent from the form to the current php script. It is not shown in the 
+            link parameters and is encrypted.
+
+- $_REQUEST >> Can act like $_GET or $_POST.
+
+- $_SESSION >> Remember your data when moving through the site .. it starts with session_start();
+               
 
 ============================================================================================================
 
@@ -154,7 +180,6 @@
 - join() = implode($delimiter, $array) >> the opposite of explode .. It returns a string from concatanating 
   all the elements in the array seperated by the delimiter inputted.
 
-
 - str_split($str, $length = 1); >> splits the string to chunks of length chars and put them in an array.
 
 - chunk_split($str, $length, $delimiter = '\n'); >> returns the string with the $delimiter between every   
@@ -181,10 +206,23 @@
 
 - ucwords() >> returns the string with all its words upper case.
 
+- addslashes($str) >> escape all quotes and slashes from the string.
 
+- stripslashes($str); >> remove all slashes before charachters escaped in the string.
 
+- strip_tags($str, $allowed_tags :: "<br><a><b> and so on");  >> remove all html and xml tags from the string.
 
+- trim($str, $charlist = '\n\t \0'), ltrim(), rtrim() >> it returns the string with its beginning and end 
+  stripped with $charlist
+  example : $str = trim($str, 'BASHIK') >> it will search in the two endings with this chars and remove them 
+  one by one.
 
+- parse_str($str,[$array]); >> parses the link and returns all key value pairs in it as a variable or in an 
+  array if inputted.
+  Example : parse_str("name=Bisho&age=19&gender=male", $array) >> makes $array associative array that have 
+  key : name with value Bisho .. ,etc
+
+- nl2br($str, [XHTML = true]); >> returns a string with all new lines converted to breaks.
 
 ============================================================================================================
 
@@ -265,6 +303,62 @@
 
 =============================================================================================================
 
+                                  ----------------------------------------
+                                  <<<<<<<    Working with files    >>>>>>>
+                                  ----------------------------------------
+
+- __DIR__ 's value is the current directory of the current script.
+
+- __FILE__ 's value is the full file name of the current script.
+
+- file_exists($file) >> reutrns true if the file exists, false if not.
+
+- is_writable($file) >> reutrns true if the file is writable, false if not.
+
+- mkdir($dir) >> making a directory named $dir.
+
+- rmdir($dir) >> removing dir named $dir.
+
+- is_dir($dir) >> returns true if the dir exists, false if not.
+
+- dirname($path) >> returns the path of the directory your file are in. 
+  Example : dirname(__FILE__) == __DIR__
+            dirname(/opt/lampp/htdocs/first_task) == '/opt/lampp/htdocs'
+
+- basename($path, $suffix) >> takes the path of the whole file and returns the file name only .. if extention 
+  of the file was inputted it will remove the extention from the returned name.
+  Example : basename(/opt/lampp/htdocs/first_task) == 'first_task'
+
+- chmod($file, $permissions) >> modified the permisstions of the file as you changes it with linux command 
+  line. 
+
+- file_put_contents($file_path, $data, $mode) >> puts the $data in the file. If not existes it will be created.
+  Mode :
+    # FILE_APPEND >> don't remove the previous file contents.
+    # LOCK_EX >> to prevent anyone else writing to the file at the same time.
+
+- file_get_content($path/to/file, $include_path, context, offset, length) >> returns the contents of the file 
+  as a string and can return a specific length from a specific offset.
+
+- copy($original_file, $target_file);
+
+- rename($original_file, $target_file); >> can be treated as move.
+
+- pathinfo($path); >> returns an array contains dirname, basename, extentsion, filename.
+
+- unlink($file_name); >> removes the file.
+
+- rmdir($directory); >> removes the directory .. must be empty.
+
+- 
 
 
+=============================================================================================================
+
+
+
+
+Filters:
+
+- filter_list() >> returns an array have all filters possible in php.
 

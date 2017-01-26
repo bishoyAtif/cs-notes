@@ -1,0 +1,29 @@
+============================================================================================================
+                                --------------------------------
+                                <<<<<<<    Web Server    >>>>>>>
+                                --------------------------------
+
+The primary function of a web server is to store, process and deliver web pages to clients. A user agent, commonly a web browser or web crawler, initiates communication by making a request for a specific resource using HTTP and the server responds with the content of that resource or an error message if unable to do so.
+
+Many generic web servers also support server-side scripting using Active Server Pages (ASP), PHP, or other scripting languages. This means that the behaviour of the web server can be scripted in separate files, while the actual server software remains unchanged. Usually, this function is used to generate HTML documents dynamically ("on-the-fly") as opposed to returning static documents. The former is primarily used for retrieving and/or modifying information from databases. The latter is typically much faster and more easily cached but cannot deliver dynamic content.
+
+Web servers are able to map the path component of a Uniform Resource Locator (URL) into:
+  * A local file system resource (for static requests)
+  * An internal or external program name (for dynamic requests)
+For a static request the URL path specified by the client is relative to the web server's root directory.
+
+Consider the following URL as it would be requested by a client:
+http://www.example.com/path/file.html
+The client's user agent will translate it into a connection to www.example.com with the following HTTP 1.1 request:
+  GET /path/file.html HTTP/1.1
+  Host: www.example.com
+
+The web server on www.example.com will append the given path to the path of its root directory. On an Apache server, this is commonly /home/www (On Unix machines, usually /var/www). The result is the local file system resource:
+/home/www/path/file.html
+
+============================================================================================================
+                                --------------------------
+                                <<<<<<<    DDoS    >>>>>>>
+                                --------------------------
+
+Distributed Denial of Service attacks. A denial-of-service attack (DoS attack) or distributed denial-of-service attack (DDoS attack) is an attempt to make a computer or network resource unavailable to its intended users

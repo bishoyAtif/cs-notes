@@ -1,0 +1,8 @@
+- What is the difference between SQL, MySQL, MySQLi, PDO ?
+    # SQL    >> Structured Query Language .. The language to treat with DBs.
+    # MySQL  >> DB Engine .. A softwere to use SQL to treat with DBs .. Like PGSQL and SQLite.
+    # MySQLi >> MySQL-Improved .. Extention in PHP to connect to the DB using MySQL.
+    # PDO    >> PHP Data Object .. Extention in PHP to connect to the DB using many DB engines Like MySQL, 
+                PGSQL and SQLite.
+
+              
