@@ -1,3 +1,19 @@
+// Ch 8 : 
+     Privillages for databases.
+
+
+=============================================================================================================
+
+                                      -----------------------------
+                                      <<<<<<<    General    >>>>>>>
+                                      -----------------------------
+
+- Why MySQL ??
+    # Free.
+    # Used by many popular web apps.
+    # Powerful and fast.
+    # highly scalable.
+
 - What is the difference between SQL, MySQL, MySQLi, PDO ?
     # SQL    >> Structured Query Language .. The language to treat with DBs.
     # MySQL  >> DB Engine .. A softwere to use SQL to treat with DBs .. Like PGSQL and SQLite.
@@ -5,4 +21,130 @@
     # PDO    >> PHP Data Object .. Extention in PHP to connect to the DB using many DB engines Like MySQL, 
                 PGSQL and SQLite.
 
-              
+- Creating Data Model 
+    
+    # Entity class >> Employee .... Entity instance >> first_name, last_name, salary, ID, Skills, Address.
+    
+    # Simple component >> has only one value 'Individual column'. Example: first_name.
+      Composite component >> has multiple values 'column that can be related to other columns'. 
+                             Example: Address 'street, zip_code, city'.
+
+    # Shapes of each attribute: 
+        Employee >> Rectangle.
+        first_name, last_name >> only circle 'Normal Column'.
+        ID >> circle with underlined name 'Primary key .. Distinct value'.
+        Skilles >> double circle 'Multi valued Attribute' 
+
+=============================================================================================================
+
+                                        --------------------------------
+                                        <<<<<<<    Data types    >>>>>>>
+                                        --------------------------------
+
+- CHAR(#) >> String with max length #.
+
+- VARCHAR(#) >> String with variable length with max #.
+
+- TEXT(#) >> Like VARCHAR But TEXT can't be assigned to NULL a
+                              TEXT can be indexed with only first n characters but VARCHAR is indexed totally
+
+- INT[#] [UNSIGNED] >> # represents the minimum width of the data when the data is retrived.
+                       # It's usually used with ZEROFILL qualifier.
+                       # Example: CREATE TABLE students(id INT(4) ZEROFILL);  
+
+- DECIMAL[total_width, float_width] >> # Example: DECIMAL(5,2) == ###.## 
+
+- DATETIME and TIMESTAMP both stores timestamps but DATETIME has a much more wide range than TIMESTAMP 
+  # TIMESTAMP stores from 1970 to 2037 only.
+  # TIMESTAMP is also useful because if you don't specify a date it will automatically store the current time.
+
+- YEAR >> can store from 1901 to 2155;
+
+=============================================================================================================
+
+                                        ----------------------------
+                                        <<<<<<<    Syntax    >>>>>>>
+                                        ----------------------------
+- SOURCE /path/to/source/file; >> runs SQL commands from an external file. 
+
+- \c >> Canceling a line of input.
+
+- SHOW DATABASES; >> returns all the databases in your server.
+
+- CREATE DATABASE [ IF NOT EXISTS ] 'db_name'; >> creating the databse.
+
+- DROP   DATABASE [IF EXISTS] 'db_name'; >> deleting the database.
+
+- USE 'db_name'; >> selecting the database from the command line to be used.
+
+- SHOW TABLES; >> returns all the tables in your database.
+
+- DESCRIBE 'table_name';
+
+- CREATE TABLE 'table_name'(field_1 VARCHAR CONSTRAINT, field_2 INT ...); >> creates a table.
+
+- DROP TABLE table_name;
+
+- CONSTRAINTS : It's rules for the database.
+    # NOT NULL >> can't be empty field.
+    # CHECK(field_name [>, <, =] some_value)
+    # DEFAULT 'value' >> It is used if no value is used for this field.
+    # AUTO_INCREMENT >> used with primary keys to increment it automatically.
+    # USIGNED >> unsigned int.
+    # UNIQUE >> no duplecating values.
+    
+- INSERT INTO table_name (field_1, field_2, ...) VALUES(value_1, value_2 ...);
+
+- SELECT * | column_1, column_2 FROM table_name WHERE [condition];
+
+- LIKE 'b%' >> a word begins with b
+  LIKE '%b%' >> a word contains  b
+
+- WHERE field_name IS NULL; >> checks for the null values in the table;
+
+- ORDER BY field_name [DESC] >> orders the result asccendingly or descindingly.
+
+- DELET FROM table_name WHERE [Condition];
+
+- UPDATE table_name SET field_1 = value_1, ...  WHERE CONDITION;1
+
+- Primary and forign keys
+    # CONSTRAINT relation_name PRIMARY KEY (column_name)
+    # CONSTRAINT relation_name FOREIGN KEY (column_name) REFERENCES foreign_table_name(foreign_column_name)
+
+- AS >> used to rename the column on a single query to ease the retrive of the data.
+
+- LIMIT # >> used to retrive a specific amount # of columns.  
+
+- ALTER TABLE table_name RENAME new_table_name >> renaming a table; 
+
+- ALTER TABLE table_name MODIFY column_name new_data_type >> altering the data_type of a column.
+
+- ALTER TABLE table_name ADD column_name [CONSTRAINTS]; >> adding new column to a table.
+
+- ALTER TABLE table_name CHANGE old_column_name new_column_name data_type 'Must be specified'.
+
+- ALTER TABLE table_name DROP column_name.
+
+
+
+=============================================================================================================
+
+                                        ----------------------------------
+                                        <<<<<<<    Normalization   >>>>>>>
+                                        ----------------------------------
+
+- First Normal Form:
+    # Each column has a single value.
+    # No repeatition for the values of the same column.
+
+
+
+
+
+
+
+
+
+
+
