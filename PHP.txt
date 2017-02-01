@@ -2,6 +2,9 @@
     1- Objects
     2- Practical PHP
     3- Mastering mysql
+    4- page 254 using locks
+    5- Natural Join
+    6- 
 
 ============================================================================================================
 
@@ -49,6 +52,19 @@
   It may be used with include(), fopen() and database connection
 
 - header('REFRESH:;URL=bisho.php'); >> redirects to bisho.php after seconds. 
+
+- header('Location: bisho.php'); >> redirects to a new location
+
+- Using _END : _END; must be on a new line with no indentation and without spaces after it.
+  echo <<<_END Some text .....
+    Another text
+_END;
+  Advantges of using it :
+    # Makes it very clear when debugging your program
+    # When you wish to insert a variable within HTML you type it directly without need to reopn php tags.
+
+
+
 ============================================================================================================
 
                             -------------------------------------------
@@ -360,3 +376,48 @@
 
 - filter_list() >> returns an array have all filters possible in php.
 
+=============================================================================================================
+
+                                      ----------------------------
+                                      <<<<<<<    MySQLi    >>>>>>>
+                                      ----------------------------
+
+- $conn = new mysqli($hn, $un, $ps, $db);
+  if($conn->connect_error) die($conn->connect_error);  >> Connecting to the DB.
+
+- $results = $conn->query(); >> returns a result object based on this query.
+
+- $results_array = $results->fetch_all(MODE); >> returns the results as an array
+    # Mode can be MYSQLI_ASSOC >> returns associative array.
+    # Mode can be MYSQLI_NUM >> reyurns numeric array.
+
+- $conn->insert_id >> if you want to know the id of the row you have just inserted.
+  ==> I think it differs from one php version to another ... maybe $result->insert_id
+
+- $results->close(), $conn->close() >> closes the conn and the results object.
+
+
+=============================================================================================================
+
+                                      ------------------------------
+                                      <<<<<<<    Security    >>>>>>>
+                                      ------------------------------
+
+- Sanitizing inputs >>
+  # $string = strip_slashes($string); , $conn->real_escape_string($string);
+
+- OR using Placeholders
+  # $statement = $conn->prepare("INSERT INTO books VALUES(?,?,?,?,?)");
+    $statement->bind_param('isisi', $isbn, $name, $year, $author, $category) ;
+    
+    /// i --> integer, s --> string, d --> double, b --> blob :: This is added in the first parameter of bind
+    
+    $isdb = 123; $name = 'bisho' .......;
+    $statement->excute(); // Finished Excuting statement.
+
+- Protecting from XSS 'Cross Site Scripting' >> must be used when making user add things to be viewed
+  # htmlentities($string);
+
+
+
+=============================================================================================================
