@@ -418,6 +418,10 @@ _END;
 - Protecting from XSS 'Cross Site Scripting' >> must be used when making user add things to be viewed
   # htmlentities($string);
 
+- register_globals >> functionality in PHP that takes the variables in $_POST and $_GET and put them directly in 
+                      PHP variables ... Must be disables because any one can but GET attribute in the link to 
+                      override your script variables if not initialized " http://website.com/?override=value "
 
+                      
 
 =============================================================================================================

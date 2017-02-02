@@ -21,6 +21,7 @@ The client's user agent will translate it into a connection to www.example.com w
 The web server on www.example.com will append the given path to the path of its root directory. On an Apache server, this is commonly /home/www (On Unix machines, usually /var/www). The result is the local file system resource:
 /home/www/path/file.html
 
+
 ============================================================================================================
                                 --------------------------
                                 <<<<<<<    DDoS    >>>>>>>
