@@ -1,5 +1,4 @@
 // O'reilly PHP,MySQL :
-    1- Objects
     2- Practical PHP
     3- Mastering mysql
     4- page 254 using locks
@@ -16,8 +15,6 @@
 
 - at pure PHP web pages we omit the closing tag of php script "?>"
 
-
-
 - String Concatanation $s .= 'Bisho';  ==>  $s = $s . 'Bisho'; 
 
 - Getting variable type
@@ -28,7 +25,6 @@
   resource variable when the connection succeeds but it becomes a False-Boolean variable when the connection fails.
   Example : $conn = mysqli('localhost', 'root', 'password', 'Mydb');
             $fp   = fopen('bisho.txt', 'r');
-
 
 - Defining a constant >> define("CONSTANT NAME" , constant value or variable);
   Constants are global and used in website config.
@@ -41,7 +37,6 @@
   $a === $b is the identity operator. It returns true if the two values and data types are equal
   Example : $a = 5; $b = '5'; 
             $a == $b >> true .... but $a === $b >> false
-
 
 - die(string status) === exit(). It stops the excution of the current script, excutes the destructors and   
   shutdown functions and if there is a status between parentheses It will be displayed. 
@@ -63,8 +58,37 @@ _END;
     # Makes it very clear when debugging your program
     # When you wish to insert a variable within HTML you type it directly without need to reopn php tags.
 
+- empty($variable) >> returns true if variable doesn't have any value.
 
+- ini_set('Property', 1); >> sets a value to ini file 'PHP Configuration'
 
+- Adv. of Functions :
+    # Less typing.
+    # Less excution time.
+    # reduce syntax and programming errors.
+
+- function_exists('Function_name') >> Used to know if the fucntion exists in this version of PHP.
+
+- func_get_args() >> returns an array with all the fucntions argument in.
+
+- Anonymous functions >> The functions which aren't assigned to a specific name but just added to a variable 
+                         or inserted in another function 
+  Example : $func = function(){// Function body}
+
+- The call back is a property that used with anonymous functions 
+  Example:  function split_str($string, $callback){
+              $results = explode(' ', $string);
+
+              if(is_callable($callback))
+              {
+                call_user_func($callback, $results);
+              }
+            }
+
+            split_str('Bisho Atif Samy', function($results){
+              echo $results[2]; 
+            });
+ 
 ============================================================================================================
 
                             -------------------------------------------
@@ -98,7 +122,11 @@ _END;
 
 - $_SESSION >> Remember your data when moving through the site .. it starts with session_start();
                
-
+- $_COOKIE >> Remember a value locally in the browser to use it in the user preferences and remember_me for 
+              example.
+              - setcookie('Name', 'Value', Expire_time, HTTPS?, Available for scripts?); 
+              - To remove it repeat the setcookie but use the time as time() - your set time.             
+              
 ============================================================================================================
 
                                     ----------------------------
@@ -269,36 +297,30 @@ _END;
     # &&  >> best practice to use it because it has higher precedence than equal operator. It doesn's cause 
       any problem with using assignment and logical operators.
 
+- Difference between == (equality) and === (identity)
+    # 'Bisho' == 'Bisho' >> true
+    # 'Bisho' === 'Bisho' >> true
+    # '2' (string) ==  2 (int) >> true
+    # '2' (string) === 2 (int) >> false
+
 ============================================================================================================
-
-
 
 - htmlentities() function that escapes all html dangerous characters that passed to it.
 
 - Ternary operator ? is used like if statement with vaiable assignment
   Example : $x = $x > $new ? $x : $new; >> This checks for the condition ($x > $new) and assign variable $x based on this condition.
 
-
-
-
 - rand(from, to) >> getting random value from the range inputted.
-
-
 
 - phpversion() >> shows the php version of your current server.
 
 - phpinfo() >> shows info about your server, php version, server configs and more. It 's usually disabled in 
   the production stage.      
 
-
-
-
-
 - list() is used to assign a list of variables in one operation and it only works on numerical arrays.
   Example : list($drink, $color, $power) = $info;
             echo "$drink is $color and $power makes it special.\n"; >> coffee is brown and caffeine makes it 
             special1
-
 
 ============================================================================================================
 
@@ -376,6 +398,11 @@ _END;
 
 - filter_list() >> returns an array have all filters possible in php.
 
+- filter_var($input, Flags, Options); >> returns a sanitized string
+  
+    # Flags can be used to validate or sanitize inputs.
+    # Options are passed as an array.
+
 =============================================================================================================
 
                                       ----------------------------
@@ -399,14 +426,161 @@ _END;
 
 =============================================================================================================
 
+                                      -------------------------
+                                      <<<<<<<    OOP    >>>>>>>
+                                      -------------------------
+
+- Object = new stdClass; >> Creating an object from existing class stdClass
+
+- The objects are created and assigned by reference.
+  Example : $object1 = new User(); >> object1 is a reference.
+            $object2 = $object1 >> there is only one object and $object1 , 2 are referencing to it.
+
+- $object2 = clone $object1; >> This makes another object $object2 with its seperate reference.
+
+- Accessing a normal property >> $object->property
+  Accessing a static property >> Class::$property
+
+- Declaring a class >>
+  
+  class class_name {
+    public name;
+    public age;
+
+    public function sentence(){
+      return $this->name . "  " . $this->age; 
+    }
+  }
+
+- $this to refer to a self object property or a function "Pseudo Variable"
+
+- [ :: ] >> scope resolution operator >> usually used with self for the class constants
+  Example : const MAX = 5;
+            if ($this->num < self::MAX) echo 'OK!';
+
+- Difference between self and this:
+    # self is used with the class constants or static variables used with '::'. 'fixed for each class' 
+    # this is used with the object variables that changes in each object. used with '->'
+
+- Object->Property = 'Bisho' || ['Bisho', 'Pola'];
+
+- Constants declaration within a class >> const CONSTANT_NAME = 'Value';
+
+- Methods that begins with __ 'two underscores' are reserved.
+
+- Static methods and proreties are accessed from the class using operator :: ,not from the object and it 
+  hasn't access on any objects properties.
+
+- Constructor function >>
+  
+  public function __construct($name, $age){
+    $this->name = $name;
+    $this->age = $age;
+  }
+
+- Destructor function >>
+
+  public function __destruct(){
+    // Code made when the object is to be closed
+  }
+
+- Clone Function >>
+  
+  public funtion __clone(){
+    // Code excuted when object is cloned
+  }
+
+- Call function >> 
+  public function __call($method_name, $method_parameters){
+    // Code excuted when called not accessible or not declared method
+  }
+
+- __set($key, $value) is run when writing data to inaccessible or new properties.
+
+  __get($variable) is utilized for reading data from inaccessible properties.
+
+  __call($method_name, $arguments) is triggered when invoking inaccessible methods in an object context.
+
+  __toString() method allows a class to decide how it will react when it is treated like a string. 
+               For example: what echo $obj; will print.
+
+- Inheritance >>
+  
+  class Son extends Mother {
+    // Son extends all the properties and the methods of the Mother class
+  }
+
+- When you inherit a class and override a function it it but you also want the function in the super class you
+  can use parent operator
+  Example : 
+
+  class Dad {
+    function test(){
+      echo 'This is the parent class'
+    }
+  }
+  class child{
+    function test(){
+      echo 'This is the child'
+    }
+    function test2(){
+      parent::test();
+    }
+  }
+
+- If you want the constructor of the parent class to be excuted before the constructor of the subclass
+  function __construct(){
+  parent::__constructor();
+  // Subclass properties initialization
+  }
+
+- To prevent subclasses to override the function of the super classes you can use the word 'final' when 
+  declaring th efunctions in the super class.
+
+- Visibility :
+    # public : can be accessed directly or within functions from a class or a subclass.
+    # protected : can be accessed only within function from a class or a subclass.
+    # private : can only accessed by functions in its class not in a subclass.
+
+- Abstract classes is a classes made just to be inherited by other classes 
+  # can't be instansiated
+  # declared with the key word abstract.
+  # used usally with the abstract functions 'Functions must be created in the subclass when inherited and 
+    doesnot contain any body'
+  # Used to force the developes to use the functions defined with abstract class.
+
+- We can use the interface as we use the abstract classes 
+  # The interface can contain only functions declarations that must be implemented in the child class.
+
+  interface Mobile{
+    public function function1();
+    public function function2();
+  }
+  class Iphone implements Mobile{
+    // Function declarations.
+  }
+
+- Dependency Injection >> # Using a class within another class to use its functionality
+                          # The object of the small class is inputted in the big class constructor.
+                          # We can use the database object in the user class constructor to add the create  
+                            user function using the query function in the database class.
+
+- Auto Loading >> spl_autoload_register(function($class){
+                    require "{$class}.php";
+                  });
+                  // The class name must be identical to the file name.
+
+=============================================================================================================
+
                                       ------------------------------
                                       <<<<<<<    Security    >>>>>>>
                                       ------------------------------
 
-- Sanitizing inputs >>
-  # $string = strip_slashes($string); , $conn->real_escape_string($string);
+- register_globals >> functionality in PHP that takes the variables in $_POST and $_GET and put them directly 
+                      in PHP variables ... Must be disables because any one can but GET attribute in the link 
+                      to override your script variables if not initialized " website.com/?override=value "
 
-- OR using Placeholders
+- Using Placeholders >> The Most safe way
   # $statement = $conn->prepare("INSERT INTO books VALUES(?,?,?,?,?)");
     $statement->bind_param('isisi', $isbn, $name, $year, $author, $category) ;
     
@@ -415,13 +589,50 @@ _END;
     $isdb = 123; $name = 'bisho' .......;
     $statement->excute(); // Finished Excuting statement.
 
-- Protecting from XSS 'Cross Site Scripting' >> must be used when making user add things to be viewed
+- Protecting from XSS 'Cross Site Scripting' >> must be used when making user add things to your HTML code.
   # htmlentities($string);
+  # strip_slashes($string);
+  # strip_tags($string);
 
-- register_globals >> functionality in PHP that takes the variables in $_POST and $_GET and put them directly in 
-                      PHP variables ... Must be disables because any one can but GET attribute in the link to 
-                      override your script variables if not initialized " http://website.com/?override=value "
+- SQL Injection >> hacker inputs some text in the form to complete a query in your database connection to 
+                   access a forbidden data in your site.
+                   >> name= admin , password = 'or 1=1 or ' .. makes an always true condition in password field
+                   >> name= admin' #  ... comments the rest of the database query
 
-                      
+- Protecting from SQL Injection : 
+    # $conn->real_escape_string($string);
+    # Use the protection of XSS also
 
 =============================================================================================================
+
+                                      -------------------------
+                                      <<<<<<<    PDO    >>>>>>>
+                                      -------------------------
+
+- PDO is not a specific database extention but it is database access layer that can access many of database 
+  engines like mysql, sqlite, postgres.
+
+- To know the database engines in your system use the static function PDO::getAvailableDrivers();
+
+- To create a new PDO connection object with a specific db :
+  $handler = new PDO('mysql:host=ip_address;dbname=database_name', 'user_name', 'Password');
+
+- We can use try and catch exceptions using PDOException class
+    Example:
+    try
+    {
+      //Connect to the DB
+    }
+    catch($PDOException $e)
+    {
+      $e->getMessage(); //This returns the error happened
+    }
+
+- $result = $handle->query('SELECT * FROM table');
+  $result->fetch(PDO_BOTH, PDO_NUM, PDO_ASSOC, PDO_OBJ) >> fetches one row of the data with these specific 
+                                                           preferences.
+
+-                                                           
+
+=============================================================================================================
+

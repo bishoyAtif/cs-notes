@@ -47,15 +47,52 @@
 
 =============================================================================================================
 
-                                      ------------------------------------
-                                      <<<<<<<    Input Elements    >>>>>>>
-                                      ------------------------------------
+                                      -----------------------------------
+                                      <<<<<<<    Form Elements    >>>>>>>
+                                      -----------------------------------
 
-- <input type="text" name="field_name" value="default value" placeholder="value" maxlength="num" >
+- <form name="form_name" action="target_path" method="POST | GET"> Input Tags </form>
+
+- <input type="text" name="field_name" value="default value" placeholder="value" maxlength="num" size="size" >
 
 - <input type="password" name="field_name" >
 
+- <textarea name="field_name" cols="width" rows="height" wrap="type"> Default Text </textarea>
+    # type="off" >> will make a horizontal scroll bar if the text is longer than the area.
+    # type="soft" >> will make a new line automatically if the text was longer but the input is read 
+                               without that newline (Default) 
+    # type="hard" >> will make a new line automatically if the text was longer and the input is read with 
+                     those new lines
 
+- <input type="checkbox" name="field_name" checked=" | checked" value="value = on">
+    # If many checkboxes are checked with the same name it will return the value of the last checked one
+      If you want to return all the values of them type the name as an array and treat the input as an array.
+      <input name="time[]">
+
+- <input type="radio" name="time" checked=" | checked">
+
+- <input type="hidden" name="field_name" value="value"> >> used to sent additional information to the user
+    # never treat hidden inputs as secure.
+
+- <select name="filed_name" multiple="multiple" size="#">
+    <option selected="selected" value="value">Option Name</option>
+  </select>
+    # size is the number of fields shown in the multiple mode
+    # When multiple selection is used , an array name must be used for the name attribute and it is treated   
+      like checkbox.
+
+- <label>Label text <input element> </label>
+    # Makes radio buttons and checkboxes selectable when clicking on any text between label tags.
+
+- <input type="submit" name="submit_button_name"> >> Standard submit button
+ 
+- <input type="image" name="submit" src="hi.jpg" width="50" height="" > >> Image submit button
+
+### General Attributes:
+    - autocomplete >> Default = "on" can be set to the entire form or a specific input element.
+    - autofocus >> Default = "off" selects the input element todirectly write in it.
+    - required >> make sure that the field isn't empty.
+    - formaction, formmethod, formtarget >> override the form attributes for a specific submit button.
 
 =============================================================================================================
 
