@@ -2,7 +2,6 @@
     2- Practical PHP
     3- Mastering mysql
     4- page 254 using locks
-    5- Natural Join
     6- 
 
 ============================================================================================================
@@ -89,6 +88,25 @@ _END;
               echo $results[2]; 
             });
  
+- uniqid([ $prefix = '', $more_entropy = FALSE ]) >> returns a random id with prefix.
+  with 23 chars if $more_entropy = true of 13 if false.
+
+- hmtlspecialchars($text) >> used when adding text to your html
+
+- urlencode($text) >> used when adding text to your URL
+
+- sleep($sec) >> stops the execution of the script for $sev seconds.
+
+- usleep($sec) >> the same as sleep but in micro seconds.
+
+- ceil($number) >> rounding the number down.
+
+- floor($number) >> rounding the number up.
+
+- func_get_args() >> used within a function to return the function arguments as an array.
+
+- RegEx: The pattern in PHP is included within foroward slaches '/Pattern/' 
+
 ============================================================================================================
 
                             -------------------------------------------
@@ -102,7 +120,7 @@ _END;
     $GLOBALS >> An assocaiative array that has all variable names in the global scope of the scope as its keys and global values as its values
     $_SERVER >> An assocaiative array that has all server information needed
     $_GET, $_POST, $_FILES >> has all variable sent to script from these http headers
-    More like $_ENV, $_SESSION, $_COOCKIE and $_REQUEST
+    More like $_ENV, $_SESSION, $_COOKIE and $_REQUEST
 
 - Global variables can't be accessed directly in function scope. It can be only accessed with 
   $GLOBALS['variable_name'].
@@ -126,12 +144,14 @@ _END;
               example.
               - setcookie('Name', 'Value', Expire_time, HTTPS?, Available for scripts?); 
               - To remove it repeat the setcookie but use the time as time() - your set time.             
-              
+                Example: setcookie($cookie_name, NULL); >> deletes a cookie.
 ============================================================================================================
 
                                     ----------------------------
                                     <<<<<<<    Arrays    >>>>>>>
                                     ----------------------------
+
+- You can define array as array(//Elements) Or ['', '', ''] after PHP_5.4
 
 - We can add an element to the end of an indexed array with $array[] = 'Bisho' and 
                         to the end of associative array with $array[key] = value;
@@ -267,6 +287,23 @@ _END;
 
 - nl2br($str, [XHTML = true]); >> returns a string with all new lines converted to breaks.
 
+- str_word_count($str, [ $mode = 0, $charlist = '' ]) >> split the string to words
+  # Mode:
+    # mode = 0 >> returns only the numbers of the words in the string
+    # mode = 1 >> returns the words of the string as a numeric array
+    # mode = 2 >> returns the words of the string as an associative array with keys 'the position of each word'
+  # Charlist: A string have all special characters that can be counted as words.
+
+- strcmp($str1, $str2) 
+  # returns 0  >> the two strings are the same.
+  # returns +n >> the first string is more than the second string with n chars
+  # returns -n >> the first string is less than the second string with n chars
+
+- strncmp($str1, $str2, $length)
+  # The same as strcmp() but is works with the first $length chars of each of the words.
+
+- strrev($str) >> returns the string reversed.
+
 ============================================================================================================
 
                               --------------------------------------------
@@ -318,9 +355,9 @@ _END;
   the production stage.      
 
 - list() is used to assign a list of variables in one operation and it only works on numerical arrays.
-  Example : list($drink, $color, $power) = $info;
+  Example : list($drink, $color, $power) = ['coffe', 'brown', 'powerful'];
             echo "$drink is $color and $power makes it special.\n"; >> coffee is brown and caffeine makes it 
-            special1
+            special
 
 ============================================================================================================
 
@@ -344,6 +381,44 @@ _END;
                                   <<<<<<<    Working with files    >>>>>>>
                                   ----------------------------------------
 
+- $handle = fopen('file_name', 'mode'); >> opens this file in the mode required
+  # mode :
+    # 'r' Open for reading only; place the file pointer at the beginning of the file.
+    
+    # 'r+'  Open for reading and writing; place the file pointer at the beginning of the file.
+    
+    # 'w' Open for writing only; place the file pointer at the beginning of the file and truncate the file to zero 
+      length. If the file does not exist, attempt to create it.
+    
+    # 'w+'  Open for reading and writing; place the file pointer at the beginning of the file and truncate the file to 
+      zero length. If the file does not exist, attempt to create it.
+    
+    # 'a' Open for writing only; place the file pointer at the end of the file. If the file does not exist, attempt to 
+      create it. In this mode, fseek() has no effect, writes are always appended.
+    
+    # 'a+'  Open for reading and writing; place the file pointer at the end of the file. If the file does not exist, 
+      attempt to create it. In this mode, fseek() only affects the reading position, writes are always appended.
+    
+    # 'x' Create and open for writing only; place the file pointer at the beginning of the file. If the file already 
+      exists, the fopen() call will fail by returning FALSE and generating an error of level E_WARNING. If the file 
+      does not exist, attempt to create it.
+    
+    # 'x+'  Create and open for reading and writing; otherwise it has the same behavior as 'x'.
+
+- Opening a file using FTP
+  $handle = fopen('ftp://user:password@bisho.info/path_to_file', 'mode');
+
+- $content = fread($handle, $length) 
+  Example: $content = fread($handle, filesize($file_name));
+
+- fwrite($handle, $string, [$length]) >> writes a string to a file 
+
+- fseek($handle, $offset, $whence) >> moves the pointer to a specific position different from the default position.
+  # whence:
+    # SEEK_SET - Set position equal to offset bytes.
+    # SEEK_CUR - Set position to current location plus offset.
+    # SEEK_END - Set position to end-of-file plus offset.
+
 - __DIR__ 's value is the current directory of the current script.
 
 - __FILE__ 's value is the full file name of the current script.
@@ -351,6 +426,8 @@ _END;
 - file_exists($file) >> reutrns true if the file exists, false if not.
 
 - is_writable($file) >> reutrns true if the file is writable, false if not.
+
+- filesize('bisho.txt') >> returns the file size of the inputted file
 
 - mkdir($dir) >> making a directory named $dir.
 
@@ -387,7 +464,7 @@ _END;
 
 - rmdir($directory); >> removes the directory .. must be empty.
 
-- 
+- scandir($path) >> returns the files and the folders in this path in an array.
 
 
 =============================================================================================================
@@ -402,6 +479,8 @@ _END;
   
     # Flags can be used to validate or sanitize inputs.
     # Options are passed as an array.
+
+- filter_var($email, FILTER_VALIDATE_EMAIL) >> returns the email if the email is valid or false if not.
 
 =============================================================================================================
 
@@ -429,6 +508,11 @@ _END;
                                       -------------------------
                                       <<<<<<<    OOP    >>>>>>>
                                       -------------------------
+
+- Why OOP ?
+  - No GOD class.
+  - Code Maintainability and Reusability
+  - Excellent for team work.
 
 - Object = new stdClass; >> Creating an object from existing class stdClass
 
@@ -570,6 +654,31 @@ _END;
                   });
                   // The class name must be identical to the file name.
 
+- Method Chaining: Used to trigger more than one function on the same line of code
+  # Each function must return the current object $this.
+  Example : $this->fun_1()->func_2()->fun_3();
+
+- PHP supports only single inheritance but to implement the multiple inheritance you can use traits.
+
+- Traits:
+  # It can used as abstract classes but multiple traits can be used.
+  # Its function override the function of the base class if inherited but it can't override the function of 
+    the same name in the sub class.
+  # We can use one global trait to include many traits to be easily used.
+  
+  # If there is a collision we must use one of the two functions of the same name
+    Example: trait_name::method_name insteadof another_trait_name >> use the function from the first_treat
+  
+  # We can use the other function by naming it another name
+    Example: trait_name::method_name as another_name
+
+- Using Namespaces:
+  # It makes a different world for each class to be seperated in.
+  # We declare a namespace for a project by using "namespace name;" at the top of the scipt.
+  # When includded to the global namespace we declare a class from the specific namespace by using
+    "$object = new name_space\class_name();"
+  
+
 =============================================================================================================
 
                                       ------------------------------
@@ -628,11 +737,57 @@ _END;
       $e->getMessage(); //This returns the error happened
     }
 
+- To set attributes to the pdo object >> $handler->setAttribute(PDO_Attribute, PDO_Constant);
+
+- To get the available drivers in the current pdo version .. use $handler->getAvailableDrivers();
+
 - $result = $handle->query('SELECT * FROM table');
   $result->fetch(PDO_BOTH, PDO_NUM, PDO_ASSOC, PDO_OBJ) >> fetches one row of the data with these specific 
                                                            preferences.
 
--                                                           
+- $query = $handle->query($sql);
+  $query->setFetchMode(PDO::FETCH_CLASS, 'Class_name');
+  while($object_name = $query->fetch())
+  {
+    //Do something with $object_name;
+  }
+
+  class Test
+  {
+    function __construct ...
+  }
+  
+- Preparing statements:
+  $sql = "SELECT * FROM books where id = ?";
+  $stm = $db->prepare($sql);
+  $result = $stm->execute(["Value of placeholder #1", "Value of placeholder #2" ..... ]);
+
+- Last Inserted ID:
+  $handler->lastInsertId(); >> returns the value of the last insert query id.
+
+- $results->rowCount(); >> returns the number of the rows returned from a query.
+
+============================================================================================================
+
+                            ---------------------------------
+                            <<<<<<<    Date & Time    >>>>>>>
+                            ---------------------------------
+
+- time() >> returns the current timestamp in unix format.
+
+- data($format[ , $timestamp = time()]) >> formats the timestamp as the inputted format.
+
+  
+============================================================================================================
+
+                            -------------------------------------
+                            <<<<<<<    Clean Code Tips    >>>>>>>
+                            -------------------------------------
+
+- Return expected objects last.
+
+- At If statements, Check the negative values that can break your work flow first So you don't need to nest if 
+  statements.                            
 
 =============================================================================================================
 
