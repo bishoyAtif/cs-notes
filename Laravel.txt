@@ -1,0 +1,111 @@
+============================================================================================================
+                                    ----------------------------------
+                                    <<<<<<<    Installation    >>>>>>>
+                                    ----------------------------------
+
+- PHP >= 7.0
+- Installing Composer
+- installing laravel "composer global require laravel/installer"
+- Modifing terminal variable to run laravel command directly
+- Making new laravel project "laravel new <project_name>"
+
+
+============================================================================================================
+                                    ------------------------------------
+                                    <<<<<<<    Basic Commands    >>>>>>>
+                                    ------------------------------------
+
+- php artisan serve >> launching the application.
+- php artisan -V >> getting the version of laravel.
+- php artisan make:model model_name -mc >> will make a model, migration file and controller.
+
+============================================================================================================
+                                -------------------------------------------
+                                <<<<<<<    Blade Template Engine    >>>>>>>
+                                -------------------------------------------                                    
+
+- Blade view files use the .blade.php file extension and are typically stored in the resources/views directory.
+- You can use basic layout file to be the basic structure of your view and put @yield('segment_name')
+
+- You can pass values in the view by using 
+  # view('bisho', ['name' => 'Value', ...]);
+  # view('bisho')->with('name', 'Value');
+
+- {{ $variable_name }} >> echo $variable_name
+- @foreach($tasks as task) ..... @endforeach
+- @if(CONDITION) .... @else .... @endif
+
+
+
+============================================================================================================
+                                    ------------------------------------
+                                    <<<<<<<    Structure    >>>>>>>
+                                    ------------------------------------
+
+
+- Web routes >> laravel/routes/web.php
+
+- To make new route >>
+  # Route::get('[/]route_name', function(
+        return view('template_name');
+    ));
+  # Route::get('[/]route_name', 'controller_name@Mmethod_name');
+
+- Routing with a variable
+  Route::get('/tasks/{variable}', function($variable){
+    // Use $variable
+  });
+  You can use any variable name for the route url but make sure that the sequence of the variable is correct.
+
+
+- Creating migration >> php artisan make:migration name [--create='table_name']
+  Makes a migration script called {name} and if added -create option, it will create a table called table_name
+- Fields Type integer, increments, text "long", string "small", timestamps 
+- We can define fields to be set with $table->field_type('field_name');
+
+- php artisan migrate:refresh >> rollback all the migrations and installs it again.
+
+- We can query tables using DB::table('table_name')->get(Conditions);
+  That returns an array of objects.
+- When retuns the Route function with a sql object it converts it automaticallt to json.
+
+- You can edit the migration files to edit columns of the DB and then use "php artisan migrate:refresh";
+  That removes all the data from the DB >> It just rollback all the tables and creates it again.
+- Using "php artisan migrate:reset" >> removes all the tables that is created with the migrations scripts
+- Using "php artisan tinker" >> opens the command line for the php "Shell"
+
+- There is a secure file called .env so we can put any passwords in it
+- Using where >> App\Task::where('id', '>=', 1)->get();
+- Returning a specific column >> "App\Task::pluck('column_name')"
+- To add a default value for the table column >> use $table->field_type('column_name')->default($Value);
+
+- Any Model will be namespaced at the top of it.
+  We can use "use App\Class_name" >> it workd like including class to use it without writing name space
+  Or we must use App\Model_name instead of Model_name when we call a function from this model.
+
+- If we deleted any migration file we will get an error from the composer autoloading because it tries to autoload a file that doesn't exist ... So we must use "composer dump-autoload"
+
+- We add a record to the database by creating new Object from the Model class and populate it with the data then use
+  "Object->save();"
+- We can add more clarity to common long queries by adding it as a static method within the Model.
+
+- Using Query Scope >> Must use 'scope' prefix before function
+  Used to make a specific condition to the query
+  Example: 
+  public function scopeIsComplete($query, $other_values)
+  {
+    $query->where(SPECIFIC_CONDITION);
+  }
+
+- We can use RouteModelBinding by passing the primary ID in the url and use The Model as a parameter to the Controller  
+  Function .. this will automatically find the row from the table binded with the Model and return it.
+
+- Using "name_space\model_name::all()" >> returns all the records from this model
+
+- We access fields from the request using request()->Field_name.
+- We can add a record to the database from the model class by using
+  Model_Name::create(['field#1' => value#1, 'field#2' => value#2]);
+
+- If this static method is used, A variable in the Model class must be declared to specify the fields to be added through this method
+  $guarded = ['All the variables that cannot be added through a form to this model table']
+  $fillable = [' All the variables that can be added to this mdoel table']

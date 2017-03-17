@@ -1,7 +1,5 @@
 // Ch 8 : 
      Privillages for databases.
-
-
 =============================================================================================================
 
                                       -----------------------------
@@ -122,6 +120,7 @@
 - WHERE field_name IS NULL; >> checks for the null values in the table;
 
 - ORDER BY field_name [DESC | ASC] >> orders the result asccendingly or descindingly.
+  ORDER BY field_name [DESC | ASC], second_field_name [DESC | ASC]
 
 - GROUP BY >> Used for retrieving information about a group of data.
 
@@ -219,6 +218,16 @@
 
 - Using newsted queries:
   Example: "INSERT INTO bookname SELECT name FROM books";
+
+- Using Regexp : SELECT * FROM users WHERE name REGEXP 'Regex';
+
+- Using mysqldump >> used to backup all the db into a file to be restored later
+  mysqldump -u user_name -p 'Database' > file_name.sql
+  # The first section of the command will print the all the commands to restore the DB so we must redirect it using ">" 
+    to a file to be used later.
+
+- To restore a database from a file .. just use "mysql -r user -p password [ -D Database ] < file_name.sql"
+  we use "-D Database" when restoring a specific table in the DB.
 
 =============================================================================================================
 
