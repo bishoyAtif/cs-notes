@@ -295,7 +295,9 @@
   Example : TRUNCATE(1.5556,2) : 1.55
 
 - MOD(field, #) >> Returns the division of field % #
-
+- YEAR(timestamp) //Getting the year.
+- MONTH(timestamp) //Getting the month num.
+- MONTHNAME(timestamp) // Getting the month name.
 =============================================================================================================
 
                                         -------------------------------------
