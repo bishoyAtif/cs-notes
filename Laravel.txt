@@ -120,6 +120,13 @@
 - DB::table('posts')->where(condition)->delete();
 - ->where('#1', '> | >= | < | <=', '#2');
 
+//Service providers
+- Located at app/Providers/AppServiceProviders.php
+- You can add a View::composer('view', closure); //triggers the closure each time the view is loaded
+  view()->composer('layouts.sidebar', function($view){
+    $view->with('variable_name', 'value');
+  }); //Example for view composers
+
 - When retuning the controller method with a sql object it converts it automatically into json.
 - There is a secure file called .env so we can put any passwords in it.
 ============================================================================================================
@@ -174,5 +181,5 @@
                                           -----------------------------
                                           <<<<<<<    Waiting    >>>>>>>
                                           -----------------------------
-- View Hook
 - Message flashing
+- Service Providers

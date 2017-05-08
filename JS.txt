@@ -1,0 +1,88 @@
+============================================================================================================
+                                          ----------------------------------
+                                          <<<<<<<    Introduction    >>>>>>>
+                                          ----------------------------------
+- JS is an interpreted language.
+
+//Where to write js?
+- You can write it in <script> Your JS code <script>
+- You can link js to your page using <script src="path/to/file" type="text/javascript"></script>
+
+============================================================================================================
+                                          -------------------------------
+                                          <<<<<<<    Variables    >>>>>>>
+                                          -------------------------------
+- Variable name can contain letters, numbers, underscore and dollar sign and mustn't begin with a letter.
+- Weakly "loosly" typed variables. //Change its type by using it in another context.
+- Case sensitive.
+- var variable_name = value;
+- const VAR_NAME = constant;
+- var x = "5"; var y = Number(x); //Casting the string into a number.
+============================================================================================================
+                                          -------------------------------
+                                          <<<<<<<    Functions    >>>>>>>
+                                          -------------------------------
+- Functions are case sensitive.
+
+
+- float_num.toFixed(decimal_after_point = 0)
+- console.log(variable); //Prints the variable in the console.
+- alert(variable); //Prints the variable in a pop-up.
+- variable = prompt("Message") //Gets the user input with a pop-up.
+============================================================================================================
+                                            -------------------------
+                                            <<<<<<<    Arrays    >>>>>>>
+                                            -------------------------
+- var my_array = ['Element1', 'Element2'];
+- array.length; //Gets the array length.
+- array.push('new_element'); //Adds an element to the array.
+- array.sort();
+- array.reverse();
+============================================================================================================
+                                            -------------------------
+                                            <<<<<<<    DOM    >>>>>>>
+                                            -------------------------
+- You can access title "for example" by using document.title
+- document.getElementById('id'); //Getting the html element by its id.
+- You can access the text between element tags using Element.InnerHTML
+- getElementsByClass('class_name') //Getting all elements that have the class name.
+- getElementsByTagName('tag_name')
+- document.links //Getting all the links in the DOM.
+- You can access element attributes as you access js objects by using "element.attribute"
+- history //A global array have the history of your browsing in the current tab but you can't read or write from it.
+- history.length //Gets the history length.
+- history.go(-1) //Returns back to the previous page.
+- Element.addEventListener("Event", function_to_be_excecuted)
+- 'this' keyword references the element that the event happened to it.
+- You can add a class to the class list by using element.classList.add("class_name")
+- You can remove a class from the class list by using element.classList.remove("class_name")
+
+
+
+
+- You can use foreach
+  array.forEach(function(number){
+  console.log(number);
+});
+
+- You can declare object by using
+  var object = {
+    name: 'bisho',
+    age: 19,
+  }
+
+//AJAX
+Example:
+var request = new XMLHttpRequest();
+request.open('method', Link_requested);
+
+request.onload = callback_function;
+
+function callback_function(){
+  //What are you looking at?? Do something quickly.
+}
+request.send();
+
+- You can handle error using request.onerror = method;
+- You can access response text with request.responseText
+- You must parse the response get using JOSN.parse(request.responseText);
