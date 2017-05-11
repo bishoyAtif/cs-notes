@@ -12,16 +12,31 @@
                                           -------------------------------
                                           <<<<<<<    Variables    >>>>>>>
                                           -------------------------------
-- Variable name can contain letters, numbers, underscore and dollar sign and mustn't begin with a letter.
-- Weakly "loosly" typed variables. //Change its type by using it in another context.
-- Case sensitive.
 - var variable_name = value;
 - const VAR_NAME = constant;
-- var x = "5"; var y = Number(x); //Casting the string into a number.
+- Variable name can contain letters, numbers, underscore and dollar sign and must begin with a letter or a dollar sign.
+- Case sensitive.
+- Weakly "loosly" typed variables. //Change its type by using it in another context.
+
+- var x = "5"; var y = Number(x); //Casting into number.
+  var x = 5; var y = String(5); //Casting into string.
+
+//Data types
+- Boolean. //true OR false.
+- null. //Printed as null but when doing math on it .. it will be treated as zero.
+- undefined. //hasn't declared yet or declared without assigning a value to it. It will became NaN when doing math on it.
+- Objects.
+============================================================================================================
+                                          -------------------------------
+                                          <<<<<<<    Strings    >>>>>>>
+                                          -------------------------------
+- Strings are immutable. //You can't change individual chars within it. You can't use str[0] = 'a';
+- You can overwrite the whole string by using str = "Bisho";
 ============================================================================================================
                                           -------------------------------
                                           <<<<<<<    Functions    >>>>>>>
                                           -------------------------------
+
 - Functions are case sensitive.
 
 

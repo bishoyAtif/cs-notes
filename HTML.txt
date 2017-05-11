@@ -5,19 +5,26 @@
                                       -----------------------------
 
 - <DOCTYPE html> "renders the page as HTML5 page"
+- <head></head> has the meta data for your web page.
+- <body></body> has the actual content that will appear in your page.
+- You can comment a line in HTML by using <!-- Line Commented -->
+- You can declare an attribute by using <tag attribute="Value"></tag>
 
+//HTML Entities
+- Takes the form &code; //Example: &copy; for copyright symbol.
 
-
-
-
+//Classes VS IDs
+- Id is an attribute for a tag and is unique identifier for it.
+- Class is an attribute also but it can be used in many tags for multiple selection.
 =============================================================================================================
 
                                       -------------------------------
                                       <<<<<<<    Text Tags    >>>>>>>
                                       -------------------------------
 
-- <h1> ... <h6> "Heading : affects SEO"
+- <h1> ... <h6> "Heading : affects SEO". h1 is the most header in your page. h6 is the least. //Block level elements.
 
+//Inline level elements
 - <i>, <em>       "Italic"
   <b>, <strong>   "Bold" 
   <u>, <ins>      "Underlined or inserted" 
@@ -27,6 +34,7 @@
   <sub>           "Super text" 
   <del>           "Strike-out text"
 
+//Image
 - <img> "Show image in the page"
   attr:
     # src="path/to/image"
@@ -34,17 +42,27 @@
     # title="text appears when the mouse points to it" 
     # width="..px" ... height="..px" 
 
-
+//Anchor tag. Inline Element
 - <a> Text appears in the page </a> "Anchor link"
   attr:
     # href="Link or # (id of an element to go in the same page)"
     # target="self >> opens the link in the same tab ... blank >> opens the link in another tab"
 
-- <ul type="circle, square, bullet"></ul> "Unordered list"
-  <li></li> "List item"
+//Lists
+- <ol> // Ordered List
+- <ul type="circle, square, bullet"></ul> //Unordered list
+- <li></li> "List item"
 
+//Dev VS Span
+- Dev and Span are just containers to group tags together to select them with css once.
+- Dev is block level element. While Span is inline level element.
 
-
+//Tables
+- Declare a table using <table></table>
+- Declare a table row using <tr></tr>
+- Declare a table data using <td></td>
+- Declare a table head using <th></th>
+- You can split your table using meaningful tags using <thead></thead> and <tbody></tbody> and put the rows content in them.
 =============================================================================================================
 
                                       -----------------------------------
@@ -53,7 +71,12 @@
 
 - <form name="form_name" action="target_path" method="POST | GET"> Input Tags </form>
 
+- You can use <fieldset></fieldset> to make a border around the form.
+
+- You can specify a title for your fieldset by using <legend></legend> tag.
+
 - <input type="text" name="field_name" value="default value" placeholder="value" maxlength="num" size="size" >
+- title attribute refers to the error message seen when not matching the conditions required.
 
 - <input type="password" name="field_name" >
 
@@ -83,10 +106,15 @@
 
 - <label>Label text <input element> </label>
     # Makes radio buttons and checkboxes selectable when clicking on any text between label tags.
+    # You can add a caption to the input tags with them.
 
 - <input type="submit" name="submit_button_name"> >> Standard submit button
  
 - <input type="image" name="submit" src="hi.jpg" width="50" height="" > >> Image submit button
+
+//Validation
+- Add required attribute make the field required before submitting the form.
+- Add email attribute to make the field matches an email before submitting the form.
 
 ### General Attributes:
     - autocomplete >> Default = "on" can be set to the entire form or a specific input element.
