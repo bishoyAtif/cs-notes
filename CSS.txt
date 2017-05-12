@@ -1,17 +1,45 @@
 
-# Types of using css with html
+//General CSS Rule
+- selector {
+    property:value;
+    anoterProperty:value;
+  }
 
-  - head >> <link href="path/to/file" rel="stylesheet">
+//How to use CSS with HTML?
+- <link href="path/to/file" rel="stylesheet" type="text/css"> //StyleSheets
+- <p style="color:red;font-size:30px">This is a paragraph</p> //Inline
+- <style> //Style Tag
+    p
+    {
+      color:red;
+      font-size:30px
+    }            
+  </style>
 
-  - <p style="color:red;font-size:30px">This is a paragraph</p>
+//Selectors
+- element {}              //Type Selectors.
+- #id {}                  //Selects an element with an id.
+- .class {}               //Selects the element(s) with a specific class.
+- * {}                    //Select every element in the page.
+- parent descendant {}    //Selects the element under a specific parent.
+- element + adjacent {}   //Selects the adjacent "the element after" of the element
+- a[attribute="value"] {} //Selects an element with a specific attribute.
+- a[attribute="value"][attribute="value"] //Selects elements with multiple attributes.
+- element:nth-of-type(order) //Selects the nth element.
 
-  - head >> <style>
-              p
-              {
-                color:red;
-                font-size:30px
-              }            
-            </style>
+//Colors in CSS
+- RGB: rgb(red, green, blue);
+- HEX: #FF0055;
+- RGBA: rgba(red, green, blue, trasparent "0->1")
+- Absolute: red, green, purple and black.
+
+//Inheritance Concept
+- Any Selector applied on a parent of many nodes affects all the children nodes.
+- If element styling is made, it will overwrite the inherited style from the parent.
+
+//Specificity
+- Type < Type Type < class < attribute < psudo class < id < inline
+- ul < ul li < .highlighted < input[type="text"] < li:hover < #specific < <h1 style=""></h1>
 
 # Overriding styling
   - The later declaration of a value will override the previous ones.
@@ -21,23 +49,70 @@
   - It can used to overwrite some values in frameworks like bootstrap by including the overwriting file after 
     it
 
-# id & class
-  - In .css :
-    #id_name {}
-    .class_name {}
 
-# Div properties
-  - background-color: red || #FF0056 || rgb(255,220,126) || rgba(255,210,21,0.2 : opicity);
-  - background-image: url('path/to/image');
-  - background-repeat: repeat(default) || no-repeat || repeat-x || repeat-y >> modify the repeat action of the 
-    photo in a div bigger than the photo.
-  - backfround-attachment: scroll(default) || fixed
-  - background-position: X% Y% >> makes the center of the background image as a percentage of the div height 
-    and width.
+//Background
+- background-color.
 
-  It can be defined in one line :
-  background: url() || none _ repeat mode _ Position _ Attachment _ Color
+- background-image: url('path/to/image');
+
+- background-repeat: repeat(default) || no-repeat || repeat-x || repeat-y 
+
+- backfround-attachment: scroll(default) || fixed
+
+- background-position: X% Y% >> makes the center of the background image as a percentage of the div height 
+  and width.
+
+- background-size:
+  1- cover //Stretches the image to cover all the html vertically and at least the the page full screen. 
+  2- contain //Resizes to contain all your html entities.
+
+- background: url() || none _ repeat mode _ Position _ Attachment _ Color //One line declaration.
+
+//Border
+border: widthpx color style; 
+
+//Font Properties
+- font-size: ?px | ?em //Takes a ratio of the font-size of the parent element.
+- font-family: "Arial"
+- font-weight: normal "default" | bold
+- line-height: ?;
 
 # Text properties
   - direction: ltr | rtl  
   - Letter spacing
+  - text-decoration: underline | overline | line-through | blink
+  - text-transform: uppercase | lowercase | capitalize | inherit | initial
+  - text-align: center | left | right
+  
+//Psudo Selectors 
+- element:hover //Selects the element when hovering over it.
+- a:visited //select the element when visiting a link.
+- input:checked //select the checkbox or the radio button when checked.
+- p::first-letter //Checks the first letter of the element.
+
+//CSS Box Model
+- Each element is represented as a rectangular box, with the box's content, padding, border, and margin built up around one 
+  another like the layers of an onion.
+
+1- width, height //Sets the size of the content box.
+   width property can be a ratio of its parent element. width: 30%;  
+2- padding represents the inner margin of a CSS box — the layer between the outer edge of the content box and the inner edge 
+   of the border. 
+3- border is sitting between the outer edge of the padding and the inner edge of the margin.
+4- The margin represents the outer area surrounding the CSS box, which pushes up against other CSS boxes in the layout.
+
+- You can manipulate margin, border and padding by using these properties. margin, margin-top, border, padding-left and so on
+- Shortcut for declaring the four sides. "margin: ?px ?px ?px ?px" clockwise from the top.
+- Use auto for the side that you want css to style it dynamically.
+- "margin: 1px 2px" will make the top and the bottom sides 1px margin and will make the left and the right sides 2px marign.
+
+//Float
+- The float CSS property specifies that an element should be placed along the left or right side of its container
+
+
+
+
+
+
+
+

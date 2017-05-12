@@ -63,6 +63,25 @@
 - Declare a table data using <td></td>
 - Declare a table head using <th></th>
 - You can split your table using meaningful tags using <thead></thead> and <tbody></tbody> and put the rows content in them.
+
+//HTML5
+- You can use HTML5 Tags to give your page a semantic meaning. It helps with SEO.
+- header //For the header of the page.
+- footer //For the footer of the page or an article.
+- nav //For the navbar or the sidebar of the page "Navigation".
+- article //Container for a blog post or an article.
+- section //Container for splitting a blog post "for example" to many parts.
+- aside //Used for creating secondery tags not so related with the current blog post.
+- time //Used to wrap timestamps to give them semantic meaning
+
+//HTML5 With IE
+- IE < 9 can't recognize html5 so we make a comment in the header that only IE can uncomment it.
+  <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+//Custom Data Attributes
+- You can declare custom data attributes for any tag by using data-attribute="value"
 =============================================================================================================
 
                                       -----------------------------------
@@ -87,7 +106,7 @@
     # type="hard" >> will make a new line automatically if the text was longer and the input is read with 
                      those new lines
 
-- <input type="checkbox" name="field_name" checked=" | checked" value="value = on">
+- <input type="checkbox" name="field_name" checked value="value">
     # If many checkboxes are checked with the same name it will return the value of the last checked one
       If you want to return all the values of them type the name as an array and treat the input as an array.
       <input name="time[]">
@@ -107,10 +126,18 @@
 - <label>Label text <input element> </label>
     # Makes radio buttons and checkboxes selectable when clicking on any text between label tags.
     # You can add a caption to the input tags with them.
+    # You can pair a label with id by using the syntax <label for="tag-id">Caption</label>
 
 - <input type="submit" name="submit_button_name"> >> Standard submit button
  
 - <input type="image" name="submit" src="hi.jpg" width="50" height="" > >> Image submit button
+
+//HTML5 Inputs
+- URL //Matching URL form.
+- email //Matching an email.
+- number. //Can have min, max and step attributes to restrict the input taken.
+- week, month, time, datetime.
+- color.
 
 //Validation
 - Add required attribute make the field required before submitting the form.
