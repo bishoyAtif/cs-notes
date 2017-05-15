@@ -1,4 +1,3 @@
-
 //General CSS Rule
 - selector {
     property:value;
@@ -71,8 +70,12 @@
 //Border
 border: widthpx color style; 
 
+//Font size units
+- ?px
+- ?em  //Takes a ratio of the font-size of the parent element.
+- ?rem //Takes a ratio of the root element.
 //Font Properties
-- font-size: ?px | ?em //Takes a ratio of the font-size of the parent element.
+- font-size: ? 
 - font-family: "Arial"
 - font-weight: normal "default" | bold
 - line-height: ?;
@@ -108,7 +111,7 @@ border: widthpx color style;
 
 //Float
 - The float CSS property specifies that an element should be placed along the left or right side of its container
-
+- It makes the element doesn't belong to and the order in its container. It makes the element float in its container.
 
 
 

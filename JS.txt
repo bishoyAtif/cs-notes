@@ -32,6 +32,7 @@
                                           -------------------------------
 - Strings are immutable. //You can't change individual chars within it. You can't use str[0] = 'a';
 - You can overwrite the whole string by using str = "Bisho";
+- str.length //Returning the length of the string.
 ============================================================================================================
                                           -------------------------------
                                           <<<<<<<    Functions    >>>>>>>
@@ -101,3 +102,12 @@ request.send();
 - You can handle error using request.onerror = method;
 - You can access response text with request.responseText
 - You must parse the response get using JOSN.parse(request.responseText);
+
+
+--------------------------------------General 
+
+//null VS undefined
+- undefined is a variable declared but not have a value.
+- null is explicit removal of the variable value.
+- Example: When you check for the variable in your program you will check if the program flow has put the value null to the 
+  variable you want, not if the variable has a value or not.

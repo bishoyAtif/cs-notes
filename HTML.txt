@@ -16,6 +16,9 @@
 //Classes VS IDs
 - Id is an attribute for a tag and is unique identifier for it.
 - Class is an attribute also but it can be used in many tags for multiple selection.
+
+//Target attribute
+- You can add a bookmark to your link by using at the end of it #id_required and add the id to the element you want to go to.
 =============================================================================================================
 
                                       -------------------------------
@@ -49,7 +52,7 @@
     # target="self >> opens the link in the same tab ... blank >> opens the link in another tab"
 
 //Lists
-- <ol> // Ordered List
+- <ol type="a, A, I, i"> // Ordered List
 - <ul type="circle, square, bullet"></ul> //Unordered list
 - <li></li> "List item"
 
@@ -73,6 +76,9 @@
 - section //Container for splitting a blog post "for example" to many parts.
 - aside //Used for creating secondery tags not so related with the current blog post.
 - time //Used to wrap timestamps to give them semantic meaning
+
+//Iframe
+- <iframe src=""></iframe> //Used to show another web page in the original page.
 
 //HTML5 With IE
 - IE < 9 can't recognize html5 so we make a comment in the header that only IE can uncomment it.

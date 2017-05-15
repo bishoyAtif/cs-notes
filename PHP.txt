@@ -7,11 +7,8 @@
                                     -----------------------------
 
 - Local Host 127.0.0.1 >> "There is no place like 127.0.0.1"
-
 - at pure PHP web pages we omit the closing tag of php script "?>"
-
 - String Concatanation $s .= 'Bisho';  ==>  $s = $s . 'Bisho'; 
-
 - Getting variable type
   # gettype() >> to get only the type of a variable.
   # var_dump() >> to get the type and the contents of a variable in details
@@ -63,9 +60,6 @@ _END;
     # reduce syntax and programming errors.
 
 - function_exists('Function_name') >> Used to know if the fucntion exists in this version of PHP.
-
-- func_get_args() >> returns an array with all the fucntions argument in.
-
 - Anonymous functions >> The functions which aren't assigned to a specific name but just added to a variable 
                          or inserted in another function 
   Example : $func = function(){// Function body}
@@ -88,27 +82,17 @@ _END;
   with 23 chars if $more_entropy = true of 13 if false.
 
 - hmtlspecialchars($text) >> used when adding text to your html
-
 - urlencode($text) >> used when adding text to your URL
-
 - sleep($sec) >> stops the execution of the script for $sev seconds.
-
 - usleep($sec) >> the same as sleep but in micro seconds.
-
-- ceil($number) >> rounding the number down.
-
-- floor($number) >> rounding the number up.
-
+- ceil($number) >> rounding the number up.
+- floor($number) >> rounding the number down.
 - func_get_args() >> used within a function to return the function arguments as an array.
-
 - RegEx: The pattern in PHP is included within foroward slaches '/Pattern/' 
-
 ============================================================================================================
-
                             -------------------------------------------
                             <<<<<<<    Variables & Operators    >>>>>>>
                             -------------------------------------------
-
 - We can use variable functions. 
   Example : $x = 'hello'; $x(); >> This will trigger the function hello. It's like using hello();
 
@@ -196,7 +180,7 @@ _END;
 
 - Removing elements from the array 
     # array_pop($array, $item1, ...) >> removing item from the end of the array.
-    # array_popshift($array, $item1, ...); >> removing item from the top of the array.
+    # array_shift($array, $item1, ...); >> removing item from the top of the array.
 
 - sort($array, $sort_type) , rsort($array, $sort_type) "Reversed Sort" >> 
     * SORT_REGULAR - compare items normally >> doesn't change types of data (orders string fistly then int).
@@ -254,27 +238,16 @@ _END;
             $str = str_replace('/n', '<br>', $str);
 
 - str_repeat($str, $num) >> returns a string with value $str repeated $num times.
-
 - str_shuffle($str) >> returns the string $str shuffled
-
 - strlen($str) >> returns the string length
-
 - strtolower(), strtoupper() >> returns the string in lower case or upper case
-
 - ucfirst() >> upper case first, lcfirst() >> lower case first
-
 - ucwords() >> returns the string with all its words upper case.
-
 - addslashes($str) >> escape all quotes and slashes from the string.
-
 - stripslashes($str); >> remove all slashes before charachters escaped in the string.
-
 - strip_tags($str, $allowed_tags :: "<br><a><b> and so on");  >> remove all html and xml tags from the string.
-
-- trim($str, $charlist = '\n\t \0'), ltrim(), rtrim() >> it returns the string with its beginning and end 
-  stripped with $charlist
-  example : $str = trim($str, 'BASHIK') >> it will search in the two endings with this chars and remove them 
-  one by one.
+- trim($str, $charlist = '\n\t \0'), ltrim(), rtrim() >> it returns the string with its beginning and end stripped with $charlist
+  example : $str = trim($str, 'BASHIK') >> it will search in the two endings with this chars and remove them one by one.
 
 - parse_str($str,[$array]); >> parses the link and returns all key value pairs in it as a variable or in an 
   array if inputted.
@@ -416,21 +389,13 @@ _END;
     # SEEK_END - Set position to end-of-file plus offset.
 
 - __DIR__ 's value is the current directory of the current script.
-
 - __FILE__ 's value is the full file name of the current script.
-
 - file_exists($file) >> reutrns true if the file exists, false if not.
-
 - is_writable($file) >> reutrns true if the file is writable, false if not.
-
 - filesize('bisho.txt') >> returns the file size of the inputted file
-
 - mkdir($dir) >> making a directory named $dir.
-
 - rmdir($dir) >> removing dir named $dir.
-
 - is_dir($dir) >> returns true if the dir exists, false if not.
-
 - dirname($path) >> returns the path of the directory your file are in. 
   Example : dirname(__FILE__) == __DIR__
             dirname(/opt/lampp/htdocs/first_task) == '/opt/lampp/htdocs'
@@ -451,20 +416,14 @@ _END;
   as a string and can return a specific length from a specific offset.
 
 - copy($original_file, $target_file);
-
 - rename($original_file, $target_file); >> can be treated as move.
-
 - pathinfo($path); >> returns an array contains dirname, basename, extentsion, filename.
-
 - unlink($file_name); >> removes the file.
-
 - rmdir($directory); >> removes the directory .. must be empty.
-
 - scandir($path) >> returns the files and the folders in this path in an array.
 
 
 =============================================================================================================
-
                                       -----------------------------
                                       <<<<<<<    Filters    >>>>>>>
                                       -----------------------------
@@ -472,7 +431,6 @@ _END;
 - filter_list() >> returns an array have all filters possible in php.
 
 - filter_var($input, Flags, Options); >> returns a sanitized string
-  
     # Flags can be used to validate or sanitize inputs.
     # Options are passed as an array.
 
@@ -610,12 +568,12 @@ _END;
 
 - If you want the constructor of the parent class to be excuted before the constructor of the subclass
   function __construct(){
-  parent::__constructor();
-  // Subclass properties initialization
+    parent::__constructor();
+    // Subclass properties initialization
   }
 
 - To prevent subclasses to override the function of the super classes you can use the word 'final' when 
-  declaring th efunctions in the super class.
+  declaring the functions in the super class.
 
 - Visibility :
     # public : can be accessed directly or within functions from a class or a subclass.
@@ -764,24 +722,20 @@ _END;
 - $results->rowCount(); >> returns the number of the rows returned from a query.
 
 ============================================================================================================
-
                             ---------------------------------
                             <<<<<<<    Date & Time    >>>>>>>
                             ---------------------------------
 
 - time() >> returns the current timestamp in unix format.
-
 - data($format[ , $timestamp = time()]) >> formats the timestamp as the inputted format.
 
   
 ============================================================================================================
-
                             -------------------------------------
                             <<<<<<<    Clean Code Tips    >>>>>>>
                             -------------------------------------
 
 - Return expected objects last.
-
 - At If statements, Check the negative values that can break your work flow first So you don't need to nest if 
   statements.                            
 

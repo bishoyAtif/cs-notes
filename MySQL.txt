@@ -47,7 +47,6 @@
   ROLLBACK; //Discards all the changes if one of them doesn't excecuted successfully.
 
 =============================================================================================================
-
                                         --------------------------------
                                         <<<<<<<    Data types    >>>>>>>
                                         --------------------------------
@@ -73,9 +72,7 @@
 
 - SET  >> stores multiple records to choose one or more from them
   ENUM >> stores multiple records to choose only one of them.
-
 =============================================================================================================
-
                                         ----------------------------
                                         <<<<<<<    Syntax    >>>>>>>
                                         ----------------------------
@@ -170,30 +167,22 @@
 
   Example: "SELECT author,title FROM classics
             WHERE MATCH(author,title)
-            AGAINST('"origin of"' IN BOOLEAN MODE);"
+            AGAINST('"origin of"' IN BOOLEAN MODE);
           # uses double quotes to request that all rows containing the exact phrase origin of be returned.
 
 - ALTER TABLE table_name RENAME new_table_name >> renaming a table; 
-
 - ALTER TABLE table_name MODIFY column_name new_data_type >> altering the data_type of a column.
-
 - ALTER TABLE table_name ADD column_name [CONSTRAINTS]; >> adding new column to a table.
   ## ALTER TABLE users ADD age INT ( FIRST | AFTER name )
-  
 - ALTER TABLE table_name CHANGE old_column_name new_column_name data_type 'Must be specified'.
-
 - ALTER TABLE table_name DROP column_name.
-
 - ALTER TABLE table_name ENGINE=MyISAM 'For example'
-
 - WHERE field_name BETWEEN #1 and #2 >> select within a range.
-
 - WHERE field_name IN (#1, #2, #3) >> selects from a specific values.
   Example : "SELCT * FROM books WHERE id IN (5,6,7)"; 
-
 - DISTINCT field_name >> takes the first row of the rows the have repeated field_name
   Example : "SELECT DISTINCT name, age FROM students";
-
+  
 - NATURAL JOIN >> automatically joins columns that have the same name. 
 
 - JOIN :
