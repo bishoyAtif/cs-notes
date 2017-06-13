@@ -1,61 +1,132 @@
 =============================================================================================================
+                                      ------------------------------------
+                                      <<<<<<<   1- Introduction    >>>>>>>
+                                      ------------------------------------
+- HTML code is made up with elements, each one of them often have two tags and maybe one.
+- Each element acts like a container that tells the browser info about the information between its two tags.
 
+// Basic elements
+- <html> element indicates that the enclosing elements are treated as html code.
+- <head> element  includes the information about the page "meta data for the page".
+- <body> element indicates that the enclosing elements are put in the main browser window "things that appear into your web page".
+- <h1> element is the main heading tag in the document.
+- <title> elements is put in the head section and refers to the title of the page that appears on the page tab.
+
+// Attributes
+- Attributes provides additional info about the content of the element, it is put in the opening tag.
+- You can declare an attribute by using <tag attribute="Value"></tag>
+- Example: lang="fr" // lang attribute refers to the language of the text in the element.
+
+//Structural VS Semantic elements
+- Structural elements is used just to structure a web page element like a paragraph or a list.
+- Semantic elements is not intended to affect the structure of the web page but it adds more information about the element. 
+  It helps with SEO and Screen readers.
+# You shouldn't use the semantic tags to style the text. Use it only to give the text a meaning you want.
+=============================================================================================================
+                                        ----------------------------
+                                        <<<<<<<   2- Text    >>>>>>>
+                                        ----------------------------
+- <h1> ... <h6> "from larger to smaller". "Heading : affects SEO". h1 is the main header in your page. //Block level elements.
+- <p> is a paragraph tag. Browser will automatically views it in a single line.
+
+// Inline level elements
+- <i>, <em>       "Italic"
+- <b>, <strong>   "Bold" 
+- <ins>      "Underlined or inserted" 
+- <small>         "Small text"
+- <mark>          "Highlight" 
+- <sub>           "Sub text" 
+- <sub>           "Super text" 
+- <del>           "Strike-out text"
+
+! When the browser comes across two, more white spaces or even a line break, It only shows one space. That is known as "White space collapsing".
+
+// Breaks and Horizontal lines 
+- <br /> adding a line break inside a paragraph.
+- <hr /> creates a horizontal rule "line" to split the content.
+
+! There are some elements that don't include any words and usually have one tag between them called "Empty tags" or "Self closing tags".
+
+- <blockquote> is a semantic tag that tells the browser that is a quote. The text will be indented. 
+  It helps to get the quotatins in your site with the search engines.
+  % cite="who-said-the-quote"
+
+- <q> is used when making short inline quotation.
+
+- <abbr> is used for abbriviations.
+  % title="full-term"
+  * <abbr title="professor">Prof</abbr>
+
+- <acronym> is used for the terms with the first character of each word in an expression.
+  % title="full-term"
+
+! HTML5 use only <abbr> for both abbreviations and acronyms.
+
+- <cite> is used when referencing a piece of work such as a book or a film. It is rendered as italic text.
+- <dfn> is used when adding a new terminology "definition instance"
+- <address> is used to contain the conatct info of the page author like physical address or email.
+=============================================================================================================
+                                        -----------------------------
+                                        <<<<<<<   3- Lists    >>>>>>>
+                                        -----------------------------
+- <li> is used to represent a list item.
+
+// Ordered List
+- created using <ol> tag
+
+// Unordered List
+- created using <ul> tag
+
+// Definition List
+- created using <dl> tag and includes a series of terms and definitions.
+- <dt> : definition term.
+- <dd> : definition itself.
+
+! A nested lists can be made by defining a new list within the <li> tag.
+=============================================================================================================
+                                        -----------------------------
+                                        <<<<<<<   4- Links    >>>>>>>
+                                        -----------------------------
+- A link is defined using <a> tags "anchor tags".
+
+- <a> The text that user clicks on</a>
+  % href="URL"
+  % target="_self"  >> opens the link in the same tab
+           "_blank" >> opens the link in another tab
+
+- Absolute URL is the url that you enters to get the web page directly. "http://google.com"
+- Relative URL is the url for a specific page relative to another page in your website, the root directory for example.
+
+// Accessing direcrories in the relative URL
+- At the same directory "bisho.html"
+- At the child directory "child_dir/bisho.html"
+- At the parent directory "../bisho.html".
+
+- To make a link to send an email directly we use href="mailto:example@gmail.com"
+
+// Classes VS IDs
+- Id is used as unique identifier for it. The same id can't declare twice or more in the same page.
+- Class is used to classify many tags for multiple selection.
+
+- You can go to a specific section with a specific id in the same page by using href="#target_id".
+=============================================================================================================
+                                        ------------------------------
+                                        <<<<<<<   5- Images    >>>>>>>
+                                        ------------------------------
+- <img> tag used to add an image to your page.
+  % src="URL for the image"
+  % alt="text for screen readers or if the image can't load"
+  % title="text appears when the user hovers over it"
+=============================================================================================================
                                       -----------------------------
                                       <<<<<<<    General    >>>>>>>
                                       -----------------------------
-
 - <DOCTYPE html> "renders the page as HTML5 page"
-- <head></head> has the meta data for your web page.
-- <body></body> has the actual content that will appear in your page.
 - You can comment a line in HTML by using <!-- Line Commented -->
-- You can declare an attribute by using <tag attribute="Value"></tag>
 
 //HTML Entities
 - Takes the form &code; //Example: &copy; for copyright symbol.
-
-//Classes VS IDs
-- Id is an attribute for a tag and is unique identifier for it.
-- Class is an attribute also but it can be used in many tags for multiple selection.
-
-//Target attribute
-- You can add a bookmark to your link by using at the end of it #id_required and add the id to the element you want to go to.
 =============================================================================================================
-
-                                      -------------------------------
-                                      <<<<<<<    Text Tags    >>>>>>>
-                                      -------------------------------
-
-- <h1> ... <h6> "Heading : affects SEO". h1 is the most header in your page. h6 is the least. //Block level elements.
-
-//Inline level elements
-- <i>, <em>       "Italic"
-  <b>, <strong>   "Bold" 
-  <u>, <ins>      "Underlined or inserted" 
-  <small>         "Small text"
-  <mark>          "Highlight" 
-  <sub>           "Sub text" 
-  <sub>           "Super text" 
-  <del>           "Strike-out text"
-
-//Image
-- <img> "Show image in the page"
-  attr:
-    # src="path/to/image"
-    # alt="text for screen readers"
-    # title="text appears when the mouse points to it" 
-    # width="..px" ... height="..px" 
-
-//Anchor tag. Inline Element
-- <a> Text appears in the page </a> "Anchor link"
-  attr:
-    # href="Link or # (id of an element to go in the same page)"
-    # target="self >> opens the link in the same tab ... blank >> opens the link in another tab"
-
-//Lists
-- <ol type="a, A, I, i"> // Ordered List
-- <ul type="circle, square, bullet"></ul> //Unordered list
-- <li></li> "List item"
-
 //Dev VS Span
 - Dev and Span are just containers to group tags together to select them with css once.
 - Dev is block level element. While Span is inline level element.
