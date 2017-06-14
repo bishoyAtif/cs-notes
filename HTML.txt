@@ -20,7 +20,7 @@
 //Structural VS Semantic elements
 - Structural elements is used just to structure a web page element like a paragraph or a list.
 - Semantic elements is not intended to affect the structure of the web page but it adds more information about the element. 
-  It helps with SEO and Screen readers.
+  It helps with SEO and Screen readers. It also helps adding more hooks for html elements to be used by CSS.
 # You shouldn't use the semantic tags to style the text. Use it only to give the text a meaning you want.
 =============================================================================================================
                                         ----------------------------
@@ -105,8 +105,8 @@
 - To make a link to send an email directly we use href="mailto:example@gmail.com"
 
 // Classes VS IDs
-- Id is used as unique identifier for it. The same id can't declare twice or more in the same page.
-- Class is used to classify many tags for multiple selection.
+- Id attribute is used as unique identifier for it. The same id can't declare twice or more in the same page.
+- Class attribute is used to classify many tags for multiple selection.
 
 - You can go to a specific section with a specific id in the same page by using href="#target_id".
 =============================================================================================================
@@ -117,29 +117,178 @@
   % src="URL for the image"
   % alt="text for screen readers or if the image can't load"
   % title="text appears when the user hovers over it"
+
+// Block-level VS Inline-level Elements
+- Block-level elements always appears on a separate line. It can't have any tag with it on the same line. Like <p> or <h1> tags.
+- Multiple inline-level elements can appear on the same line with other inline-level elements or within another block-level elements without requiring to be in a new line.
+
+// Image Preparing
+- Use GIF or PNG for the photos that have flat colors "Logos or Illustrations".
+- Use JPEG for the photos that have varity of colors "Photographs".
+
+- Images created for the web should be saved at the resolution of 72 ppi.
+  Making the images with higher resolution than 72 ppi will result in only a larger image not a higher quality image.
+
+- Vector images are resolution independent. It is created by placing points on a grid and drawing lines between those points.
+  You can resize image as you want without affecting the quality of the image.
+  Vectors are used in the web using SVG Format "Scalable Vector Graphics".
+
+- You can use <figure> tags to contain images and thier caption.
+  <figcaption> tags can relate a caption with the image within <figure> tags.
 =============================================================================================================
-                                      -----------------------------
-                                      <<<<<<<    General    >>>>>>>
-                                      -----------------------------
-- <DOCTYPE html> "renders the page as HTML5 page"
+                                        ------------------------------
+                                        <<<<<<<   6- Tables    >>>>>>>
+                                        ------------------------------
+- <table> tags are used to declare a table. The table is drawn row by row.
+- <tr> declaring a table row. It indicates the start of each row.
+- <td> declaring a table data "cell". It is usually put within table row.
+- <th> declaring a table heading "row or column". It improves the search engines ability to index the pages.
+  It also adds more hooks to be used with CSS.
+  % scope="col" Indicating that the heading is for a column.
+         ="row" Indicating that the heading is for a row
+
+// Spanning
+- colspan attribute can be used on <th> or <td> element and indicates how many columns to run across.
+- rowspan attribute can be used on <th> or <td> element and indicates how many rows to span down the table.
+
+// Long table
+- <thead> includes the heading of the table.
+- <tbody> includes the body of the table.
+- <tfoot> includes the footer of the table.
+! These elements are used to help screen reader improvement and add more hooks to be used with css.
+! Another reason for having <thead> and <tfoot> elements is that if the table contents is more than one page, the browser can keep the header and the footer visible and scroll over the table contents.
+=============================================================================================================
+                                        -----------------------------
+                                        <<<<<<<   7- Forms    >>>>>>>
+                                        -----------------------------
+- The form is sent to the server as key/value pairs.
+# You should never change the name of the form control in the page unless you make sure that the server knows the new value.
+
+- <form> tags includes all the form controls.
+  % action="URL of the page on the server that will recieve the form pairs"
+  % method="GET" //The form pairs will be added to the end of URL. Used for retriving info and for short forms like search box.
+    method="POST" //Values are sent through PHP Headers. Used when uploading a file or when using sensitive data.
+
+- <input> tag is used to make a form control to get info from the user.
+
+% Any form control must have "name" attribute to be the key to the value sent to the server
+% All text form controls have "placeholder" attribute to make a temporary text before typing. Doesn't work when using "value"
+                              "maxlength" attribute to control the max number of characters.
+                              "value" attribute to add a default value.
+
+// Form Control Elements
+- <input type="text"> used to get plain text.
+
+- <input type="password"> used to get passwords.
+  For full security, you should have SSL certification to encrypt the data before sending with http.
+
+- <textarea> Default Text </textarea>
+  % wrap="off"  will make a horizontal scroll bar if the text is longer than the area.
+    wrap="soft" will make a new line automatically if the text was longer but the input is read without that newline (Default).
+    wrap="hard" will make a new line automatically if the text was longer and the input is read with those new lines.
+
+- <input type="radio">
+  % value="the value sent to the server if this button is checked"
+  % checked. used to indicate which value should be selected by default.
+  ! The value of the name attribute must be the same for every radio button in the selection group.
+
+- <input type="checkbox">
+  % value="the value sent to the server if this button is checked"
+  % checked. used to indicate which value should be selected by default.
+  ! If many checkboxes are checked with the same name it will return the value of the last checked one
+    If you want to return all the values of them type the name as an array and treat the input as an array.
+    e.g. <input name="time[]">
+
+- <select> tags is used to make a select box.
+  % multiple. To use multiple selection.
+  % size="#". The number of fields shown in the multiple mode.
+  ! When multiple selection is used , an array name must be used for the name attribute and it is treated like checkbox.
+
+- <option> Option Name </option> Used to create option within the select box.
+  % selected. Used to indicate which value should be selected by default.
+  % value="the value sent to the server if this button is selected".
+
+- <input type="file"> Create a browse button that selects a file from the client device.
+  ! Form action must be POST. Can't use GET for uploading a file.
+
+- <input type="submit" name="submit_button_name">. Standard submit button.
+
+- <input type="image" name="submit" src="hi.jpg">. Image submit button.
+
+- <button> tags are used to allow users to get more control on their buttons appear. Allow other elements to appear inside them
+
+- <input type="hidden"> Used to sent additional hidden information to the server.
+  # never treat hidden inputs as secure.
+
+- <input type="date"> makes a special select box to select a date.
+
+- <input type="email"> The user must enter a valid email. 
+
+- <input type="url"> The user must enter a valid url. 
+
+- <input type="search"> Adds a cross beside the search box to clear the text.
+
+- <input type="color"> Selects a color from the color palette.
+
+- <label> Label text <input element> </label>
+  Makes radio buttons and checkboxes selectable when clicking on any text between label tags. Also improve screen readers.
+  You can add a caption to the input tags with them.
+  ! You can pair a label with id by using the syntax <label for="input-id">Caption</label>
+
+- Best places to add the label associated with an input tag:
+  Above or Left : For text, text areas, select boxes and file upload.
+  Right : For checkboxes and radiobuttons.
+
+- <fieldset> tags are used to group form controls together. It will render a border around the fieldset.
+- <legend> tags are used to specify a caption for a group of the form controls.
+
+// Validation
+- Used to reduce the work on the server.
+  Make the users see if there is a problem in the form before submitting it to the server.
+% required. The user can't submit the form with this field empty.
+% title attribute refers to the error message seen when not matching the conditions required.
+
+
+// General Attributes:
+% autocomplete >> Default = "on" can be set to the entire form or a specific input element.
+% autofocus >> Default = "off" selects the input element to directly write in it.
+% formaction, formmethod, formtarget >> override the form attributes for a specific submit button.
+=============================================================================================================
+                                    ------------------------------------
+                                    <<<<<<<   8- Extra Markup    >>>>>>>
+                                    ------------------------------------
+- DOCTYPE declaration is used to tell the browser which HTML version to render.
+  <!DOCTYPE html>. Renders the page as HTML5 page.
+
 - You can comment a line in HTML by using <!-- Line Commented -->
+
+//Div VS Span
+- <div> is just a container to group tags together in a block-level element to select them with css once.
+- <span> is the inline-level equivalent of the <div> element. 
+- Div is block level element. While Span is inline level element.
+
+// Iframe
+- <iframe src="URL"></iframe> //Used to show another web page in the original page. Abbr for Inline Frame.
+  % seamless. Used when you don't need scrollbars.
+
+// Meta Tag
+- <meta> tag lives inside <head> element. It tells search engines about the page and who created it.
+  It's empty tag so it use attributes to carry the information.
+  Common attributes used are name, http-equiv and content, the value of the name or http-equiv is the property you are setting and the content attibute has its value.
+
+% name="description" Have page description and commonly used by search engines. It can be a maximum of 155 Chars. Usually displayed in the search engine results.
+% name="keywords" Has comma separated values that user might search with. No longer have much effect on SEO nowdays.
+% name="robots" If the content has the value "noindex" the page won't be indexed in SE. If "nofollow", It will be indexed but the pages that it links to won't be indexed.
+
+% http-equiv="author". This defines the author for the web page.
+% http-equiv="pragma" Used with content="no-cache" to prevent the browser from caching the web page. 
+% http-equiv="expires" Used to indicate the caching expire date. The content must be like this "Fri, 04 Apr 2014 23:59:59 GMT".
 
 //HTML Entities
 - Takes the form &code; //Example: &copy; for copyright symbol.
-=============================================================================================================
-//Dev VS Span
-- Dev and Span are just containers to group tags together to select them with css once.
-- Dev is block level element. While Span is inline level element.
+# Check the appearance of the symbol after using it as some fonts can't display some symbols.
 
-//Tables
-- Declare a table using <table></table>
-- Declare a table row using <tr></tr>
-- Declare a table data using <td></td>
-- Declare a table head using <th></th>
-- You can split your table using meaningful tags using <thead></thead> and <tbody></tbody> and put the rows content in them.
-
-//HTML5
-- You can use HTML5 Tags to give your page a semantic meaning. It helps with SEO.
+// More HTML5 elements
 - header //For the header of the page.
 - footer //For the footer of the page or an article.
 - nav //For the navbar or the sidebar of the page "Navigation".
@@ -148,86 +297,10 @@
 - aside //Used for creating secondery tags not so related with the current blog post.
 - time //Used to wrap timestamps to give them semantic meaning
 
-//Iframe
-- <iframe src=""></iframe> //Used to show another web page in the original page.
-
-//HTML5 With IE
-- IE < 9 can't recognize html5 so we make a comment in the header that only IE can uncomment it.
+# IE < 9 can't recognize HTML5 so we make a comment in the header that only IE can uncomment it.
   <!--[if IE]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
-//Custom Data Attributes
 - You can declare custom data attributes for any tag by using data-attribute="value"
 =============================================================================================================
-
-                                      -----------------------------------
-                                      <<<<<<<    Form Elements    >>>>>>>
-                                      -----------------------------------
-
-- <form name="form_name" action="target_path" method="POST | GET"> Input Tags </form>
-
-- You can use <fieldset></fieldset> to make a border around the form.
-
-- You can specify a title for your fieldset by using <legend></legend> tag.
-
-- <input type="text" name="field_name" value="default value" placeholder="value" maxlength="num" size="size" >
-- title attribute refers to the error message seen when not matching the conditions required.
-
-- <input type="password" name="field_name" >
-
-- <textarea name="field_name" cols="width" rows="height" wrap="type"> Default Text </textarea>
-    # type="off" >> will make a horizontal scroll bar if the text is longer than the area.
-    # type="soft" >> will make a new line automatically if the text was longer but the input is read 
-                               without that newline (Default) 
-    # type="hard" >> will make a new line automatically if the text was longer and the input is read with 
-                     those new lines
-
-- <input type="checkbox" name="field_name" checked value="value">
-    # If many checkboxes are checked with the same name it will return the value of the last checked one
-      If you want to return all the values of them type the name as an array and treat the input as an array.
-      <input name="time[]">
-
-- <input type="radio" name="time" checked=" | checked">
-
-- <input type="hidden" name="field_name" value="value"> >> used to sent additional information to the user
-    # never treat hidden inputs as secure.
-
-- <select name="filed_name" multiple="multiple" size="#">
-    <option selected="selected" value="value">Option Name</option>
-  </select>
-    # size is the number of fields shown in the multiple mode
-    # When multiple selection is used , an array name must be used for the name attribute and it is treated   
-      like checkbox.
-
-- <label>Label text <input element> </label>
-    # Makes radio buttons and checkboxes selectable when clicking on any text between label tags.
-    # You can add a caption to the input tags with them.
-    # You can pair a label with id by using the syntax <label for="tag-id">Caption</label>
-
-- <input type="submit" name="submit_button_name"> >> Standard submit button
- 
-- <input type="image" name="submit" src="hi.jpg" width="50" height="" > >> Image submit button
-
-//HTML5 Inputs
-- URL //Matching URL form.
-- email //Matching an email.
-- number. //Can have min, max and step attributes to restrict the input taken.
-- week, month, time, datetime.
-- color.
-
-//Validation
-- Add required attribute make the field required before submitting the form.
-- Add email attribute to make the field matches an email before submitting the form.
-
-### General Attributes:
-    - autocomplete >> Default = "on" can be set to the entire form or a specific input element.
-    - autofocus >> Default = "off" selects the input element todirectly write in it.
-    - required >> make sure that the field isn't empty.
-    - formaction, formmethod, formtarget >> override the form attributes for a specific submit button.
-
-=============================================================================================================
-
-
-
-
