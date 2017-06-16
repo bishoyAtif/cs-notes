@@ -1,25 +1,40 @@
-//General CSS Rule
-- selector {
-    property:value;
-    anoterProperty:value;
-  }
+=============================================================================================================
+                                      ------------------------------------
+                                      <<<<<<<   1- Introduction    >>>>>>>
+                                      ------------------------------------
+- You should think as if there is a box around each CSS element.
+  For the block-level elements, The box takes all the line it is on. But the inline-level elements can be part of the line.
 
-//How to use CSS with HTML?
-- <link href="path/to/file" rel="stylesheet" type="text/css"> //StyleSheets
+- CSS associates rules "Styles" with HTML elements.
+- CSS Rule contains a selector and a declaration, e.g.
+  p { // Selector 
+    font-family: Arial; // Declaration, Property: Value
+  }
+  Selector indicates which element to apply the rule, Declaration indicates how this element should be styled.
+
+// Adding CSS to HTML
+- <link href="path/to/file" rel="stylesheet" type="text/css"> //Associating HTML with CSS file.
+
 - <p style="color:red;font-size:30px">This is a paragraph</p> //Inline
-- <style> //Style Tag
-    p
-    {
+
+- <style> //Internal
+    p {
       color:red;
       font-size:30px
     }            
   </style>
 
-//Selectors
-- element {}              //Type Selectors.
-- #id {}                  //Selects an element with an id.
+// Selectors
+- * {}                    // "Universal Selector" Select every element in the page.
+
+- element {}              // Type Selectors.
+  p {} // Selects all p elements 
+
 - .class {}               //Selects the element(s) with a specific class.
-- * {}                    //Select every element in the page.
+  .cls {} // Selects all elements with class "cls"
+  p.cls {} // Selects all p elements with class "cls"
+
+- #id {}                  //Selects an element with an id.
 - parent descendant {}    //Selects the element under a specific parent.
 - element + adjacent {}   //Selects the adjacent "the element after" of the element
 - a[attribute="value"] {} //Selects an element with a specific attribute.
@@ -112,10 +127,3 @@ border: widthpx color style;
 //Float
 - The float CSS property specifies that an element should be placed along the left or right side of its container
 - It makes the element doesn't belong to and the order in its container. It makes the element float in its container.
-
-
-
-
-
-
-
