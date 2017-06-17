@@ -162,3 +162,14 @@ border: widthpx color style;
 //Float
 - The float CSS property specifies that an element should be placed along the left or right side of its container
 - It makes the element doesn't belong to and the order in its container. It makes the element float in its container.
+
+=============================================================================================================
+                                        -----------------------------
+                                        <<<<<<<   Bootstrap   >>>>>>>
+                                        -----------------------------
+- Bootstrap is a CSS framework that makes beautiful responsive websites quickly.
+
+- You can use bootstrap by static file downloading and linking it with <link> .
+  Or by linking bootstrap CDN by <link> tag.
+
+- 

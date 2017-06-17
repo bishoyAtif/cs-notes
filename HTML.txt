@@ -247,7 +247,7 @@
   Make the users see if there is a problem in the form before submitting it to the server.
 % required. The user can't submit the form with this field empty.
 % title attribute refers to the error message seen when not matching the conditions required.
-
+! You can turn the automatic validation off by using "novalidate" attribute with the element you want.
 
 // General Attributes:
 % autocomplete >> Default = "on" can be set to the entire form or a specific input element.
