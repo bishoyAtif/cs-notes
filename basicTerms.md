@@ -24,7 +24,7 @@
 
 - A JSON Web Token (JWT) is a JSON object that is defined as a safe way to represent a set of information between two parties. The token is composed of a header, a payload, and a signature. Simply it is a string with the format ```header.payload.signature```
 - The authentication server then creates the JWT and sends it to the user. When the user makes API calls to the application, the user passes the JWT along with the API call. In this setup, the application server would be configured to verify that the incoming JWT are created by the authentication server and not faked or temered with.<br>
-<img src="https://i.ibb.co/0K3SxH8/1-SSXUQJ1d-Wji-Ur-Do-Kaai-GLA.png" style="float: right;width: 40%;">
+![JWT Exchange Model](https://i.ibb.co/0K3SxH8/1-SSXUQJ1d-Wji-Ur-Do-Kaai-GLA.png)
 - The header component of the JWT contains information about how the JWT signature should be computed. The value of the “typ” key specifies that the object is a JWT, and the value of the “alg” key specifies which hashing algorithm is being used to create the JWT signature component.
 
   ```json
@@ -47,7 +47,7 @@
 
 ### Same Origin Policy
 
-- Browsers implement something called "Same-origin Policy" (SOP).<img src="https://cdn-images-1.medium.com/max/1600/1*g_ISMQPCQpjw-6w3JRFUKQ.png" style="float: right;width: 40%;">
+- Browsers implement something called "Same-origin Policy" (SOP). ![CSRF Attack Model](https://cdn-images-1.medium.com/max/1600/1*g_ISMQPCQpjw-6w3JRFUKQ.png)
 - It pervents the browser from executing XMLHttpRequests and some other requests "mentioned below" from cross origins. As it can contain many vulnerabilities like csrf "Making blind requests to cross web site depending that there are registered cookies for those web sites".
 - In other words, Two websites can load each others contents "Using Ajax Requests" only if they are both from the same origin "Same Origin Requests". But if the origins of the two sites differ, loading content from each other "Cross Origin Requests" is not permitted, unless we use CORS or another technique to poke little holes into the SOP.
 - SOP is not to protect the resources requested on a server, that task is up to the server itself via other means. **The point is to protect the innocent user**.
@@ -98,3 +98,10 @@
 ```
 
 - The web server on ```www.example.com``` will append the given path to the path of its root directory. On an Apache server, this is commonly ```/home/www``` (On Unix machines, usually ```/var/www```). The result is the local file system resource ```/home/www/path/file.html```.
+
+<style>
+  img {
+    float: right;
+    width: 40%;
+  }
+</style>
