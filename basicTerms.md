@@ -63,6 +63,21 @@
 - WebGL textures.
 - Images/video frames drawn to a canvas using drawImage().
 
+### JSONP "JSON With Padding"
+
+- One way to overcome the restrictions of SOP is JsonP.
+- There is one item that bypasses this limitation of SOP. It's ```<script>``` tag. When you use a script tag, the domain limitation is ignored, but under normal circumstances, you can't really do anything with the results, the script just gets evaluated.
+- Here it the trick! When you make your request to a server that is JSONP enabled, you pass a special parameter that tells the server a little bit about your page. That way, the server is able to nicely wrap up its response in a way that your page can handle. For example ```http://www.example.net/sample.aspx?callback=mycallback```. Without jsonp, the normal response will be ```{ foo: 'bar' }``` but if the server has implemented jsonp, It will take the parameter ```mycallback``` and wrap it around the json returned. So It will become ```mycallback({ foo: 'bar' });```. As you can see, it will now invoke the method you specified. So, in your page, you define the callback function:
+
+  ```javascript
+  mycallback = function(data){
+    alert(data.foo);
+  };
+  ```
+
+- And now, when the script is loaded, it'll be evaluated, and your function will be executed.
+- This technique is outdated. These days, CORS is the recommended approach vs. JSONRequest.
+
 ### Cross-Origin-Request-Sharing "CORS"
 
 - It’s a way to relax security and make it less restrictive. SOP is implemented in almost all modern browsers and because of that, a website from one origin is not allowed to access resources from foreign origins. CORS is a mechanism to make exceptions to SOP by allowing servers to specify who can access its assets or resources.
@@ -92,16 +107,9 @@
 - For a static request the URL path specified by the client is relative to the web server's root directory.
 - Consider the following URL as it would be requested by a client ```http://www.example.com/path/file.html```. The client's user agent will translate it into a connection to ```www.example.com``` with the following HTTP 1.1 request:
 
-``` http
-  GET /path/file.html HTTP/1.1
-  Host: www.example.com
-```
+  ``` http
+    GET /path/file.html HTTP/1.1
+    Host: www.example.com
+  ```
 
 - The web server on ```www.example.com``` will append the given path to the path of its root directory. On an Apache server, this is commonly ```/home/www``` (On Unix machines, usually ```/var/www```). The result is the local file system resource ```/home/www/path/file.html```.
-
-<style>
-  img {
-    float: right;
-    width: 40%;
-  }
-</style>
