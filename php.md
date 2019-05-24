@@ -1,7 +1,3 @@
-// O'reilly PHP,MySQL :
-    2- Practical PHP
-============================================================================================================
-
                                     -----------------------------
                                     <<<<<<<    General    >>>>>>>
                                     -----------------------------
@@ -117,16 +113,6 @@ _END;
             link parameters and is encrypted.
 
 - $_REQUEST >> Can act like $_GET or $_POST.
-
-- $_SESSION >> Remember your data when moving through the site .. it starts with session_start();
-               
-- $_COOKIE >> Remember a value locally in the browser to use it in the user preferences and remember_me for 
-              example.
-              - setcookie('Name', 'Value', Expire_time, HTTPS?, Available for scripts?); 
-              - To remove it repeat the setcookie but use the time as time() - your set time.             
-                Example: setcookie($cookie_name, NULL); >> deletes a cookie.
-============================================================================================================
-
                                     ----------------------------
                                     <<<<<<<    Arrays    >>>>>>>
                                     ----------------------------
@@ -739,5 +725,18 @@ _END;
 - At If statements, Check the negative values that can break your work flow first So you don't need to nest if 
   statements.                            
 
-=============================================================================================================
+## Cookies & Sessions
 
+- HTTP is a stateless protocol. There is no association between any two HTTP requests. Because the protocol does not provide any method that the client can use to identify itself, the server cannot distinguish between clients.
+- Cookies are an extension of the HTTP protocol. More precisely, they consist of two HTTP headers: the Set-Cookie response header that adds a cookie key-value pair to the browser and the Cookie request header that sends the cookie values in the browser to the server.
+- It is a small piece of data "4KB" stored in the browser for a specific website. Each cookie belongs to a specific domain and it can only be sent or received to its specific domain or the parent domain. A domain can't set or reveive cookies from its sub domains or its sibillings.
+- If the cookie has no "expires" parameter, It's called "session cookie" and it expires when you close the browser. The "remember me" feature in the login forms sets the "expires" parameter in the cookies.
+- The concept of session management builds upon the ability to maintain state by maintaining data associated with each unique client using cookies.
+- You can use the superglobal array ```$_COOKIE``` to view the current cookie stored in the client side.
+- You can add a new cookie to the browser using ```setcookie(<key>, <value>, <whenToExpire> "time() + 60 * 60 to denote an hour", <secure> "HTTPS", <httpOnly> "Available for scripts? or not")```
+- To delete a cookie use ```setcookie(<key>, null, time() - 60 * 60)```. That will set the expire date of the cookie to a timestamp in the past. So it will be destroyed.
+- Session is based on cookies and it saves info about the user and populates it in all of the pages for the same domain in the browser's session. For example, the shopping cart contents should be saved when I navigate the website. By default the session will be destroyed if I close the browser. You can explicitly save the session key to the cookie to resume the session in the next time you open the browser.
+- By default the session file is saved in the server  within a storage or a database and the server finds the right session for the right user using ```phpsessid``` key in the ```$_COOKIE``` superglobal array.
+- You should call ```session_start()``` to resume or initiate a session when using the sessions within your app.
+- When you call ```session_start()```, PHP first determines whether a session identifier ```'phpsessid'``` is included in the current request within the request cookie. If it is, the session data for that particular session is read and provided to you in the ```$_SESSION``` superglobal array.
+- The two most common causes of cookie disclosure are browser vulnerabilities and cross-site scripting.

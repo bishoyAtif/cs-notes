@@ -68,13 +68,11 @@
 - One way to overcome the restrictions of SOP is JsonP.
 - There is one item that bypasses this limitation of SOP. It's ```<script>``` tag. When you use a script tag, the domain limitation is ignored, but under normal circumstances, you can't really do anything with the results, the script just gets evaluated.
 - Here it the trick! When you make your request to a server that is JSONP enabled, you pass a special parameter that tells the server a little bit about your page. That way, the server is able to nicely wrap up its response in a way that your page can handle. For example ```http://www.example.net/sample.aspx?callback=mycallback```. Without jsonp, the normal response will be ```{ foo: 'bar' }``` but if the server has implemented jsonp, It will take the parameter ```mycallback``` and wrap it around the json returned. So It will become ```mycallback({ foo: 'bar' });```. As you can see, it will now invoke the method you specified. So, in your page, you define the callback function:
-
   ```javascript
   mycallback = function(data){
     alert(data.foo);
   };
   ```
-
 - And now, when the script is loaded, it'll be evaluated, and your function will be executed.
 - This technique is outdated. These days, CORS is the recommended approach vs. JSONRequest.
 

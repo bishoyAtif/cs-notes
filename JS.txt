@@ -45,6 +45,9 @@
 - console.log(variable); //Prints the variable in the console.
 - alert(variable); //Prints the variable in a pop-up.
 - variable = prompt("Message") //Gets the user input with a pop-up.
+
+### Forcing coercion
+- Number('value') >> coerce it to a number
 ============================================================================================================
                                             -------------------------
                                             <<<<<<<    Arrays    >>>>>>>
@@ -104,10 +107,10 @@ request.send();
 - You must parse the response get using JOSN.parse(request.responseText);
 
 
---------------------------------------General 
+--------------------------------------General
 
 //null VS undefined
 - undefined is a variable declared but not have a value.
 - null is explicit removal of the variable value.
-- Example: When you check for the variable in your program you will check if the program flow has put the value null to the 
+- Example: When you check for the variable in your program you will check if the program flow has put the value null to the
   variable you want, not if the variable has a value or not.
