@@ -15,10 +15,15 @@
 
 ## Mime Type
 
-- A MIME type is a label used to identify a type of data. It is used so software can know how to handle the data. It serves the same purpose on the Internet that file extensions do on Microsoft Windows.
-- So if a server says "This is text/html" the client can go "Ah, this is an HTML document, I can render that internally", while if the server says "This is application/pdf" the client can go "Ah, I need to launch the Foxit PDF Reader plugin that the user has installed and that has registered itself as the application/pdf handler."
-- You'll most commonly find them in the headers of HTTP messages (to describe the content that an HTTP server is responding with or the formatting of the data that is being POSTed in a request) and in email headers (to describe the message format and attachments).
+- A MIME type "Content-Type Header in the response" is a label used to identify a type of data. It is used so software can know how to handle the data. It serves the same purpose on the Internet that file extensions do on Microsoft Windows.
+- So if a server says in the http response "This is text/html" the client can go "Ah, this is an HTML document, I can render that internally", while if the server says "This is application/pdf" the client can go "Ah, I need to launch the Foxit PDF Reader plugin that the user has installed and that has registered itself as the application/pdf handler."
+- You'll most commonly find them in the headers of HTTP messages to describe the content that an HTTP server is responding with or the formatting of the data that is being POSTed in a request "```enctype``` attribute in html" and in email headers (to describe the message format and attachments).
 - For more info check [Mime & Content-Type](https://youtu.be/FBkZ2TJZZUY)
+- ```enctype``` header within html form is the way you edit ```Content-Type``` header in the HTTP POST request. It can be one of two values:
+  - ```application/x-www-form-urlencoded```: It's the default value. The body of the HTTP message sent to the server is essentially one giant query string name/value pairs are separated by the ampersand (&), and names are separated from values by the equals symbol (=). non-alphanumeric characters are replaced by `%HH', a percent sign and two hexadecimal digits representing the ASCII code of the character. So It turns any non-alphanumeric characters into 3 bytes and It wouldn't be efficient with large files.
+  - ```multipart/form-data```: The type that allows file ```<input>``` element(s) to upload file "binary" data. It splits the payload into MIME messages each ended with a boundary separator that is assigned in the ```Content-Type``` header. This approach will not be efficient in the small "non binary" messages.
+  - ```text/plain```: A type introduced in HTML5. It is intended to be human readable. They are not reliably interpretable by computer, So avoid using them.
+  - For more info, check this [article](http://bit.ly/2Kz9wt3).
 
 ## JWT
 
@@ -95,6 +100,10 @@
 - A pre-flighted request makes the browser first send an additional preliminary OPTIONS request (“preflight request”) in order to make sure that the actual request "pre-flighted request" is safe to send as it may be destructive or can modify the server resources "for example, DELETE and PUT methods requests users pre-flighted requests".
 - The browser first sends an OPTIONS request with three additional parameters ```Origin```, ```Access-Control-Request-Method``` the method requested and ```Access-Control-Request-Headers``` additional headers attached. Then the browser checks the server response and it should have ```Access-Control-Allow-Origin```, ```Access-Control-Allow-Methods```, ```Access-Control-Allow-Headers``` headers that match the request origin, method and headers. If it matches, the browser then sends the actual request, else it just discards the request totally.
 
+## Https
+- Hyper Text Transfer Protocol Secure (HTTPS) is the secure version of HTTP, the protocol over which data is sent between your browser and the website that you are connected to. The 'S' at the end of HTTPS stands for 'Secure'. It means all communications between your browser and the website are encrypted. HTTPS is often used to protect highly confidential online transactions like online banking and online shopping order forms.
+- HTTPS pages typically use one of two secure protocols to encrypt communications - SSL (Secure Sockets Layer) or TLS (Transport Layer Security). Both the TLS and SSL protocols use what is known as an 'asymmetric' Public Key Infrastructure (PKI) system.
+
 ## Web Server
 
 - The primary function of a web server is to store, process and deliver web pages to clients. A user agent, commonly a web browser or web crawler, initiates communication by making a request for a specific resource using HTTP and the server responds with the content of that resource or an error message if unable to do so.
@@ -111,3 +120,61 @@
   ```
 
 - The web server on ```www.example.com``` will append the given path to the path of its root directory. On an Apache server, this is commonly ```/home/www``` (On Unix machines, usually ```/var/www```). The result is the local file system resource ```/home/www/path/file.html```.
+
+### How does the server handle dynamic content
+
+- First, the client sends http request to the server. The server handles it and passes it with ```CGI``` or ```FastCGI``` protocols to the gateway. The gateway is the process manager that actually spins up the processes that deal with and interpret the dynamic code "PHP", for example. 
+- Some of gateways examples are
+  - ```mod_php```: Module can be enabled within Apache and it's a php interpreter integrated within web server so the server doesn't need to make external calls.
+  - ```php_fpm```: "PHP FastCGI Process Manager" It's a php interpreter that accepts the FastCGI request from the server, setting-up the environment and process the required files based on the request.
+
+### Apache VS. NGINX
+
+#### Handling the connections and traffic
+- **Apache**: has many multi-processing modules "_MPMs_" that dictate how client requests are handled.
+  - ```mpm_prefork```: This processing module spawns processes with a single thread each to handle request. Each child can handle a single connection at a time. Fast until the requests exceeds the number of proceses. The only way to make safe multi-threaded php apps "as some php functions are not safe for threading".
+  - ```mpm_worker```: This module spawns processes that can each manage multiple threads. Each of these threads can handle a single connection. Threads are much more efficient than processes, which means that this MPM scales better than the prefork MPM.
+  - ```mpm_event```: The event MPM handles keep alive connections by setting aside dedicated threads for handling keep alive connections and passing active requests off to other threads. This keeps the module from getting bogged down by keep-alive requests, allowing for faster execution. It's like the ```mpm_worker``` in most cases.
+- ***NGINX***: Nginx was designed to use an asynchronous, non-blocking, event-driven connection handling algorithm. It spawns worker processes, each of which can handle thousands of connections. The server is single-threaded and processes are not spawned to handle each new connection, the memory and CPU usage tends to stay relatively consistent, even at times of heavy load.
+
+#### Handling dynamic content
+- **Apache**: Apache handles dynamic content by embedding a processor "as loadable module" of the language in question into each of its worker instances. This allows it to execute dynamic content within the web server itself without having to rely on external components. So the configuration of dynamic processing tends to be simpler. Communication does not need to be coordinated with an additional piece of software and modules.
+- **NGINX**: Nginx does not have any ability to process dynamic content natively. To handle PHP and other requests for dynamic content, Nginx must pass to an external processor for execution and wait for the rendered content to be sent back. this means that communication must be configured between Nginx and the processor over one of the protocols Nginx knows how to speak (http, FastCGI, SCGI, uWSGI, memcache). However, this method has some advantages as well. Since the dynamic interpreter is not embedded in the worker process, its overhead will only be present for dynamic content. Static content can be served in a straight-forward manner and the interpreter will only be contacted when needed.
+
+#### Specific directory configuration
+- **Apache**: Apache includes an option to allow additional configuration on a per-directory basis using ```.htaccess``` files which is often used for implementing URL rewrites, access restrictions, authorization and authentication, even caching policies. It makes it flexible but slower.
+- **NGINX**: Nginx does not interpret ```.htaccess``` files.  By not allowing directory overrides, Nginx can serve requests faster by doing a single directory lookup and file read for each request
+
+## Terminal vs Console vs Shell
+
+### Terminal
+
+- Mainframes had terminal stations equipped with a display and keyboard scattered around the premise. They were endpoints where users could access the mainframe.
+- Any external part that can interact with the system.
+- text input/output environment.
+
+### Console
+
+- physical implementation of a terminal.
+- The black screen that you interact with to make input/output commands.
+
+### Shell
+
+- A shell is a user interface for access to an operating system's services.
+- It is a command language interpreter that executes commands read from the standard input device such as keyboard or from a file.
+- The shell gets started when you log in or open a terminal.
+- It is named a shell because it is the outermost layer around the operating system kernel.
+- Examples of shells are BASH, CSH, and ZSH.
+
+## SQL VS. NoSQL
+
+### SQL
+- restricted schema. Normalization eliminates the data duplication.
+- Has relations and the tables can be joined.
+- Horizontal scaling is too hard or impossible in the SQL databases because you can't just split the data.
+
+### NoSQL
+- Has no schema. Just documents that contains json data "may have duplicates".
+- Has no relations. The related data is added with each other in the same collection.
+- Does better job with the horizontal scaling as it can be splitted easy "No relations".
+- Better than SQL when talking about mass read and write requests "execpt for too much write as you will need to update multiple collections".

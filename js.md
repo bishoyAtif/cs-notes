@@ -1,3 +1,23 @@
+# JS
+
+## General
+- JS is an interpreted language.
+- There are two ways to use JS within HTML:
+    - You can write it in <script> Your JS code <script>
+    - You can link js file to your page using <script src="path/to/file" type="text/javascript"></script>
+- JS is weakly "loosly" typed variables. Variables change their type by using it in another context.
+
+## Variables
+- There is 5 primitive "Basic" datatypes ("Numbers", "Strings", "Booleans", "NULL", "undefined")
+- Variable name can contain letters, numbers, underscore and dollar sign and must begin with a letter or a dollar sign.
+- Case sensitive.
+  - #### How to declare a variable ?
+
+
+
+
+
+
 ============================================================================================================
                                           ----------------------------------
                                           <<<<<<<    Introduction    >>>>>>>

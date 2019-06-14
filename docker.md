@@ -29,23 +29,20 @@
 - ```docker info``` shows more info about config files, the client, the server, the images and containers you have.
 - ```docker login``` login to your docker hub account to let your cli interact with it.
 - ```docker logout``` logout from your docker hub account.
-
+- ```docker system prune``` Remove all unused containers, networks, images and optionally volumes.
 ## Docker containers
 
 ## Dealing with Containers
 
 - ```docker container run <image> <alternative command to run>``` run a new container from an image.
   - ```--publish or -p portFromLocal:portToContainer``` forwards a request to an extrnal local port to an internal port in the container. ```--publish 8000:80``` forwards the requests on the port 8000 for the host to the port 80 in the container.
+  - ```-P``` publishes all the ports that are ```EXPOSE```d in the dockerfile of the image.
   - ```--detach or -d``` runs the container in the background.
   - ```--name <uniqueName>``` let you specify the name for the container.
   - ```--env or -e <key=value>``` let you specify environment variables when creating the container.
   - ```-it``` get a new virtual terminal for the new container and make its STDIN within the current shell.
   - ```-ia``` attaches the virtual terminal for the current container and make its STDIN within the current shell.
-  - ```--link <anotherContainer>``` links a container with another container "makes DNS Feature available between these two containers".
-  - ```--network <network>``` adds the container to a specific network.
   - ```--rm``` automatically removes the container when it exits.
-  - ```-v <volumeName:/path/to/local/volume>``` creates or attaches a container to a local volume.
-  - ```-v </path/from/the/container:/path/to/local/volume>``` binds a directory from the local to a specific container directory "overwrite a directory in the container with a directory in the local".
 - ```docker container stop <id|nuiqueName>``` stop a running container.
 - ```docker container start <id|nuiqueName>``` start a stopped container.
 - ```docker container exec <flags> <id|nuiqueName> <command>``` executes an additional command on a running container, won't affect the main process it.
@@ -63,13 +60,25 @@
 
 ### Networking between containers
 
-- Communication between containers should be done through the container name not ip "because ip can be changed as the container can be closed or removed".
-- docker provides DNS support within all the containers in a new-made network so you can message other containers with their container name only like localhost.
+- Communication between containers should be done through the container name not ip "because ip can be changed as the container can be stopped or removed".
+- This feature can be implemented by linking two containers together using ```--link <anotherContainer>``` flag when creating the container. But it's now **deprecated**.
+- You can also implement this feature "DNS support and calling the containers by their name" by making a **new network** and connect all the containers to it so you can message other containers with their container name only like localhost.
 - ```docker network ls``` shows available docker networks.
 - ```docker network create <networkName>``` creates a new network.
 - ```docker network inspect <network>``` shows info about a specific network "containers in this netowrk, ip adresses and more".
 - ```docker network connecct <network> <container>``` add a container to a specific network.
 - ```docker network disconnect <network> <container>``` remove a container from a specific network.
+- ```docker container run --network <network>``` adds the container to a specific network.
+
+## Docker Volumes
+- Volumes or data volumes is a way for us to create a place in the host machine where we can write files so they are persisted. Typically we would want to store things like log files, JSON files and perhaps even databases (SQLite ) on a volume to be available even the container is removed or recreated.
+- ```docker volume create <name of volume>``` this command creates a new volume.
+- ```docker volume ls``` lists all the volumes on the local.
+- ```docker volume prune``` removes all the volumes that aren't used be any containers.
+- ```docker volume rm <name of volume>``` removes a specific volume.
+- ```docker volume inspect <name of volume>``` gets info about this volume "the place to store data and more".
+- ```docker container run -v <volumeName:/path/to/container/target/directory>``` creates or attaches a container to a local volume.
+- ```docker container run -v </path/from/the/host:/path/to/container/target/directory>``` binds a directory from the local to a specific container directory "overwrite a directory in the container with a directory in the local". It simply mounts a host directory to a directory with the same name in the container.
 
 ## Docker Images
 
@@ -87,14 +96,24 @@
 
 ### Building Images
 
+- ```docker image build <options> context```
+  - ```context``` argument is a directory that acts as the base directory to make the commands from the ```Dockerfile``` within like ```COPY```.
+  - ```-f or --file <filename = Dockerfile>``` specify a file to build. The default file is named ```Dockerfile``` in the current directory.
+  - ```-t or --tag name:tag``` specify a name and a tag for the image.
+
+#### Commands of ```Dockerfile```
+
 - ```FROM <baseImage>``` specifies a base image to start with.
 - ```ENV <key> <value>``` adds environment variables to the image.
-- ```RUN <commands>``` run bash commands within the image "usually used to install packages".
-- ```EXPOSE <port> <anotherPort> ...``` exposes ports from image's container to the outside world "You still need to use ```-p``` to expose them explicitly.
-- ```CMD [<command>]``` sets the command to be run when creating a container from this image.
+- ```RUN <command>``` run bash commands within the image "usually used to install packages".
+- ```EXPOSE <port> <anotherPort> ...``` documents the ports that should be exposed from the container to the outside world "You still need to use ```-p``` to expose them explicitly. ```EXPOSE don't actually open the ports".
 - ```WORKDIR <directoryToChangeTo>``` changes the image's working directory to a specific directory.
 - ```COPY <from> <to>``` copies a file or directory from the local to the container.
 - ```VOLUME <path>``` creates a data storage drive by specifying a local host path to save the data to.
+- ```ENTRYPOINT ["list", "of", "command", "parts"]``` sets the command and parameters that will be **always** executed first when a container is run. Any command line arguments passed to ```docker run <image>``` will be appended to the entrypoint command.
+- ```CMD [<command>]``` sets a default command to run when creating a container from this image. It will be overwritten when passing command argument to ``` docker run``` or ```docker exec``` containers.
+  - ```CMD``` and ```ENTRYPOINT``` commands can be in two forms. Shell form ```echo "Hello world"```. it calls ```/bin/sh -c <command>``` under the hood and normal shell processing happens. And It can be in exec form ```["executable", "param1", "param2", ...]```. When instruction is executed in exec form it calls executable directly, and shell processing does not happen. It don't substitue variables or do any actions that related to bash. You should call bash explicitly if you need to use it ```["/bin/bash", "-c", "echo Hello, $name"]```.
+  - Prefer ```ENTRYPOINT``` to ```CMD``` when building executable Docker image and you need a command always to be executed. Additionally use ```CMD``` if you need to provide extra default arguments that could be overwritten from command line when docker container runs.
 
 ## Docker Compose
 
@@ -110,5 +129,6 @@
 - ```docker-compose down``` stop all the containers and delete containers, volumes and networks.
   - ```--v``` removes volumes attached to the containers.
   - ```--rmi <type>``` remoevs built images. When using ```type=local``` removes only the custom built images.
+- ```docker-compose exec <container> <command>``` executing command in a service within composed containers.
 - ```docker-compose ps``` shows all the running containers.
 - ```docker-compose top``` shows the processes running in the containers.

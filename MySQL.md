@@ -1,7 +1,3 @@
-// Ch 8 : 
-     Privillages for databases.
-=============================================================================================================
-
                                       -----------------------------
                                       <<<<<<<    General    >>>>>>>
                                       -----------------------------
@@ -45,11 +41,8 @@
   # Your queries.
   COMMIT; // Confirms all the changes in the db.
   ROLLBACK; //Discards all the changes if one of them doesn't excecuted successfully.
-
-=============================================================================================================
-                                        --------------------------------
+                       
                                         <<<<<<<    Data types    >>>>>>>
-                                        --------------------------------
 
 - CHAR(#) >> String with max length #.
 
@@ -194,36 +187,24 @@
                   "
     # LEFT JOIN  >> selects from two tables with the matual field and all the records from the left table even 
                     if not in the right table.
-
     # RIGHT JOIN >> The opposite of the LEFT JOIN.
-
 - UNION = FULL JOIN:
   # SELECT if from books UNION select id from categories;
     # It will join the id column with the data of the two tables.
-
 - Dynamic tables:
   # CREATE VIEW view_name AS SELECT name FROM books INNER JOIN categories ON ....
   # the view dynamically changes its data according to the tables that consists of
-
 - Using newsted queries:
   Example: "INSERT INTO bookname SELECT name FROM books";
-
 - Using Regexp : SELECT * FROM users WHERE name REGEXP 'Regex';
-
 - Using mysqldump >> used to backup all the db into a file to be restored later
   mysqldump -u user_name -p 'Database' > file_name.sql
   # The first section of the command will print the all the commands to restore the DB so we must redirect it using ">" 
     to a file to be used later.
-
 - To restore a database from a file .. just use "mysql -r user -p password [ -D Database ] < file_name.sql"
   we use "-D Database" when restoring a specific table in the DB.
 
-=============================================================================================================
-
-                                        ----------------------------------
                                         <<<<<<<    Normalization   >>>>>>>
-                                        ----------------------------------
-
 - First Normal Form:
     # Each column has a single value.
     # No repeatition for the values of the same column.
@@ -233,11 +214,9 @@
     # No repeation for the values in multiple column.
 
 =============================================================================================================
-
                                         ----------------------------
                                         <<<<<<<    Indexes   >>>>>>>
                                         ----------------------------
-
 - Adding index to a row in an existing table >> ALTER TABLE books ADD INDEX(author(20))
     # Adding index to the first 20 chars of the column authors.
     # If MySQL finds two indexes with the same contents, it will have to waste time going to the table itself 
@@ -247,17 +226,12 @@
     # It's recommended to load your data into a table that has no FULLTEXT index and then create the index 
       than to load data into a table that has an existing FULLTEXT index.
     # Used to search in large texts .. particular with MATCH .. AGAINST
-
 - CREATE INDEX index_name ON table_name(field_name); >> creating an index.
-
 - DROP INDEX index_name ON table_name; >> Dropping an index.
-
 =============================================================================================================
-
                                         ----------------------------------
                                         <<<<<<<    Row Functions   >>>>>>>
                                         ----------------------------------
-
 - UPPER(field_name), LOWER(field_name) >> makes the entire row lower or upper case.
   Example : "SELECT id, UPPER(name) from categories";
   ## Used when searching for a string in database to make sure that the string in the database is collected 
@@ -287,24 +261,10 @@
 - YEAR(timestamp) //Getting the year.
 - MONTH(timestamp) //Getting the month num.
 - MONTHNAME(timestamp) // Getting the month name.
-=============================================================================================================
-
                                         -------------------------------------
                                         <<<<<<<    Column Functions   >>>>>>>
                                         -------------------------------------
-
 - AVG(field_name) >> Get the average of the numbers in the column.
-
 - COUNT(field_name) >> Get the number of the rows in the column.
-
 - MIN(field_name), MAX(field_name) >> Get the min and the max numbers of the values in the rows in a column.
-
 - SUM(field_name) >> Get the sum of all the values in a row.
-
-
-
-
-
-
-
-
