@@ -28,17 +28,15 @@
 ## JWT
 
 - A JSON Web Token (JWT) is a JSON object that is defined as a safe way to represent a set of information between two parties. The token is composed of a header, a payload, and a signature. Simply it is a string with the format ```header.payload.signature```
-- The authentication server then creates the JWT and sends it to the user. When the user makes API calls to the application, the user passes the JWT along with the API call. In this setup, the application server would be configured to verify that the incoming JWT are created by the authentication server and not faked or temered with.<br>
-![JWT Exchange Model](https://i.ibb.co/0K3SxH8/1-SSXUQJ1d-Wji-Ur-Do-Kaai-GLA.png)
+<img src="https://i.ibb.co/0K3SxH8/1-SSXUQJ1d-Wji-Ur-Do-Kaai-GLA.png" alt="JWT Exchange Model" width="40%" align="right" style="margin: 15px">
+- The authentication server then creates the JWT and sends it to the user. When the user makes API calls to the application, the user passes the JWT along with the API call. In this setup, the application server would be configured to verify that the incoming JWT are created by the authentication server and not faked or temered with.
 - The header component of the JWT contains information about how the JWT signature should be computed. The value of the “typ” key specifies that the object is a JWT, and the value of the “alg” key specifies which hashing algorithm is being used to create the JWT signature component.
-
   ```json
   {
       "typ": "JWT",
       "alg": "HS256"
   }
   ```
-
 - The payload component of the JWT is the data that‘s stored inside the JWT (this data is also referred to as the “claims” of the JWT). There are several different standard claims for the JWT payload, such as “iss” the issuer, “sub” the subject, “userId” to mark the user and “exp” the expiration time.
 - What this algorithm does after that is base64url encoding the header and the payload created previously. The algorithm then joins the resulting encoded strings together with a period (.) in between them. Then the data string is hashed with the secret key using the hashing algorithm specified in the JWT header. The resulting hashed is then base64url encoded to produce the JWT signature. Then we simply need to combine the components, with periods (.) separating them.
 - It is important to understand that the purpose of using JWT is **NOT to hide or obscure data in any way**. The reason why JWT are used is to **prove that the sent data was actually created by an authentic source**.
@@ -52,7 +50,8 @@
 
 ### Same Origin Policy
 
-- Browsers implement something called "Same-origin Policy" (SOP). ![CSRF Attack Model](https://cdn-images-1.medium.com/max/1600/1*g_ISMQPCQpjw-6w3JRFUKQ.png)
+- Browsers implement something called "Same-origin Policy" (SOP).
+<img src="https://cdn-images-1.medium.com/max/1600/1*g_ISMQPCQpjw-6w3JRFUKQ.png" alt="CSRF Attack Model" width="60%" align="right" style="margin: 15px">
 - It pervents the browser from executing XMLHttpRequests and some other requests "mentioned below" from cross origins. As it can contain many vulnerabilities like csrf "Making blind requests to cross web site depending that there are registered cookies for those web sites".
 - In other words, Two websites can load each others contents "Using Ajax Requests" only if they are both from the same origin "Same Origin Requests". But if the origins of the two sites differ, loading content from each other "Cross Origin Requests" is not permitted, unless we use CORS or another technique to poke little holes into the SOP.
 - SOP is not to protect the resources requested on a server, that task is up to the server itself via other means. **The point is to protect the innocent user**.

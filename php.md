@@ -6,8 +6,8 @@
 - at pure PHP web pages we omit the closing tag of php script "?>"
 - String Concatanation $s .= 'Bisho';  ==>  $s = $s . 'Bisho'; 
 - Getting variable type
-  # gettype() >> to get only the type of a variable.
-  # var_dump() >> to get the type and the contents of a variable in details
+  - gettype() >> to get only the type of a variable.
+  - var_dump() >> to get the type and the contents of a variable in details
 
 - Resource datatype >> A variable that calls an external file or database out of the PHP code. It becomes a 
   resource variable when the connection succeeds but it becomes a False-Boolean variable when the connection fails.
@@ -43,17 +43,17 @@
     Another text
 _END;
   Advantges of using it :
-    # Makes it very clear when debugging your program
-    # When you wish to insert a variable within HTML you type it directly without need to reopn php tags.
+    - Makes it very clear when debugging your program
+    - When you wish to insert a variable within HTML you type it directly without need to reopn php tags.
 
 - empty($variable) >> returns true if variable doesn't have any value.
 
 - ini_set('Property', 1); >> sets a value to ini file 'PHP Configuration'
 
 - Adv. of Functions :
-    # Less typing.
-    # Less excution time.
-    # reduce syntax and programming errors.
+    - Less typing.
+    - Less excution time.
+    - reduce syntax and programming errors.
 
 - function_exists('Function_name') >> Used to know if the fucntion exists in this version of PHP.
 - Anonymous functions >> The functions which aren't assigned to a specific name but just added to a variable 
@@ -113,89 +113,65 @@ _END;
             link parameters and is encrypted.
 
 - $_REQUEST >> Can act like $_GET or $_POST.
-                                    ----------------------------
-                                    <<<<<<<    Arrays    >>>>>>>
-                                    ----------------------------
 
-- You can define array as array(//Elements) Or ['', '', ''] after PHP_5.4
+## Arrays
 
-- We can add an element to the end of an indexed array with $array[] = 'Bisho' and 
-                        to the end of associative array with $array[key] = value;
+- You can define array as ```array(<element1>, <element2> ...)``` Or ```['element1', 'element2', ...]``` after ***PHP5.4***
+- We can add an element to the end of an indexed array using ```$array[] = value``` and to the end of associative array using ```$array[key] = value;```.
+- We can overwrite a value of the array using ```$array[index] = newValue;```.
+- floating point can't be assigned as keys in associative array. The array ignores the floating point part and deals with it as int.
+- ```foreach($arrayName as $value){}``` loops through the values of the array and ```foreach($arrayName as $key => $value){}``` loops through the keys and values of the associative array.
+- To loop through rows of a database, We can use a nested foreach loop
+```php
+  foreach($results as $key => $row) {
+    echo $key . '<br>';
+    foreach($row as $field => $value) {
+      echo $field . '---->' . $value . '<br>';
+    }
+    echo '----------------------------------------<br>';
+  }
+```
 
-- We can overwrite a value of the array. $array[0] = 'Bisho';
+### Common array related functions
 
-- floating point can't be assigned as keys in associative array. The array ignores the floating point part and 
-  deals with it as int;
-
-- foreach($array_name as value) >> loops through the values of the array
-  foreach($array_name as $key => $value) >> loops through the keys and values of the associative array.
-
-- To loop through rows of a database, We can use a nested foreach loop :
-    Example : foreach($b as $key => $row)
-              {
-                echo $key . "<br>";            
-                foreach($row as $field => $value)
-                {
-                  echo $field . '---->' . $value . '<br>';
-                }
-                echo '----------------------------------------<br>';
-              }
-
-- extract($array, $mode, $prefix) >> it turns the key value pairs in the associative array to a variables and 
+- extract($array, $mode, $prefix) turns the key value pairs in the associative array to a variables and 
   values in the current script.
     * EXTR_OVERWRITE   >> If there is a collision, overwrite the existing variable. 
     * EXTR_SKIP        >> If there is a collision, don't overwrite the existing variable.
     * EXTR_PREFIX_ALL  >> Prefix all variable names with prefix.
     * EXTR_PREFIX_SAME >> If there is a collision, prefix the variable name with prefix.
-
 - compact($array_of_strings = 'str1','str2'....); returns an associative array with pairs of keys from the 
   variable name from the string inputted and a value from the corresponding variable value.
   It is usually used for debugging a script
   Example : $arr = compact(explode(' ', 'var1 var2 var3'));
-
 - count($array, $mode = 0) >> counts the elements of an array 
     * $mode = 0 or COUNT_NORMAL >> counts only the first  level of the array.
-    * $mode = 1 or COUNT_RECURSIVE >> counts recursively all the elements of the arrays in the indexes of the 
-                                      main array
-
+    * $mode = 1 or COUNT_RECURSIVE >> counts recursively all the elements of the arrays in the indexes of the main array
 - array_reverse($array); >> returns a reversed array.
-
 - Adding elements to the array 
-    # array_push($array, $item1, ...) >> adding item to the end of the array.
-    # array_unshift($array, $item1, ...); >> adding item to the top of the array.
-
+    - array_push($array, $item1, ...) >> adding item to the end of the array.
+    - array_unshift($array, $item1, ...); >> adding item to the top of the array.
 - Removing elements from the array 
-    # array_pop($array, $item1, ...) >> removing item from the end of the array.
-    # array_shift($array, $item1, ...); >> removing item from the top of the array.
-
+    - array_pop($array, $item1, ...) >> removing item from the end of the array.
+    - array_shift($array, $item1, ...); >> removing item from the top of the array.
 - sort($array, $sort_type) , rsort($array, $sort_type) "Reversed Sort" >> 
     * SORT_REGULAR - compare items normally >> doesn't change types of data (orders string fistly then int).
     * SORT_STRING - compare items as strings >> changes the whole array to strings then orders it.
-
 - asort($array, $sort_type),rasort($array, $sort_type) >> sorts associative array values normally and reversed 
   ksort($array, $sort_type),rksort($array, $sort_type) >> sorts associative array keys normally and reversed
-
 - Array searching methods: 
-    # in_array($item, $array) >> returns true if the item is in the array, false if not.
-    # array_search($item, $array) >> returns the index of the item in the array if exists, else returns false.
-    # array_key_exists($key, $array) >> returns true if the key exists in the array, false if not.
-
+    - in_array($item, $array) >> returns true if the item is in the array, false if not.
+    - array_search($item, $array) >> returns the index of the item in the array if exists, else returns false.
+    - array_key_exists($key, $array) >> returns true if the key exists in the array, false if not.
 - shuffle($array); >> shuffles the array inputted.
-
 - array_fill($start, $number, $value); >> returns an array filled with the value repeated from the start 
   position and repeated $number times.
-
 - array_sum($array); >> returns the sum of the values in the array "ignores strings".
-
 - array_rand($array, $num = 1) >> returns an array of $number random keys from the main array. If $num = 1 it  
   will return only int not an array.
-
 - array_unique($array); >> returns the main array without repeated elements.
-
 - reset($array) >> returns the first element of that array.
   end($array)   >> returns the last element of that array.
-
-
 ============================================================================================================
 
                                     -----------------------------
@@ -215,9 +191,9 @@ _END;
   $length characters of it.
 
 - str_replace($replaced_string_array, $replace_with, $str, $count); works on strings and the values of an array
-    # If $replaced was array and $replace_with was a string it will search for all the strings in the array 
+    - If $replaced was array and $replace_with was a string it will search for all the strings in the array 
       and replace it with the string.
-    # If $replaced was array and $replace_with was an array it will replace each value of the first array with 
+    - If $replaced was array and $replace_with was an array it will replace each value of the first array with 
       the corresponding value in the second array "If the second array was smaller than the first, the values 
       that have no corresponding replaces will be replaced with empty strings" 
   Example : changing the '\n' to '<br>' in html forms to be viewd in the page as a new line.
@@ -243,19 +219,19 @@ _END;
 - nl2br($str, [XHTML = true]); >> returns a string with all new lines converted to breaks.
 
 - str_word_count($str, [ $mode = 0, $charlist = '' ]) >> split the string to words
-  # Mode:
-    # mode = 0 >> returns only the numbers of the words in the string
-    # mode = 1 >> returns the words of the string as a numeric array
-    # mode = 2 >> returns the words of the string as an associative array with keys 'the position of each word'
-  # Charlist: A string have all special characters that can be counted as words.
+  - Mode:
+    - mode = 0 >> returns only the numbers of the words in the string
+    - mode = 1 >> returns the words of the string as a numeric array
+    - mode = 2 >> returns the words of the string as an associative array with keys 'the position of each word'
+  - Charlist: A string have all special characters that can be counted as words.
 
 - strcmp($str1, $str2) 
-  # returns 0  >> the two strings are the same.
-  # returns +n >> the first string is more than the second string with n chars
-  # returns -n >> the first string is less than the second string with n chars
+  - returns 0  >> the two strings are the same.
+  - returns +n >> the first string is more than the second string with n chars
+  - returns -n >> the first string is less than the second string with n chars
 
 - strncmp($str1, $str2, $length)
-  # The same as strcmp() but is works with the first $length chars of each of the words.
+  - The same as strcmp() but is works with the first $length chars of each of the words.
 
 - strrev($str) >> returns the string reversed.
 
@@ -266,34 +242,34 @@ _END;
                               --------------------------------------------
 
 - Difference between echo and print   
-    # They are both php constructs and doesn't need parentheses
-    # print can have many arguments not like echo.
-    # print have a return value so it's little slower than echo
-    # echo can't used in more complex expressions like $b ? print 'TRUE' : print 'FALSE'
+    - They are both php constructs and doesn't need parentheses
+    - print can have many arguments not like echo.
+    - print have a return value so it's little slower than echo
+    - echo can't used in more complex expressions like $b ? print 'TRUE' : print 'FALSE'
 
 - Difference between require and include:
-    # including file with require stops the whole script if the file doesn't exist, require_once includes the 
+    - including file with require stops the whole script if the file doesn't exist, require_once includes the 
       file just once.
-    # including file with include doesn't stop the script if the file doesn't exist and just shows a warning 
+    - including file with include doesn't stop the script if the file doesn't exist and just shows a warning 
       that the file doesn't exist, include_once includes the file just once.
 
 - Difference between single and double quoted strings 
-    # Single quotes >> The interpreter doesn't try to evaluate the variables in it like 
+    - Single quotes >> The interpreter doesn't try to evaluate the variables in it like 
       'Hi His is $Dollar' >>> Hi His is $Dollar
-    # Double quotes >> The interpreter tries to evaluate the variables in it like 
+    - Double quotes >> The interpreter tries to evaluate the variables in it like 
       'Hi His is $Dollar' >>> No variable called $Dollar (Assuming that no variable $Dollar declared)
 
 - Difference between 'and' and && 
-    # and >> has lower precedence than equal operator '='
+    - and >> has lower precedence than equal operator '='
       example : $a = true and false >> ($a = true) and false .... so $a equals true and that is wrong.
-    # &&  >> best practice to use it because it has higher precedence than equal operator. It doesn's cause 
+    - &&  >> best practice to use it because it has higher precedence than equal operator. It doesn's cause 
       any problem with using assignment and logical operators.
 
 - Difference between == (equality) and === (identity)
-    # 'Bisho' == 'Bisho' >> true
-    # 'Bisho' === 'Bisho' >> true
-    # '2' (string) ==  2 (int) >> true
-    # '2' (string) === 2 (int) >> false
+    - 'Bisho' == 'Bisho' >> true
+    - 'Bisho' === 'Bisho' >> true
+    - '2' (string) ==  2 (int) >> true
+    - '2' (string) === 2 (int) >> false
 
 ============================================================================================================
 
@@ -337,28 +313,28 @@ _END;
                                   ----------------------------------------
 
 - $handle = fopen('file_name', 'mode'); >> opens this file in the mode required
-  # mode :
-    # 'r' Open for reading only; place the file pointer at the beginning of the file.
+  - mode :
+    - 'r' Open for reading only; place the file pointer at the beginning of the file.
     
-    # 'r+'  Open for reading and writing; place the file pointer at the beginning of the file.
+    - 'r+'  Open for reading and writing; place the file pointer at the beginning of the file.
     
-    # 'w' Open for writing only; place the file pointer at the beginning of the file and truncate the file to zero 
+    - 'w' Open for writing only; place the file pointer at the beginning of the file and truncate the file to zero 
       length. If the file does not exist, attempt to create it.
     
-    # 'w+'  Open for reading and writing; place the file pointer at the beginning of the file and truncate the file to 
+    - 'w+'  Open for reading and writing; place the file pointer at the beginning of the file and truncate the file to 
       zero length. If the file does not exist, attempt to create it.
     
-    # 'a' Open for writing only; place the file pointer at the end of the file. If the file does not exist, attempt to 
+    - 'a' Open for writing only; place the file pointer at the end of the file. If the file does not exist, attempt to 
       create it. In this mode, fseek() has no effect, writes are always appended.
     
-    # 'a+'  Open for reading and writing; place the file pointer at the end of the file. If the file does not exist, 
+    - 'a+'  Open for reading and writing; place the file pointer at the end of the file. If the file does not exist, 
       attempt to create it. In this mode, fseek() only affects the reading position, writes are always appended.
     
-    # 'x' Create and open for writing only; place the file pointer at the beginning of the file. If the file already 
+    - 'x' Create and open for writing only; place the file pointer at the beginning of the file. If the file already 
       exists, the fopen() call will fail by returning FALSE and generating an error of level E_WARNING. If the file 
       does not exist, attempt to create it.
     
-    # 'x+'  Create and open for reading and writing; otherwise it has the same behavior as 'x'.
+    - 'x+'  Create and open for reading and writing; otherwise it has the same behavior as 'x'.
 
 - Opening a file using FTP
   $handle = fopen('ftp://user:password@bisho.info/path_to_file', 'mode');
@@ -369,10 +345,10 @@ _END;
 - fwrite($handle, $string, [$length]) >> writes a string to a file 
 
 - fseek($handle, $offset, $whence) >> moves the pointer to a specific position different from the default position.
-  # whence:
-    # SEEK_SET - Set position equal to offset bytes.
-    # SEEK_CUR - Set position to current location plus offset.
-    # SEEK_END - Set position to end-of-file plus offset.
+  - whence:
+    - SEEK_SET - Set position equal to offset bytes.
+    - SEEK_CUR - Set position to current location plus offset.
+    - SEEK_END - Set position to end-of-file plus offset.
 
 - __DIR__ 's value is the current directory of the current script.
 - __FILE__ 's value is the full file name of the current script.
@@ -395,8 +371,8 @@ _END;
 
 - file_put_contents($file_path, $data, $mode) >> puts the $data in the file. If not existes it will be created.
   Mode :
-    # FILE_APPEND >> don't remove the previous file contents.
-    # LOCK_EX >> to prevent anyone else writing to the file at the same time.
+    - FILE_APPEND >> don't remove the previous file contents.
+    - LOCK_EX >> to prevent anyone else writing to the file at the same time.
 
 - file_get_content($path/to/file, $include_path, context, offset, length) >> returns the contents of the file 
   as a string and can return a specific length from a specific offset.
@@ -417,8 +393,8 @@ _END;
 - filter_list() >> returns an array have all filters possible in php.
 
 - filter_var($input, Flags, Options); >> returns a sanitized string
-    # Flags can be used to validate or sanitize inputs.
-    # Options are passed as an array.
+    - Flags can be used to validate or sanitize inputs.
+    - Options are passed as an array.
 
 - filter_var($email, FILTER_VALIDATE_EMAIL) >> returns the email if the email is valid or false if not.
 
@@ -434,8 +410,8 @@ _END;
 - $results = $conn->query(); >> returns a result object based on this query.
 
 - $results_array = $results->fetch_all(MODE); >> returns the results as an array
-    # Mode can be MYSQLI_ASSOC >> returns associative array.
-    # Mode can be MYSQLI_NUM >> reyurns numeric array.
+    - Mode can be MYSQLI_ASSOC >> returns associative array.
+    - Mode can be MYSQLI_NUM >> reyurns numeric array.
 
 - $conn->insert_id >> if you want to know the id of the row you have just inserted.
   ==> I think it differs from one php version to another ... maybe $result->insert_id
@@ -443,220 +419,347 @@ _END;
 - $results->close(), $conn->close() >> closes the conn and the results object.
 
 
-=============================================================================================================
+## OOP
 
-                                      -------------------------
-                                      <<<<<<<    OOP    >>>>>>>
-                                      -------------------------
+### Why OOP ?
 
-- Why OOP ?
-  - No GOD class.
-  - Code Maintainability and Reusability
-  - Excellent for team work.
+- No GOD class.
+- Code Maintainability and Reusability.
+- Excellent for team work.
 
-- Object = new stdClass; >> Creating an object from existing class stdClass
+### Using Objects
 
+- ```$object = new stdClass;``` Creating an object from existing class ```stdClass```.
 - The objects are created and assigned by reference.
-  Example : $object1 = new User(); >> object1 is a reference.
-            $object2 = $object1 >> there is only one object and $object1 , 2 are referencing to it.
+  ```php
+    $object1 = new User(); // $object1 is a reference.
+    $object2 = $object1; // there is only one object and $object1 , $object2 reference it.
+  ```
+- ```$object2 = clone $object1;``` Makes another object $object2 with its seperate reference.
+- ```$object->property``` To access a normal property.
+- ```Class::$property``` To access a static property.
 
-- $object2 = clone $object1; >> This makes another object $object2 with its seperate reference.
+### Declaring Classes
+- To declare a class, use
+  ```php
+    class ClassName
+    {
+        public name;
+        public age;
 
-- Accessing a normal property >> $object->property
-  Accessing a static property >> Class::$property
-
-- Declaring a class >>
-  
-  class class_name {
-    public name;
-    public age;
-
-    public function sentence(){
-      return $this->name . "  " . $this->age; 
+        public function sentence()
+        {
+            return $this->name . ' ' . $this->age; 
+        }
     }
+  ```
+- ```const CONSTANT_NAME = 'Value';``` to declare constantswithin a class.
+- Difference between ```self``` and ```$this```
+  - ```self``` is used with the class constants or static variables used with the scope resolution operator ```::```. It is fixed values for each class "Can't be manipulated with the new objects".
+  - ```$this``` is a pseudo variable refering to the self object "Will be different for each class instance".
+- Static methods and proreties are accessed using the class itself, It has only one reference not one for each object and can't use ```$this``` within it.
+```php
+  class TestClass
+  {
+      const MAX = 5;
+      public $num;
+
+      public function test()
+      {
+        if ($this->num < self::MAX) echo 'OK!';
+      }
   }
+```
 
-- $this to refer to a self object property or a function "Pseudo Variable"
+### Inheritance
 
-- [ :: ] >> scope resolution operator >> usually used with self for the class constants
-  Example : const MAX = 5;
-            if ($this->num < self::MAX) echo 'OK!';
-
-- Difference between self and this:
-    # self is used with the class constants or static variables used with '::'. 'fixed for each class' 
-    # this is used with the object variables that changes in each object. used with '->'
-
-- Object->Property = 'Bisho' || ['Bisho', 'Pola'];
-
-- Constants declaration within a class >> const CONSTANT_NAME = 'Value';
-
-- Methods that begins with __ 'two underscores' are reserved.
-
-- Static methods and proreties are accessed from the class using operator :: ,not from the object and it 
-  hasn't access on any objects properties.
-
-- Constructor function >>
-  
-  public function __construct($name, $age){
-    $this->name = $name;
-    $this->age = $age;
-  }
-
-- Destructor function >>
-
-  public function __destruct(){
-    // Code made when the object is to be closed
-  }
-
-- Clone Function >>
-  
-  public funtion __clone(){
-    // Code excuted when object is cloned
-  }
-
-- Call function >> 
-  public function __call($method_name, $method_parameters){
-    // Code excuted when called not accessible or not declared method
-  }
-
-- __set($key, $value) is run when writing data to inaccessible or new properties.
-
-  __get($variable) is utilized for reading data from inaccessible properties.
-
-  __call($method_name, $arguments) is triggered when invoking inaccessible methods in an object context.
-
-  __toString() method allows a class to decide how it will react when it is treated like a string. 
-               For example: what echo $obj; will print.
-
-- Inheritance >>
-  
-  class Son extends Mother {
-    // Son extends all the properties and the methods of the Mother class
-  }
-
-- When you inherit a class and override a function it it but you also want the function in the super class you
-  can use parent operator
-  Example : 
-
-  class Dad {
-    function test(){
-      echo 'This is the parent class'
+- You can inherit another class using ```extend``` keyword.
+  ```php
+    class Son extends Parent
+    {
+      // Son extends all the properties and the methods from the Parent class
     }
-  }
-  class child{
-    function test(){
-      echo 'This is the child'
+  ```
+- When you inherit a class and override a function it it but you also want the function in the super class you can use ```parent``` operator.
+  ```php
+    class Dad
+    {
+        public function test()
+        {
+            echo 'This is the parent class';
+        }
     }
-    function test2(){
-      parent::test();
-    }
-  }
 
+    class child
+    {
+        public function test()
+        {
+            echo 'This is the child class';
+        }
+
+        public function parentTest()
+        {
+            parent::test(); // 'This is the parent class'
+        }
+    }
+  ```
 - If you want the constructor of the parent class to be excuted before the constructor of the subclass
-  function __construct(){
-    parent::__constructor();
-    // Subclass properties initialization
+  ```php
+    public function __construct()
+    {
+        parent::__constructor();
+        // Actual subclass initialization.
+    }
+  ```
+- ```final``` keyword is used to prevent the extending of a class or the overwriting of a method.
+  ```php
+    final public function testFunction(){
+        // This function can't be overriden in the subclasses.
+    }
+  ```
+- When you use ```self``` to refer to a class member, you're referring to the class within which you use the keyword. But when you use ```static```, you are referencing the class within it was called. ```static``` was introduced later in php5.3 with a feature called _Late static binding_
+  ```php
+    class A {
+        public static function get_self() {
+            return new self();
+        }
+
+        public static function get_static() {
+            return new static();
+        }
+    }
+
+    class B extends A {}
+
+    echo get_class(B::get_self());  // A
+    echo get_class(B::get_static()); // B
+    echo get_class(A::get_self()); // A
+    echo get_class(A::get_static()); // A
+  ```
+
+### Magic Methods
+
+- Some of the methods starting with __ 'two underscores' are reserved.
+- ```__construct($parameters)``` function is triggered on making a new instance of the class
+  ```php
+    private $name;
+    private $age;
+
+    public function __construct($name, $age)
+    {
+        $this->name = $name;
+        $this->age = $age;
+    }
+  ```
+- Destructor function ```__destruct()``` is triggered when the object is to be collected by garbage collector. For example, It can be used when closing a database connection.
+- ```__get($variable)``` is invoked when accessing not accessible or not defined properties.
+- ```__set($key, $value)``` is invoked when writing not accessible or not defined properties.
+- ```__call($method_name, $arguments)```. It is excuted when called not accessible or not declared method. It is usually used when delegating or forwarding the logic for another class or component.
+  ```php
+    // This is the usage of __call in Model Class in Laravel. It is used to forward the calls to the models to Eloquent. For example, $user->delete()
+    public function __call($method, $parameters)
+    {
+        if (in_array($method, ['increment', 'decrement'])) {
+            return $this->$method(...$parameters);
+        }
+
+        return $this->forwardCallTo($this->newQuery(), $method, $parameters);
+    }
+  ```
+- ```__callStatic($method_name, $arguments)```. It is excuted when called not accessible or not declared static method.
+- ```__clone()``` is triggered when cloning the object using ```clone``` operator. Objects in php are assigned by reference not by value. So you need a specific operator to make a copy of an object. _Objects are cloned using shadow copy. Only Permitive values are copied. Any parameter objects need to be cloned explicitly within ```\_\_clone``` method_.
+  ```php
+    public funtion __clone(){
+        $this->accont = clone $this->account; // Must be cloned explicitly
+    }
+  ```
+- ```__toString()``` method allows a class to decide how it will react when it is treated like a string. For example: what ```echo $obj;```.
+- ```__sleep()``` is invoked when serializing an object of the class.
+- ```__wakeup()``` is invoked when deserializing an object of the class.
+
+### Visibility
+
+- ```public``` : can be accessed from the global scope directly or within functions in a class or a subclass.
+- ```protected``` : can be accessed only within function from a class or a subclass.
+- ```private``` : can only accessed only within functions in its class not in a subclass.
+
+### Abstract Classes & Interfaces
+
+- Abstract classes is a classes made just to be inherited by other classes
+  - Can't be instantiated.
+  - Declared with the key word ```abstract``` before ```class``` keyword.
+  - Used usally with the abstract functions _Functions must be created in the subclass when inherited 'Usually don't contain any body'_.
+  - Abstract functions are used to force the developes to implement the functions within their subclasses.
+  - Only methods can be defined as abstract. Properties can't be abstract.
+  ```php
+    abstract class Mobile
+    {
+        abstract public function function1();
+        public function function2()
+        {
+            // function body
+        }
+    }
+
+    class Iphone extends Mobile
+    {
+        // Other functions declarations.
+    }
+  ```
+- We can use the interface as we use the abstract classes. The interface can contain only functions declarations that must be implemented in the child class.
+  ```php
+    interface Mobile
+    {
+        public function function1();
+        public function function2();
+    }
+
+    class Iphone implements Mobile
+    {
+        // Function declarations.
+    }
+  ```
+
+### Traits
+
+- PHP supports only single inheritance but to implement the multiple inheritance you use traits.
+- You can define a trait using
+  ```php
+  trait calculatesTaxes
+  {
+      private $tax = 0.14;
+
+      public function calculateTax($price){
+          return $price + $price * $this->tax;
+      }
   }
+  ```
+- It provides functionality that can be used in many classes. Multiple traits can be used within one class.
+- Trait functions override the function of the parent class if inherited but it can't override the function of the same name in the sub class.
+- If there is a collision we must use one of the two functions of the same name
+  ```php
+    trait BankTrait
+    {
+        private $tax = 0.14;
 
-- To prevent subclasses to override the function of the super classes you can use the word 'final' when 
-  declaring the functions in the super class.
+        public function calculateTax($price)
+        {
+            return $price + $price * $this->tax;
+        }
+    }
 
-- Visibility :
-    # public : can be accessed directly or within functions from a class or a subclass.
-    # protected : can be accessed only within function from a class or a subclass.
-    # private : can only accessed by functions in its class not in a subclass.
+    trait TaxesTrait
+    {
+        private $tax = 0.14;
 
-- Abstract classes is a classes made just to be inherited by other classes 
-  # can't be instansiated
-  # declared with the key word abstract.
-  # used usally with the abstract functions 'Functions must be created in the subclass when inherited and 
-    doesnot contain any body'
-  # Used to force the developes to use the functions defined with abstract class.
+        public function calculateTax($price)
+        {
+            return $price + $price * $this->tax;
+        }
+    }
 
-- We can use the interface as we use the abstract classes 
-  # The interface can contain only functions declarations that must be implemented in the child class.
+    class Product
+    {
+      use TaxesTrait, calculateTaxes {
+          TaxesTrait::calculateTaxes insteadof BankTrait;
+          // If you need to access the overwritten method as well.
+          BankTrait::calculateTaxes as CalculateBankTaxes;
+          // If you need to change the accessability of the method.
+          BankTrait::calculateTaxes as public;
+      }
+    }
+  ```
 
-  interface Mobile{
-    public function function1();
-    public function function2();
-  }
-  class Iphone implements Mobile{
-    // Function declarations.
-  }
+### Namespaces
+- Using Namespaces:
+  - It makes a different world for each class to be seperated in.
+  - We declare a namespace for a project by using "namespace name;" at the top of the scipt.
+  - When includded to the global namespace we declare a class from the specific namespace by using
+    "$object = new name_space\class_name();"
 
-- Dependency Injection >> # Using a class within another class to use its functionality
-                          # The object of the small class is inputted in the big class constructor.
-                          # We can use the database object in the user class constructor to add the create  
+### Dependency Injection
+- Dependency Injection >> - Using a class within another class to use its functionality
+                          - The object of the small class is inputted in the big class constructor.
+                          - We can use the database object in the user class constructor to add the create  
                             user function using the query function in the database class.
-
 - Auto Loading >> spl_autoload_register(function($class){
                     require "{$class}.php";
                   });
                   // The class name must be identical to the file name.
-
 - Method Chaining: Used to trigger more than one function on the same line of code
-  # Each function must return the current object $this.
+- Each function must return the current object $this.
   Example : $this->fun_1()->func_2()->fun_3();
 
-- PHP supports only single inheritance but to implement the multiple inheritance you can use traits.
-
-- Traits:
-  # It can used as abstract classes but multiple traits can be used.
-  # Its function override the function of the base class if inherited but it can't override the function of 
-    the same name in the sub class.
-  # We can use one global trait to include many traits to be easily used.
-  
-  # If there is a collision we must use one of the two functions of the same name
-    Example: trait_name::method_name insteadof another_trait_name >> use the function from the first_treat
-  
-  # We can use the other function by naming it another name
-    Example: trait_name::method_name as another_name
-
-- Using Namespaces:
-  # It makes a different world for each class to be seperated in.
-  # We declare a namespace for a project by using "namespace name;" at the top of the scipt.
-  # When includded to the global namespace we declare a class from the specific namespace by using
-    "$object = new name_space\class_name();"
-  
-
-=============================================================================================================
-
-                                      ------------------------------
-                                      <<<<<<<    Security    >>>>>>>
-                                      ------------------------------
+## Security
 
 - register_globals >> functionality in PHP that takes the variables in $_POST and $_GET and put them directly 
                       in PHP variables ... Must be disables because any one can but GET attribute in the link 
                       to override your script variables if not initialized " website.com/?override=value "
-
 - Using Placeholders >> The Most safe way
-  # $statement = $conn->prepare("INSERT INTO books VALUES(?,?,?,?,?)");
+  - $statement = $conn->prepare("INSERT INTO books VALUES(?,?,?,?,?)");
     $statement->bind_param('isisi', $isbn, $name, $year, $author, $category) ;
-    
     /// i --> integer, s --> string, d --> double, b --> blob :: This is added in the first parameter of bind
-    
     $isdb = 123; $name = 'bisho' .......;
     $statement->excute(); // Finished Excuting statement.
-
 - Protecting from XSS 'Cross Site Scripting' >> must be used when making user add things to your HTML code.
-  # htmlentities($string);
-  # strip_slashes($string);
-  # strip_tags($string);
-
+  - htmlentities($string);
+  - strip_slashes($string);
+  - strip_tags($string);
 - SQL Injection >> hacker inputs some text in the form to complete a query in your database connection to 
                    access a forbidden data in your site.
                    >> name= admin , password = 'or 1=1 or ' .. makes an always true condition in password field
-                   >> name= admin' #  ... comments the rest of the database query
-
+                   >> name= admin' -  ... comments the rest of the database query
 - Protecting from SQL Injection : 
-    # $conn->real_escape_string($string);
-    # Use the protection of XSS also
+    - $conn->real_escape_string($string);
+    - Use the protection of XSS also
 
-=============================================================================================================
+## Exceptions
 
-                                      -------------------------
-                                      <<<<<<<    PDO    >>>>>>>
-                                      -------------------------
+### ```try .. catch``` statement
+
+- Exceptions in PHP are used to mark that there is an error then handle it later and give the feedback to the user.
+- try .. catch statement is used to catch any exception that arises within try statement. If no try .. catch statement found and an exception occured, PHP fallbacks to the global exception handler to handle it.
+  ```php
+    try {
+        // Run your code here
+    }
+    catch (Exception $e) {
+        // Code to handle the exception
+    }
+    finally {
+        // Optional code that always runs
+    }
+  ```
+- You should ensure that you actually do something about the exception when catching it. In most cases, Just silenting the exception can cause bugs which are hard to diagnose.
+
+### Exception Class
+
+- It has a constructor that receives the message and the status for the error happened.
+- It has some methods like
+  - ```getMessage()```. Gets the Exception message.
+  - ```getPrevious()```. Returns previous Exception.
+  - ```getCode()```. Gets the Exception code.
+- You can simply ```throw``` an ```Exception``` using ```throw new Exception('Message', exceptionCode)```. Standard ```Exception``` Class implements ```throwable``` interface so that it can be thrown.
+
+### SubClassing Exception
+
+- You can simply extends ```Exception``` and handle those special exception separately.
+  ```php
+    class AuthException extends Exception
+    {
+        // Other special functions related to the authentication process.
+    }
+
+    try {
+        throw new AuthException();
+    } catch (AuthException $e) {
+        // Code to handle the special exception.
+    } catch (Exception $e) {
+        // Code to handle the general exception.
+    }
+  ```
+
+## PDO
 
 - PDO is not a specific database extention but it is database access layer that can access many of database 
   engines like mysql, sqlite, postgres.
@@ -740,3 +843,32 @@ _END;
 - You should call ```session_start()``` to resume or initiate a session when using the sessions within your app.
 - When you call ```session_start()```, PHP first determines whether a session identifier ```'phpsessid'``` is included in the current request within the request cookie. If it is, the session data for that particular session is read and provided to you in the ```$_SESSION``` superglobal array.
 - The two most common causes of cookie disclosure are browser vulnerabilities and cross-site scripting.
+
+## Composer
+
+- Composer is a dependancy management tool that are used for autoloading also.
+
+### Autoloading
+
+- Required classes should be included before we use them.
+- We can simple include all the classes, but with huge libraries we could import too much unused classes. Here comes the autoloading to solve this problem, It imports only the files with classes we gonna use
+- One way to use autoloading by making ```composer.json``` file and add this snippet .. It will load all the classes from the specified directory "Just add ```/vendor/autoload.php``` within your root file" **You have to run ```composer dumpautoload``` every time you add another class to add the new class in the classmap**
+```json
+{
+  "autoload": {
+    "classmap": [
+      "DirectoryToLoadFrom/"
+    ]
+  }
+}
+```
+- Another way is to use autoloading is to use ```psr-4``` key. You must have namespaces within your classes files to implement it and every time you add a new file, It gets autoloaded dynamically. An example to this approach is
+```json
+{
+  "autoload": {
+    "psr-4": {
+      "RootNameSpace\\" : "DirectoryToLoadFrom"
+    }
+  }
+}
+```

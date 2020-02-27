@@ -2,7 +2,7 @@
 
 ## Basic Commands
 
-### General
+### General Tips
 
 - A directory is simply another name for a folder. When we’re working at the command line, we will refer to folders as directories.
 - A computer’s files and folders are structured like a tree. At the beginning is a root directory that ultimately branches out to many other folders (each with the potential to contain more folders and files). What we’re doing when we navigate our computer’s file system is effectively walking up and down certain branches of this figurative tree structure.
@@ -181,8 +181,8 @@ Can be used to alter system parameters and for debugging purposes
 	- It's actually the allocated size for this directory "number of blocks associated with the inode times the size of each block".
 
 ## Links
-- What is INode ?
-- ![File System Simple Structure](http://web.cs.ucla.edu/classes/fall08/cs111/scribe/11/ospfssample3.gif)
+- What is INode ? In the figure on the right.
+<img src="http://web.cs.ucla.edu/classes/fall08/cs111/scribe/11/ospfssample3.gif" alt="File System Simple Structure" width="40%" align="right" style="margin: 15px">
 
 ### Soft Links
 - A soft link is similar to the file shortcut feature which is used in Windows Operating systems. Each soft linked file contains a separate Inode value that points to the original file. Any changes to the data in either file is reflected in the other. Soft links can be linked across different file systems, although if the original file is deleted or moved, the soft linked file will not work correctly (called hanging link).
@@ -225,17 +225,62 @@ Can be used to alter system parameters and for debugging purposes
 - Use ```: sh``` opens external command shell. When you exit the shell, you will resume your vi editing session. Use ```: ! to run a command within your vim session.
 
 ## User Evnironment
+
 - ```alias``` command shows the current defined aliases. You can add your own aliases in ```.bashrc``` with the syntax ```alias <defined_alias>=<aliased_expression>```.
 
+### Environment variables
+
+- An environment variable is actually just a character string that contains information used by one or more applications.
+- ```env``` will list all the env variables in the current shell.
+- By default, variables created within a script are only available to the current shell; child processes (sub-shells) will not have access to values that have been set or modified. Allowing child processes to see the values requires use of the ```export``` command.
+- ```export KEY=value``` will export this variable to all other shells. To add this variable permenantly, you should use export within a shell script that will be always executed when starting a shell, ```~/.bashrc``` for example.
+- ```PATH``` variable is an ordered list of directories (the path) which is scanned when a command is given to find the appropriate program or script to run. Each directory in the path is separated by colons (```:```). A null (empty) directory name (or ```./```) indicates the current directory at any given time.
+- For example, ```path1::path2``` indicates that the directories to search within is ```path``` and ```path2``` and the current directory "because of the null directory between them".
+- ```$ export PATH=$HOME/bin:$PATH``` will add the ```bin``` directory within your home to your path.
+- Prompt Statement (PS) is used to customize your prompt string in your terminal windows to display the information you want. 
+- ```unset <variable>``` will remove the variable from the environment variables.
+
+### Tracking commands history
+
+- ```history``` command will list all the commands you have entered previously.
+- ```.bash_history``` is the file where this history is stored. Usually will be in the home directory.
+- There are some environment variables related to commands history.
+  - ```$HISTFILE``` : The location of the history file. 
+  - ```$HISTFILESIZE``` : The maximum number of lines in the history file (default 500). 
+  - ```$HISTSIZE``` : The maximum number of commands in the history file. 
+  - ```$HISTCONTROL``` : How commands are stored. 
+  - ```$HISTIGNORE``` : Which command lines can be unsaved.
+- You can use ```ctrl``` + ```r``` to start searching in the history.
+- You can execute previous commands using ```!```. For example, use ```!docker``` to execute the latest command that begins with ```docker```.
+- ```!$``` is substituted with the latest argument in the previous command.
+- use ```!<number>``` to execute the command with order ```<number>``` from the history file.
+
 ## Users and Groups
+
 - Linux uses the concept of users to separate various people who use the computer. Every user has some properties associated with them, such as a user ID and a home directory.
 - In order to make managing users easier, you can add users into a “group”. A group can have zero or more users. A particular user is associated with a “default group”, and can also be a member of other groups on the system.
-- to add new user use ```sudo useradd <user>```.
-- ```userdel <user>``` will delete the user and you can use ```-r``` flag to remove the home directory for the user ```/home/<user>```.
 - ```id``` command will show info about the current user. ```id <user>``` will show info about the user specified.
 - To view the users of the system ```cat /etc/passwd```.
 - Similarly, you can view the groups on your system by viewing the ```/etc/group``` file, by running ```cat /etc/group```
   > When running these commands, you will notice that there are a number of other users and groups that you didn’t create. These are system users and groups, which are used to run background processes securely.
+
+### Users
+
+- to add new user use ```sudo useradd <user>```.
+- ```userdel <user>``` will delete the user and you can use ```-r``` flag to remove the home directory for the user ```/home/<user>```.
+
+### Groups
+
+- use ```sudo groupadd <group>``` to add a new group.
+- use ```sudo groupdel <group>``` to remove an existing group.
+- ```usermod -aG <group> <user>``` is used to add a user to a group.
+  - ```-a``` appends the group to the user's groups. Using the command without ```-a``` will remove all the groups of the user except the group you specified.
+  - You can remove a user from the group by adding the user to all the groups except that group. For example, ```usermod -G group user``` will remove all the groups of the user except "group".
+
+### ```su``` and ```sudo```
+
+- ```su``` (switch or substitute user) to launch a new shell running as another user (you must type the password of the user you are becoming). It is almost always a bad (dangerous for both security and stability) practice to use su to become root.
+- ```sudo``` gives you the privillages of other user accounts only on a temporary basis and restricted commands. Granting privileges using sudo is less dangerous and is preferred.
 
 ## File permissions
 - Linux is a multi-user operating system, and it ensures the security of files with the concepts of “ownership” and “permissions”.
@@ -251,7 +296,9 @@ Can be used to alter system parameters and for debugging purposes
   - ```sudo chown root:daemon test.txt``` will change the owner user and the owner group for the file.
 
 ### Permissions
+
 - For the file
+  <img src="https://i.ibb.co/yBVthKk/Permissions-Concept.png" alt="Linux File Permissions" width="40%" align="right" style="margin: 15px">
   - the read permission allows a user to view the contents of a file
   - the write permission allows a user to modify and delete a file.
   - When set on a file, the write permission allows it to be executed.    
@@ -259,7 +306,6 @@ Can be used to alter system parameters and for debugging purposes
   - the read permission allows the user to list the content of that directory "Just lists the file name and INode number so if you list the dir with ```-l``` flag will not work as it tries to get more information that it has access to".
   - The write permission on a directory gives you the authority to add, remove and rename files stored in the directory.
   - the write permission allows the user to enter the directory (with cd) and view metadata (like file permissions and INode informations) of the files and directories within it.
-- ![Linux File Permissions](https://i.ibb.co/yBVthKk/Permissions-Concept.png)
 - To wrap up, Each file has 3 types of accessors. Each of them has a 3 set of permissions.
 - The default permissions are 775 for directories and 644 for files.
 - Why should they have read permissions for others ?
@@ -335,3 +381,28 @@ Can be used to alter system parameters and for debugging purposes
 ### ```strings``` command
 - ```strings``` is used to extract all printable character strings found in the file or files given as arguments. It is useful in locating human-readable content embedded in binary files.
 - ```strings book1.xls | grep my_string``` searches for the string my_string in a spreadsheet.
+
+## Shell Scripting
+
+- A shell script is a computer program designed to be run by the Unix shell, a command-line interpreter. The various dialects of shell scripts are considered to be scripting languages, like "bash and zsh".
+- ```*.sh``` extention denotes bash script.
+- A shebang "Sharp ```#``` + Bang ```!```"line is declared first to denote which type of shell interpreters to use. For example, ```#! /bin/bash``` denotes that this script will be executed with bash interpreter.
+- ```echo``` is used to print output to the user.
+- ```read -p <message-to-the-user> VARIABLE``` reads an input from the user and puts it into a variable.
+- use ```varName=value``` to set a variable.
+- use ```$varName``` to access a variable's value.
+
+## Miscellaneous
+
+### Keyboard Shortcuts
+
+- ```CTRL-L``` Clears the screen.
+- ```CTRL-D``` Exits the current shell.
+- ```CTRL-Z``` Puts the current process into suspended background.
+- ```CTRL-C``` Kills the current process.
+- ```CTRL-H``` Works the same as backspace.
+- ```CTRL-A``` Goes to the beginning of the line.
+- ```CTRL-W``` Deletes the word before the cursor.
+- ```CTRL-U``` Deletes from beginning of line to cursor position.
+- ```CTRL-E``` Goes to the end of the line.
+- ```Tab``` Auto-completes files, directories, and binaries.

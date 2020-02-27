@@ -1,4 +1,3 @@
-============================================================================================================
                                     ----------------------------------
                                     <<<<<<<    Installation    >>>>>>>
                                     ----------------------------------
@@ -176,6 +175,7 @@
 - $collection_object->load(['comments.user', 'user']) //Loading the collection object user, its comments and the user of each comment.
 - WhereYear('created_at | updated_at', 'Year')   //Returns builder object where the year in timestamp equals to a specific year.
 - WhereMonth('created_at | updated_at', 'month') //Returns builder object where the month in timestamp equals to a specific month.
+- ```DB::enableQueryLog()``` saves all the queries made to the database in a log file that you can access using ```DB::getQueryLog()```. This is a very useful tool when debugging and optimizing queries.
 
 ============================================================================================================
                                           -----------------------------
@@ -183,3 +183,13 @@
                                           -----------------------------
 - Message flashing
 - Service Providers
+
+## Facades
+
+- A facade is a pattern that uses a class wrapping a complex library to provide a simpler and more readable interface to it.
+- Laravel facades serve as "static proxies" to underlying classes in the service container
+- Every service inside the container has a unique name. In a Laravel application, to access a service directly from the container, we can use the ```App::make()``` method or the ```app()``` helper function.
+- someService::methodName();
+- Laravel Facade can invoke methods from the services in the container in a more-readable way using ServiceName::methodToBeInvoked.
+- The ```Facade``` base class has a private property named ```$app``` which stores a reference to the service container.
+- Inside the base facade class, the ```__callStatic``` magic method has been implemented to handle calling of static methods which don’t actually exist.

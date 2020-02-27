@@ -10,3 +10,8 @@ An app finds the current weather in London by opening http://www.weather.com/ an
 
 With API:
 An app finds the current weather in London by sending a message to the weather.com API (in a structured format like JSON). The weather.com API then replies with a structured response.
+
+
+## Why encoded slashes are disabled by default in most web servers?
+- For security reasons. This is mostly to avoid issues you'd normally get with non-encoded content. This behavior is often associated with Remote Code Execution, Local File Access and Directory Traversal.<br>
+- An example to this will be ```include 'languages/'.$_GET['lang'];```. A hacker may pass ```../``` to move around.

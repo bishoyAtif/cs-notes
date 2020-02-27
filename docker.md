@@ -55,8 +55,11 @@
 - ```docker container port <id|nuiqueName>``` shows published port from a specific container.
 - ```docker container diff <containerName>``` show the changes files in the container with respect to the base image.
 - ```docker container commit <containerName> <repoName/imageName:tag>``` commits the changes made within a container to a new image.
-- ```docker ps``` shows the running containers.
-- ```docker ps -a``` show all containers.
+- ```docker container ps``` shows the running containers.
+  - ```-a``` show all containers including the stopped ones.
+- ```docker container commit <container> <tag>``` commits the changes made in a running container and saves them in a new base image with a specific tag.
+  - ```-a <author>``` sets an author name for the commit.
+  - ```-m <message>``` sets the commit message.
 
 ### Networking between containers
 
@@ -88,6 +91,8 @@
 - The CoW "Copy On Write" is a strategy of sharing and copying files for maximum efficiency. If a file or directory exists in a lower layer within the image, and another layer (including the writable layer) needs read access to it, it just uses the existing file. The first time another layer needs to modify the file (when building the image or running the container), the file is copied into that layer and modified.
 - Each Container is just a writable layer over the image.
 - ```docker image ls``` shows all images cached in the local registery.
+  - ```-q``` shows the ids of the cached images.
+- ```docker image rm <imageId>``` removes an image from the cached registery by its id.
 - ```docker image pull <imageName:version=latest>``` pulls the image requested from docker hub to the local registery.
 - ```docker image history <imageName:version=latest>``` shows the layers of changes made on an image.
 - ```docker image inspect <imageName:version=latest>``` shows the meta data and the default configs for a specific image.
@@ -108,7 +113,8 @@
 - ```RUN <command>``` run bash commands within the image "usually used to install packages".
 - ```EXPOSE <port> <anotherPort> ...``` documents the ports that should be exposed from the container to the outside world "You still need to use ```-p``` to expose them explicitly. ```EXPOSE don't actually open the ports".
 - ```WORKDIR <directoryToChangeTo>``` changes the image's working directory to a specific directory.
-- ```COPY <from> <to>``` copies a file or directory from the local to the container.
+- ```COPY <source> <destination>``` copies a file or directory from the local to the image.
+- ```ADD <source> <destination>``` lets you do that too, but it also supports 2 other sources. First, you can use a URL instead of a local file or directory. Secondly, you can extract a tar file from the source directly into the destination .
 - ```VOLUME <path>``` creates a data storage drive by specifying a local host path to save the data to.
 - ```ENTRYPOINT ["list", "of", "command", "parts"]``` sets the command and parameters that will be **always** executed first when a container is run. Any command line arguments passed to ```docker run <image>``` will be appended to the entrypoint command.
 - ```CMD [<command>]``` sets a default command to run when creating a container from this image. It will be overwritten when passing command argument to ``` docker run``` or ```docker exec``` containers.
@@ -126,9 +132,14 @@
   - ```-f <fileName>``` run a custom named yaml file.
   - ```--build``` re-builds all the custom images specified in the yaml file.
 - ```docker-compose up``` setup all the containers and create volumes and networks.
+  - ```-d``` will run the composed containers in the background.
 - ```docker-compose down``` stop all the containers and delete containers, volumes and networks.
   - ```--v``` removes volumes attached to the containers.
   - ```--rmi <type>``` remoevs built images. When using ```type=local``` removes only the custom built images.
-- ```docker-compose exec <container> <command>``` executing command in a service within composed containers.
+- ```docker-compose exec <service> <command>``` executing command in a service within composed containers.
 - ```docker-compose ps``` shows all the running containers.
 - ```docker-compose top``` shows the processes running in the containers.
+
+#### ```docker-compose.yml``` file
+
+- You can use ```${variable}``` to assign dynamic values based on the host environment variables.
