@@ -453,7 +453,7 @@ _END;
         }
     }
   ```
-- ```const CONSTANT_NAME = 'Value';``` to declare constantswithin a class.
+- ```const CONSTANT_NAME = 'Value';``` to declare constants in a class.
 - Difference between ```self``` and ```$this```
   - ```self``` is used with the class constants or static variables used with the scope resolution operator ```::```. It is fixed values for each class "Can't be manipulated with the new objects".
   - ```$this``` is a pseudo variable refering to the self object "Will be different for each class instance".
@@ -503,7 +503,7 @@ _END;
         }
     }
   ```
-- If you want the constructor of the parent class to be excuted before the constructor of the subclass
+- If you want the constructor of the parent class to be executed before the constructor of the subclass
   ```php
     public function __construct()
     {
@@ -554,7 +554,7 @@ _END;
 - Destructor function ```__destruct()``` is triggered when the object is to be collected by garbage collector. For example, It can be used when closing a database connection.
 - ```__get($variable)``` is invoked when accessing not accessible or not defined properties.
 - ```__set($key, $value)``` is invoked when writing not accessible or not defined properties.
-- ```__call($method_name, $arguments)```. It is excuted when called not accessible or not declared method. It is usually used when delegating or forwarding the logic for another class or component.
+- ```__call($method_name, $arguments)```. It is executed when called not accessible or not declared method. It is usually used when delegating or forwarding the logic for another class or component.
   ```php
     // This is the usage of __call in Model Class in Laravel. It is used to forward the calls to the models to Eloquent. For example, $user->delete()
     public function __call($method, $parameters)
@@ -566,8 +566,8 @@ _END;
         return $this->forwardCallTo($this->newQuery(), $method, $parameters);
     }
   ```
-- ```__callStatic($method_name, $arguments)```. It is excuted when called not accessible or not declared static method.
-- ```__clone()``` is triggered when cloning the object using ```clone``` operator. Objects in php are assigned by reference not by value. So you need a specific operator to make a copy of an object. _Objects are cloned using shadow copy. Only Permitive values are copied. Any parameter objects need to be cloned explicitly within ```\_\_clone``` method_.
+- ```__callStatic($method_name, $arguments)```. It is executed when called not accessible or not declared static method.
+- ```__clone()``` is triggered when cloning the object using ```clone``` operator. Objects in php are assigned by reference not by value. So you need a specific operator to make a copy of an object. _Objects are cloned using shadow copy. Only Permitive values are copied. Any parameter objects need to be cloned explicitly within ```__clone``` method_.
   ```php
     public funtion __clone(){
         $this->accont = clone $this->account; // Must be cloned explicitly
@@ -588,7 +588,7 @@ _END;
 - Abstract classes is a classes made just to be inherited by other classes
   - Can't be instantiated.
   - Declared with the key word ```abstract``` before ```class``` keyword.
-  - Used usally with the abstract functions _Functions must be created in the subclass when inherited 'Usually don't contain any body'_.
+  - Used usally with the abstract functions _Functions must be created in the subclass when inherited 'Abstract methods don't have a body'_.
   - Abstract functions are used to force the developes to implement the functions within their subclasses.
   - Only methods can be defined as abstract. Properties can't be abstract.
   ```php
@@ -671,17 +671,14 @@ _END;
   ```
 
 ### Namespaces
+
 - Using Namespaces:
   - It makes a different world for each class to be seperated in.
   - We declare a namespace for a project by using "namespace name;" at the top of the scipt.
   - When includded to the global namespace we declare a class from the specific namespace by using
     "$object = new name_space\class_name();"
 
-### Dependency Injection
-- Dependency Injection >> - Using a class within another class to use its functionality
-                          - The object of the small class is inputted in the big class constructor.
-                          - We can use the database object in the user class constructor to add the create  
-                            user function using the query function in the database class.
+### Refactor this
 - Auto Loading >> spl_autoload_register(function($class){
                     require "{$class}.php";
                   });

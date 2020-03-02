@@ -37,12 +37,64 @@ This is like giving key to your home to neighbours whom you want to access your 
 
 ## SOLID Principles
 
+### Single Responsibility
+
+- “A class should have one, and only one, reason to change”.
+- The problem: 
+  - Maintainability: If you used a component that have many responsibilities. You may need to use one of those components in another place. In this case, you will need to copy it. But If you refactored it in another component and used it directly, you will change it in only one place.
+  - Testability: If you need to test a class and you need to mock one of its components. It will be impossible to mock it if it is implemented within the same class.
+  - Side Effects: Changing a class with single responsibility has less side effects than changing a class with multiple responsibilities.
+  - Readability and Ease to understand: Classes, software components and microservices that have only one responsibility are much easier to explain, understand and implement than the ones that provide a solution for everything.
+- The solution: Break any complicated class to classes each of them having one responsibility, Injecting related services together as needed.
+- Example: If you have a controller that fetches the data from the tables, manipulates it and render it to a web view. And you need to make an api that outputs json. You will duplicate the whole code for fetching and manipulating the records. But if you have two separate classes one for fetching and manipulating the data and one for outputting it. You will have the manipulation process encapsulated in one place.
+- Check this [github link](https://bit.ly/laracasts-srp) and this [article](https://bit.ly/srp-toptal) from toptal for example code.
+
+### Open Closed Principle
+
+- “Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification”.
+Problem: Changing code in different places is hard to be maintained and causes a lot of bugs.
+Solution: Try hard to separate the code that can be changed under a separate interface. So you just implement your login against the interface and be sure that the implemented classes have the functionality introduced in the interface.
+- Check this [github link](https://bit.ly/laracasts-ocp) for example code.
+
+### Liskov Substitution Principle
+
+- “If S is a subtype of T, then objects of type T may be replaced with objets of type S”. Simply, Derived classes must be substitutable for their base classes.
+- It extends the Open Closed principle and enables you to replace objects of a parent class with objects of a subclass without breaking the application.
+- Problem: When using Open Closed Principle, you will extend the behaviour by substituting classes by new classes instead of changing the old class. So If the new class that inherits from the base class or implements the interface introduced behaves differently "throws an exception that wasn't expected when using the old class", This will cause a problem in one class of the substitutions or at least we will need to handle that exception differently according to the class type.
+- Solution:
+  - Don’t implement any stricter validation rules on input parameters than implemented by the parent class.
+  - No new exeption should be throwed in the extended classes that weren't introduced in the base class.
+  - The type of the returned values from the methods should be exactly as the base class's implementations.
+- Check this [github link](https://bit.ly/laracasts-lsp) and this [article](https://bit.ly/stackify-lsp) from stackify for example code.
+
+### Interface Segeration
+
+- “Clients should not be forced to depend upon interfaces that they do not use“.
+- Problem: When a class implements an interface that have much responsibility, It may not need all the functions contracted with the interface. So you may need to define functions just for the sake of implementing the contract and ```return null``` or so from those functions.
+- Solution: Splitting the large interface to smaller interfaces. and use the smaller interfaces within the scope needed.
+- Example: If you need to send an email to a user, you may have a function that accepts a User. But that scope it too large as if you needed to use this function to send emails to an email list you will need that to implement all functions of User in the email list. Instead, you should use an interface called ```Emailable``` within the ```sendEmail``` function and make the User implement it. So when you use an email list as a receiver, you need only to implement the functionality that enables the function to send to those emails.
+- Check this [github link](https://bit.ly/2TIjgnN) for example code.
+
+### Dependency Inversion
+
+- “High level modules should not depend on low level modules but they both should depend on abstractions“. “Depend on abstractions not on implementations“.
+- Dependency Injection is not equal to Dependency Inversion. But it is a method to adhere to the Dependency Inversion Principle.
+- Problem: High coupling between components. Highly coupled components are difficult to be changed.
+- Solution: Instead of using the implementation of the class "low level class" directly within another class "high level class" and calls methods from the class directly, You should code to an interface that are already implemented by another class and call the methods agreed on in the interface. This approach enables you to decouple the low level code from the high level one. In other words, you can change the underlying implementation of the low level class without changing the interface used, and that will have no effect on the high level code.
+- Check this [github link](https://larcasts-dip) and this [article](https://bit.ly/stackify-lsp) from stackify for example code.
+
+### More Resources
+
+- This [article](https://bit.ly/jokiruiz-solid) has a brief introduction to SOLID Principles with example for each of them.
+- This [series](https://bit.ly/tutsplus-solid) is a great explanation for SOLID Principles either.
+
 ## Structural Design Patterns
 
 ### Dependency Injection
 
-- "Dependency injection is a software design pattern that allows the removal of hard-coded dependencies and makes it possible to change them, whether at run-time or compile-time". Simply, Dependency Injection is providing a component with its dependencies either through constructor injection, method calls or the setting of properties. It is that simple.
+- Dependency injection is a software design pattern that allows the removal of hard-coded dependencies and makes it possible to change them, whether at run-time or compile-time. Simply, Dependency Injection is providing a component with its dependencies either through constructor injection, method calls or the setting of properties. It is that simple.
 - In other words, we are giving the a class its dependency rather than creating it itself.
+- We can use the database object in the user class constructor to add the create user function using the query function in the database class.
 - For more info, check this [link](bit.ly/di-dpp).
 
 ## Database Design Patterns
