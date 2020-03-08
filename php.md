@@ -1,43 +1,32 @@
-                                    -----------------------------
-                                    <<<<<<<    General    >>>>>>>
-                                    -----------------------------
+## General
 
 - Local Host 127.0.0.1 >> "There is no place like 127.0.0.1"
-- at pure PHP web pages we omit the closing tag of php script "?>"
+- for pure PHP files, Omit the closing tag of php script ```?>```.
 - String Concatanation $s .= 'Bisho';  ==>  $s = $s . 'Bisho'; 
 - Getting variable type
   - gettype() >> to get only the type of a variable.
   - var_dump() >> to get the type and the contents of a variable in details
-
 - Resource datatype >> A variable that calls an external file or database out of the PHP code. It becomes a 
   resource variable when the connection succeeds but it becomes a False-Boolean variable when the connection fails.
   Example : $conn = mysqli('localhost', 'root', 'password', 'Mydb');
             $fp   = fopen('bisho.txt', 'r');
-
 - Defining a constant >> define("CONSTANT NAME" , constant value or variable);
   Constants are global and used in website config.
-
 - __FILE__ >> constant contains current file name
   __DIR__ >>  constant contains the current directory name
   __METHOD__, __FUCTION__,__NAMESPACE__.
-
 - $a ==  $b is the equal operator. It returns true if only the two values are equal
   $a === $b is the identity operator. It returns true if the two values and data types are equal
   Example : $a = 5; $b = '5'; 
             $a == $b >> true .... but $a === $b >> false
-
 - die(string status) === exit(). It stops the excution of the current script, excutes the destructors and   
   shutdown functions and if there is a status between parentheses It will be displayed. 
-
 - Error control operator '@'. It turns off the errors in php statement.
   $fp = @fopen('Bisho.txt', 'r') or die('There is no file')
   note : '=' is higher precedence than 'or' so the interpreter tries to evaluate fopen() first. If it returned true it will leave the statement otherwise it will turn off the error and excute the after-or statement.
   It may be used with include(), fopen() and database connection
-
 - header('REFRESH:;URL=bisho.php'); >> redirects to bisho.php after seconds. 
-
 - header('Location: bisho.php'); >> redirects to a new location
-
 - Using _END : _END; must be on a new line with no indentation and without spaces after it.
   echo <<<_END Some text .....
     Another text
@@ -45,38 +34,28 @@ _END;
   Advantges of using it :
     - Makes it very clear when debugging your program
     - When you wish to insert a variable within HTML you type it directly without need to reopn php tags.
-
 - empty($variable) >> returns true if variable doesn't have any value.
-
 - ini_set('Property', 1); >> sets a value to ini file 'PHP Configuration'
-
 - Adv. of Functions :
     - Less typing.
     - Less excution time.
     - reduce syntax and programming errors.
-
 - function_exists('Function_name') >> Used to know if the fucntion exists in this version of PHP.
-- Anonymous functions >> The functions which aren't assigned to a specific name but just added to a variable 
-                         or inserted in another function 
+- Anonymous functions >> The functions which aren't assigned to a specific name but just added to a variable or inserted in another function 
   Example : $func = function(){// Function body}
-
 - The call back is a property that used with anonymous functions 
   Example:  function split_str($string, $callback){
               $results = explode(' ', $string);
-
               if(is_callable($callback))
               {
                 call_user_func($callback, $results);
               }
             }
-
             split_str('Bisho Atif Samy', function($results){
               echo $results[2]; 
             });
- 
 - uniqid([ $prefix = '', $more_entropy = FALSE ]) >> returns a random id with prefix.
   with 23 chars if $more_entropy = true of 13 if false.
-
 - hmtlspecialchars($text) >> used when adding text to your html
 - urlencode($text) >> used when adding text to your URL
 - sleep($sec) >> stops the execution of the script for $sev seconds.
@@ -85,10 +64,9 @@ _END;
 - floor($number) >> rounding the number down.
 - func_get_args() >> used within a function to return the function arguments as an array.
 - RegEx: The pattern in PHP is included within foroward slaches '/Pattern/' 
-============================================================================================================
-                            -------------------------------------------
-                            <<<<<<<    Variables & Operators    >>>>>>>
-                            -------------------------------------------
+
+## Variables & Operators
+
 - We can use variable functions. 
   Example : $x = 'hello'; $x(); >> This will trigger the function hello. It's like using hello();
 
@@ -679,13 +657,177 @@ _END;
     "$object = new name_space\class_name();"
 
 ### Refactor this
-- Auto Loading >> spl_autoload_register(function($class){
-                    require "{$class}.php";
-                  });
-                  // The class name must be identical to the file name.
 - Method Chaining: Used to trigger more than one function on the same line of code
 - Each function must return the current object $this.
   Example : $this->fun_1()->func_2()->fun_3();
+
+## What is new in each PHP Version?
+
+### PHP 5.6.* to PHP 7.0.*
+
+- Speed: It is dramatically improved. PHP Engine has been refactored and parts of it are completly rewritten.
+- Scalar Type declaration: That simply means specifying which type of variable is being set instead of allowing PHP to set this automatically. It forces the method' parameters to have a specific type. In PHP 5.6.*, you can specify only class names or ```array``` types.
+  ```php
+    function enroll(Student $student, array $classes) {
+        foreach ($classes as $class) {
+            echo "Enrolling " . $student->name . " in " . $class;
+        }
+    }
+  ```
+  But when using premitive types, like ```string``` or ```integer``` in PHP 5.6.*, PHP engine will raise an error denoting that the engine expects an argument with class name ```string``` but string type used.
+  ```php
+    function stringTest(string $string) {
+        echo $string;
+    }
+  ```
+  With PHP 7 now, ```Scalar types Hinting``` was added. Specifically: ```int```, ```float```, ```string```, and ```bool```. By default, scalar type-declarations are non-strict, which means they will attempt to change the original type to match the type specified by the type-declaration. In other words, if you pass a string that starts with a number into a function that requires a float, it will grab the number from the beginning and remove everything else. Without strict types turned on, PHP attempts to cast, or change, these arguments to match the type specified in the function. You can use ```declare(strict_types=1);``` to stop the casting behaviour.
+  ```php
+    declare(strict_types=1);
+    function getTotal(float $a, float $b) {
+        return $a + $b;
+    }
+    getTotal(2, "1 week");
+    // Fatal error: Uncaught TypeError: Argument 2 passed to getTotal() must be of the type float, string given
+    getTotal(2.8,  "3.2");
+    // Fatal error: Uncaught TypeError: Argument 2 passed to getTotal() must be of the type float, string given
+    getTotal(2.5, 1);
+    // int(1) change to float(1.0)
+    //returns float(3.5)
+  ```
+- PHP 7 also supports Return Type Declarations which support all the same types as arguments. To specify the return type, we add a colon and then the type right before the opening curly bracket.
+  ```php
+    function getTotal(float $a, float $b) : float {
+  ```
+- Spaceship operator or Combined Comparison Operator, is complementing the greater-than and less-than operators.
+  ```php
+    $compare = 2 <=> 1
+    2 < 1? return -1
+    2 = 1? return 0
+    2 > 1? return 1
+  ```
+- Null Coalesce Operator is effectively the fabled if-set-or. It will return the left operand if it is not NULL, otherwise it will return the right.
+  ```php
+    $name = $firstName ??  "Guest";
+    // Equals to
+    if (!empty($firstName)) $name = $firstName;
+    else $name = "Guest";
+  ```
+- Grouped Imports: You can now import multiple classes in one ```use``` operator.
+  ```php
+    // Instead of using
+    use App\Dog;
+    use App\Cat;
+    // You can use
+    use App\{Dog, Cat};
+  ```
+
+### PHP 7.0.* to PHP 7.1.*
+
+- Nullable Types: Type declarations for parameters and return values can now be marked as nullable by prefixing the type name with a question mark. This signifies that as well as the specified type, NULL can be passed as an argument, or returned as a value.
+  ```php
+    function testReturn(): ?string
+    {
+        return 'elePHPant'; // can return string or null
+    }
+
+    function test(?string $name) // can pass string or null
+    {
+        var_dump($name);
+    }
+  ```
+- Void functions: A void return type has been introduced. Functions declared with void as their return type must either omit their return statement altogether, or use an empty return statement. NULL is not a valid return value for a void function.
+  ```php
+    function swap(&$left, &$right): void
+    {
+        // Code
+        return; // Or completly omitted.
+    }
+  ```
+- Symmetric array destructuring: The shorthand array syntax (```[]```) may now be used to destructure arrays for assignments (including within ```foreach```). Previously, only ```list()``` can be used.
+  ```php
+    $data = [
+        [1, 'Tom'],
+        [2, 'Fred'],
+    ];
+
+    list($id1, $name1) = $data[0];
+    // Equals to
+    [$id1, $name1] = $data[0];
+
+    foreach ($data as [$id, $name]) {
+        // logic here with $id and $name
+    }
+  ```
+- Multi Catch Exceptions: catch block may now be specified using the pipe character (```|```). This is useful for when different exceptions from different class hierarchies are handled the same.
+  ```php
+    try {
+        // some code
+    } catch (FirstException | SecondException $e) {
+        // handle first and second exceptions
+    }
+  ```
+- Support for negative string offsets: a negative offset is interpreted as being an offset from the end of the string.
+  ```php
+    var_dump("abcdef"[-2]); // string (1) "e"
+  ```
+- Class constant visibility: Support for specifying the visibility of class constants has been added.
+  ```php
+    class ConstDemo
+    {
+        const PUBLIC_CONST_A = 1;
+        public const PUBLIC_CONST_B = 2;
+        protected const PROTECTED_CONST = 3;
+        private const PRIVATE_CONST = 4;
+    }
+  ```
+- ```iterable``` psudo-type can now be used as a parameter or return type. This can be used with any type that is ```array``` or implements ```iterable``` or ```traversable``` interfaces.
+  ```php
+    function iterator(iterable $iter)
+    {
+        foreach ($iter as $val) {
+            //
+        }
+    }
+  ```
+
+### PHP 7.1.* to PHP 7.2.*
+
+- The new ```object``` type can be used as a method parameter or a return type to denote any type of objects.
+  ```php
+    function test(object $obj) : object
+    {
+        return new SplQueue();
+    }
+  ```
+
+### PHP 7.3.* to PHP 7.4.*
+
+- Class properties now support type declarations.
+  ```php
+    class User {
+        public int $id;
+        public string $name;
+    }
+  ```
+- Arrow functions provide a shorthand syntax for defining functions with implicit by-value scope binding.
+  ```php
+    $factor = 10;
+    $nums = array_map(fn($n) => $n * $factor, [1, 2, 3, 4]);
+    // $nums = array(10, 20, 30, 40);
+  ```
+- Null coalescing assignment operator
+  ```php
+    // Instead of this
+    $data['date'] = $data['date'] ?? new DateTime();
+    // You can do this
+    $data['date'] ??= new DateTime();
+  ```
+- Spread operators within an array.
+  ```php
+    $arrayA = [1, 2, 3];
+    $arrayB = [4, 5];
+    $result = [0, ...$arrayA, ...$arrayB, 6 ,7]; // [0, 1, 2, 3, 4, 5, 6, 7]
+  ```
 
 ## Security
 
@@ -760,14 +902,11 @@ _END;
 
 - PDO is not a specific database extention but it is database access layer that can access many of database 
   engines like mysql, sqlite, postgres.
-
 - To know the database engines in your system use the static function PDO::getAvailableDrivers();
-
 - To create a new PDO connection object with a specific db :
   $handler = new PDO('mysql:host=ip_address;dbname=database_name', 'user_name', 'Password');
-
 - We can use try and catch exceptions using PDOException class
-    Example:
+  ```php
     try
     {
       //Connect to the DB
@@ -776,50 +915,35 @@ _END;
     {
       $e->getMessage(); //This returns the error happened
     }
-
+  ```
 - To set attributes to the pdo object >> $handler->setAttribute(PDO_Attribute, PDO_Constant);
-
 - To get the available drivers in the current pdo version .. use $handler->getAvailableDrivers();
-
 - $result = $handle->query('SELECT * FROM table');
-  $result->fetch(PDO_BOTH, PDO_NUM, PDO_ASSOC, PDO_OBJ) >> fetches one row of the data with these specific 
-                                                           preferences.
-
+  $result->fetch(PDO_BOTH, PDO_NUM, PDO_ASSOC, PDO_OBJ) >> fetches one row of the data with these specific preferences.
 - $query = $handle->query($sql);
   $query->setFetchMode(PDO::FETCH_CLASS, 'Class_name');
   while($object_name = $query->fetch())
   {
     //Do something with $object_name;
   }
-
   class Test
   {
     function __construct ...
   }
-  
 - Preparing statements:
   $sql = "SELECT * FROM books where id = ?";
   $stm = $db->prepare($sql);
   $result = $stm->execute(["Value of placeholder #1", "Value of placeholder #2" ..... ]);
-
 - Last Inserted ID:
   $handler->lastInsertId(); >> returns the value of the last insert query id.
-
 - $results->rowCount(); >> returns the number of the rows returned from a query.
 
-============================================================================================================
-                            ---------------------------------
-                            <<<<<<<    Date & Time    >>>>>>>
-                            ---------------------------------
+## Date & Time
 
 - time() >> returns the current timestamp in unix format.
 - data($format[ , $timestamp = time()]) >> formats the timestamp as the inputted format.
 
-  
-============================================================================================================
-                            -------------------------------------
-                            <<<<<<<    Clean Code Tips    >>>>>>>
-                            -------------------------------------
+## Clean Code Tips
 
 - Return expected objects last.
 - At If statements, Check the negative values that can break your work flow first So you don't need to nest if 
@@ -849,23 +973,29 @@ _END;
 
 - Required classes should be included before we use them.
 - We can simple include all the classes, but with huge libraries we could import too much unused classes. Here comes the autoloading to solve this problem, It imports only the files with classes we gonna use
+- In older days, SPL's autoloader was used. This function will trigger this functions and import any class using ```require``` when a class is used.
+  ```php
+    spl_autoload_register(function($class) {
+      require "src/{$class}.php"; // The class name must be identical to the file name.
+    });
+  ```
 - One way to use autoloading by making ```composer.json``` file and add this snippet .. It will load all the classes from the specified directory "Just add ```/vendor/autoload.php``` within your root file" **You have to run ```composer dumpautoload``` every time you add another class to add the new class in the classmap**
-```json
-{
-  "autoload": {
-    "classmap": [
-      "DirectoryToLoadFrom/"
-    ]
-  }
-}
-```
-- Another way is to use autoloading is to use ```psr-4``` key. You must have namespaces within your classes files to implement it and every time you add a new file, It gets autoloaded dynamically. An example to this approach is
-```json
-{
-  "autoload": {
-    "psr-4": {
-      "RootNameSpace\\" : "DirectoryToLoadFrom"
+  ```json
+  {
+    "autoload": {
+      "classmap": [
+        "DirectoryToLoadFrom/"
+      ]
     }
   }
-}
-```
+  ```
+- Another way is to use autoloading is to use ```psr-4``` key. You must have namespaces within your classes files to implement it and every time you add a new file, It gets autoloaded dynamically. An example to this approach is
+  ```json
+  {
+    "autoload": {
+      "psr-4": {
+        "RootNameSpace\\" : "DirectoryToLoadFrom"
+      }
+    }
+  }
+  ```

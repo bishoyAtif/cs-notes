@@ -31,7 +31,8 @@ This is like giving key to your home to neighbours whom you want to access your 
 - ***Hollywood Principle***: Don't call us, we'll call you "Making actions that aren't implemented within the same module by calling the action from another module".
 - Inversion of Control is as it says, “inverting the control” of a system by keeping organizational control entirely separate from our objects.
 - Traditionally, application components have been designed to operate on and control the execution environment. For instance, a logging module could be implemented to log data to a file, and how and when to log the data would be a entirely under control of the module. But let’s say we need to extend the module’s functionality add logging data to a database, or eventually even via email. Upgrading the module to expose the extra functionality will make it grow in complexity, becoming more bloated as the logic required to attend to these additional duties is packaged behind the same API.
-- So instead of making the module completely responsible for logging data to multiple endpoints, we can transfer the responsibility straight to the external environment.
+- So instead of making the module completely responsible for logging data to multiple endpoints, we can transfer the responsibility straight to the external environment, for example a whole new module.
+- This principle helps to prevent dependency rot. Dependency rot happens when each component depends upon every other component. In other words, dependency rot is when dependency happens in each direction (upward, sideways, downward). The Hollywood Principle allows us to only make dependency in one direction.
 - One Example for this principle is using observers. there’s a highly-decoupled subject "Observable" focused on doing just a few narrow tasks while one or more external observers are responsible for implementing the logic required for handling the events triggered by the subject. How to handle the events, and even processing new ones, is entirely a responsibility of the observers rather than the subject.
 - For more info, check this [link](http://bit.ly/IOC-SP).
 
@@ -87,6 +88,7 @@ Solution: Try hard to separate the code that can be changed under a separate int
 
 - This [article](https://bit.ly/jokiruiz-solid) has a brief introduction to SOLID Principles with example for each of them.
 - This [series](https://bit.ly/tutsplus-solid) is a great explanation for SOLID Principles either.
+- This [article](https://bit.ly/dzone-solid-grasp) is also great. It talks about SOLID, GRASP and many different oop desing principles.
 
 ## Structural Design Patterns
 
@@ -96,6 +98,72 @@ Solution: Try hard to separate the code that can be changed under a separate int
 - In other words, we are giving the a class its dependency rather than creating it itself.
 - We can use the database object in the user class constructor to add the create user function using the query function in the database class.
 - For more info, check this [link](bit.ly/di-dpp).
+
+### Service Locator
+
+Many developers out there don’t see the difference between the dependency injection and the service locator design patterns. Yes, both of them are trying to solve the same problem — increase decoupling. We all know what benefits this give us when it comes to scaling, testing or simply reading the code.
+However, how do I know when to use dependency injection and when to use service locator? I would say we should use both of them when appropriate.
+If I was asked to choose a single verb that best describes the dependency injection pattern I would choose “to give”. If you think about it, that’s exactly what we achieve with dependency injection after all. We simply give objects to an object.
+$window = new Window();
+$door = new Door();
+$house = new House($window, $door);
+In this case, we give the window object and the door object to the house object.
+On the other hand, if I was asked to describe the service locator pattern with a single verb I would say “to take”. Just think about it. That’s what we do when we use a service locator. We take objects from an object.
+$house = $serviceLocator->get(House::class); 
+As you can see, we take the house object from the service locator.
+In many cases, the dependency injection and the service locator work as a single unit. We might not see it when the things are injected automagically but behind the scene the implementations of dependency injection rely on service locators in order to retrieve actual dependencies.
+This is how it might look like somewhere in the code:
+foreach ($dependencies as $dependency) {
+    $instances[] = $this->container->get($dependency);
+}
+return $this->resolve($class, $instances);
+A service locator is pretty easy to implement. All you need is to have ability to get a requested instance by name or id and ability to check whether the requested instance actually exists. Worth to note that a service locator is often called a container. Both things are the same. Both of them are meant to provide instances or services however you prefer to call them. Of course, there’s a difference between a service and an instance when speaking about terms and purposes, but from the technical point of view they are all instances of certain classes.
+Here’s a primitive version of a service locator (aka container):
+class ServiceLocator {
+
+    private $services = [];
+
+    public function get(string $id) : ?object {
+        return $this->services[$id] ?? null;
+    }
+
+
+    public function has(string $id) : bool {
+        return isset($this->services[$id]);
+    }
+
+    public function register(string $id, object $service) : void {
+        $this->services[$id] = $service;
+    }
+}
+$serviceLocator = new ServiceLocator();
+$serviceLocator->register('house', new House());
+// somewhere else
+
+if ($serviceLocator->has('house')){
+    $house = $serviceLocator->get('house');
+}
+Additionally, I have provided the way to register services.
+The implementations of dependency injection usually inject dependencies into objects automatically. All you need is to provide a bit of configuration and that’s all. That’s pretty convenient in many cases, but there are cases when you have to use service locator to avoid the deadlock. This could happen when two instances are depended on each other via constructor. Here’s an example:
+class A {
+    
+    public function __construct(B $b)
+    {
+        //
+    }
+}
+
+class B {
+    public function __construct(A $a)
+    {
+        //
+    }
+}
+$a = new A(...); // We need B!
+$b = new B(...); // We need A!
+As you can see, we cannot resolve any of the services because they are depended on each other. We cannot resolve the service A because it requires the service B, and we cannot resolve the service B because it requires the service A. To solve this, we need to retrieve one of the services in lazy-loading way. Meaning that, we should take one of the services from the service locator at the point when the service is actually needed and not in the constructor.
+All in all
+Hope this article cleared some things up for you and you enjoyed reading it. If not, then you must be already smartest programer out there ;-)
 
 ## Database Design Patterns
 

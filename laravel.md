@@ -184,6 +184,10 @@
 - Message flashing
 - Service Providers
 
+## Service "IoC" "Dependency Injection" Containers
+
+
+
 ## Facades
 
 - A facade is a pattern that uses a class wrapping a complex library to provide a simpler and more readable interface to it.
