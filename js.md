@@ -1,37 +1,7 @@
-# JS
-
 ## General
-- JS is an interpreted language.
-- There are two ways to use JS within HTML:
-    - You can write it in <script> Your JS code <script>
-    - You can link js file to your page using <script src="path/to/file" type="text/javascript"></script>
 - JS is weakly "loosly" typed variables. Variables change their type by using it in another context.
 
 ## Variables and Types
-
-- JavaScript has typed values, not typed variables.
-- ```typeof``` unary operator is used to return a string denoting the type of a value resulted from an expression or within a variable. Ex. ```typeof variable```.
-- There are 5 primitive 'basic' datatypes. They are Number, String, Boolean, null, undefined and symbol.
-- Permitive values are passed by value while the non-permitive values are passed by reference.
-  - string
-  - number
-  - boolean
-  - null and undefined
-  - object
-  - symbol  (new to ES6)
-
-  ```javascript
-    5 // Number
-    3.14 // Number
-
-    "Hello, World" // String
-
-    true // Boolean
-    false // Boolean
-
-    null // null
-    undefined // undefined
-  ```
 
 - ```null``` is treated as ```0``` when using it with arithmatic operators.
 - ```undefined``` is the value for variables that are declared without assigning a value to it. It will became ```NaN``` special value when using it with arithmatic operators.
@@ -49,55 +19,15 @@
 
 ## Variables
 
-- Variable name can contain letters, numbers, underscore and dollar sign and must begin with a letter, underscore or a dollar sign.
-- They are case sensitive. ```variable``` and ```VARiable``` are different from each other.
-- Variables are weakly "loosly" typed variables. they change their type within different contexts.
 - String variables can be interpolated using ``` ` This variable has value ${variableName}` ```.
 
 ### Declaring variables
 
-- ```var variableName = value;``` will create a variable within the current scope.
-- ```variableName = value;``` can be used to declare non-declared variables only in the non-strict mode. and it will be assigned globally.
-- ```let``` is used instead of ```var``` to declare a variable that are scoped within the current block only ```{ /** */ }```.
-- ```const VAR_NAME = constant;```. ```const``` will restrict mutating the value of the variable. Editing or adding properties is allowed in ```object``` type. Only ```Object.freeze()``` will prevent that behaviour.
 - ```new``` operator is used to create new objects. There are default classes in js like ```Object()```, ```Array()```, ```Function()```, ```Date()```, ```RegExp()```, ```Error()```. Note that ```Number()```, ```String()``` and ```Boolean()``` are used for values coercion and don't use ```new``` keyword.
   ```javascript
     var date = Date('March 6, 2019');
     date.toUTCString();
   ```
-- Declaring functions can be done using function expressions.
-  ```javascript
-    // Anonymous function expression
-    var fun1 = function () {
-      console.log('Hello, World');
-    }
-
-    // Named function expression
-    var fun2 = function greet() {
-      console.log('Hello, World');
-    }
-
-    fun1(); // Hello, World
-    fun2(); // Hello, World
-    greet(); // Error ... function not defined.
-  ```
-
-## Functions
-
-- float_num.toFixed(decimal_after_point = 0)
-- console.log(variable); //Prints the variable in the console.
-- alert(variable); //Prints the variable in a pop-up.
-- variable = prompt("Message") //Gets the user input with a pop-up.
-- IIFE 'Immediately Invoked Function Expression' is a pattern that use a function expression to declare a separate block of scope. It declares an anonymous function then executes it immediately.
-  ```javascript
-    var x = 1;
-    (function() {
-      var x = 5;
-      console.log(x); // 5
-    })();
-    console.log(x); // 1
-  ```
-
 ### Colsure
 
 - Closure is a function that remembers the variables outside of it even if you pass the function elsewhere.
@@ -147,18 +77,6 @@
     a; // 1
     b; // [3, 4]
   ```
-
-## Objects
-
-### Object Destructuring
-
-- Object destructuring is used to multi assign values from object to some variables.
-  ```javascript
-    var {firstProperty, secondProperty} = {secondProperty: 2, firstProperty: 1};
-    firstProperty; // 1
-    secondProperty; // 2
-  ```
-
 ## Loops
 
 ### For Loop
@@ -179,11 +97,7 @@
     }
   ```
 
-
-============================================================================================================
-                                            -------------------------
-                                            <<<<<<<    DOM    >>>>>>>
-                                            -------------------------
+# DOM
 - You can access title "for example" by using document.title
 - document.getElementById('id'); //Getting the html element by its id.
 - You can access the text between element tags using Element.InnerHTML
@@ -206,31 +120,11 @@
     age: 19,
   }
 
-//AJAX
-Example:
-var request = new XMLHttpRequest();
-request.open('method', Link_requested);
-
-request.onload = callback_function;
-
-function callback_function(){
-  //What are you looking at?? Do something quickly.
-}
-request.send();
-
-- You can handle error using request.onerror = method;
-- You can access response text with request.responseText
 - You must parse the response get using JOSN.parse(request.responseText);
 
-
-## Underscore JS
-
-- ```_.each(iterable, function(element){})``` can be used to iterate through iterable object and get each of its elements.
-- ```_.map(iterable, function(element){})``` is used to apply a function to an array and reutrn a new list with the applied changes _This is the key difference between ```_.map()``` and ```_.each```_.
 --------------------------------------General
 
 //null VS undefined
 - undefined is a variable declared but not have a value.
 - null is explicit removal of the variable value.
-- Example: When you check for the variable in your program you will check if the program flow has put the value null to the
-  variable you want, not if the variable has a value or not.
+- Example: When you check for the variable in your program you will check if the program flow has put the value null to the variable you want, not if the variable has a value or not.

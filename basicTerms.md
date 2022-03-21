@@ -50,8 +50,7 @@
 
 ### Same Origin Policy
 
-- Browsers implement something called "Same-origin Policy" (SOP).
-<img src="https://cdn-images-1.medium.com/max/1600/1*g_ISMQPCQpjw-6w3JRFUKQ.png" alt="CSRF Attack Model" width="60%" align="right" style="margin: 15px">
+- Browsers implement something called "Same-origin Policy" (SOP). ![CSRF Attack Model](https://cdn-images-1.medium.com/max/1600/1*g_ISMQPCQpjw-6w3JRFUKQ.png)
 - It pervents the browser from executing XMLHttpRequests and some other requests "mentioned below" from cross origins. As it can contain many vulnerabilities like csrf "Making blind requests to cross web site depending that there are registered cookies for those web sites".
 - In other words, Two websites can load each others contents "Using Ajax Requests" only if they are both from the same origin "Same Origin Requests". But if the origins of the two sites differ, loading content from each other "Cross Origin Requests" is not permitted, unless we use CORS or another technique to poke little holes into the SOP.
 - SOP is not to protect the resources requested on a server, that task is up to the server itself via other means. **The point is to protect the innocent user**.
