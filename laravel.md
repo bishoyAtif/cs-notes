@@ -1,13 +1,3 @@
-                                    ----------------------------------
-                                    <<<<<<<    Installation    >>>>>>>
-                                    ----------------------------------
-- PHP >= 5.6
-- Installing Composer from the website.
-- to make composer available in the terminal .. Add [ export PATH="$HOME/.config/composer/vendor/bin:$PATH" ] to .bashrc.
-- installing laravel "composer global require laravel/installer"
-- Modifing terminal variable to run laravel command directly
-- Making new laravel project "laravel new <project_name>"
-============================================================================================================
                                       ---------------------------------
                                       <<<<<<<    PHP Artisan    >>>>>>>
                                       ---------------------------------
@@ -181,7 +171,6 @@
                                           -----------------------------
                                           <<<<<<<    Waiting    >>>>>>>
                                           -----------------------------
-- Message flashing
 - Service Providers
 
 ## Service "IoC" "Dependency Injection" Containers

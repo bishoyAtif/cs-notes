@@ -63,22 +63,6 @@
 - ```ENUM(<value1, value2>)``` stores multiple options to choose only one of them.
 - SET >> stores multiple records to choose one or more from them
 
-## CONSTRAINTS
-
-- It's rules for columns within a table.
-- ```NOT NULL``` can't be empty field.
-- ```CHECK(<condition>)``` will check a condition before inserting into this column. ***MySQL Parses CHECK constraints but it doesn't enforce it.***
-  - ```field_name [>, <, =] some_value``` comparison between the value inserted and predefined ```some_value```.
-  - ```field_name in (value1, value2 ...)```
-- ```DEFAULT <value>``` It is used as a default value if no value is inserted in this field.
-- ```AUTO_INCREMENT``` is used with the primary keys to increment it automatically.
-- ```USIGNED``` is used with ```INT``` types and will not allow negative numbers.
-- ```UNIQUE``` will not allow for duplicate values in the column specified for it. It will raise an error when trying to insert duplicate values.
-
-### Indecies
-
-## Queries
-
 ### Working with databases
 
 - SHOW DATABASES; >> returns all the databases in your server.
@@ -212,28 +196,6 @@
   - It should be a primary key to identify each row.
 - Seconde Normal Form:
   - No repeation for the values in multiple column.
-
-## Indexes
-
-- Adding index to a row in an existing table >> ALTER TABLE books ADD INDEX(author(20))
-  - Adding index to the first 20 chars of the column authors.
-  - If MySQL finds two indexes with the same contents, it will have to waste time going to the table itself and checking the column that was indexed to find out which rows really matched.
-- FULLTEXT Index: Used only with MyISAM storage engine
-  - It's recommended to load your data into a table that has no FULLTEXT index and then create the index 
-  than to load data into a table that has an existing FULLTEXT index.
-  - Used to search in large texts .. particular with MATCH .. AGAINST
-- ALTER TABLE <table-name> DROP INDEX index_name ON table_name; >> Dropping an index.
-- ```CONSTRAINT relation_name PRIMARY KEY (column_name)``` can be used to define a primary key, a unique indentifier for each row.
-- ```CONSTRAINT relation_name FOREIGN KEY (column_name) REFERENCES foreign_table_name(foreign_column_name)``` is used to make a foreign key constraint, a key that represents a primary key or at less a unique column for a table added in another table to represents that row from the first table.
-  - You can use ```ON DELETE``` and ```ON UPDATE``` with the foreign key to make action on the rows that have foreign keys when their primary keys are changed or deleted.
-  - ```ON DELETE CASCADE``` will delete all the child rows if the primary row is deleted.
-  - ```ON DELETE SET NULL``` will set the related foreign key to null in all the child rows if the primary row is deleted.
-    ```sql
-      CONSTRAINT relation_name FOREIGN KEY column_name
-      REFERENCES foreign_table_name(foreign_column_name) 
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-    ```
 
 ## DateTime
 
