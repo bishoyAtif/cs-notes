@@ -1,18 +1,5 @@
 # Basic Terms
 
-## Charsets and Character Encoding
-
-- Character set is a defined list of characters recognized by the computer hardware and software. **Each character is represented by a number**. For example, ASCII and Unicode.
-- [ASCII Charset](https://www.commfront.com/pages/ascii-chart) represents one character in a byte. For example, Character 'A' in ASCII is represented with 01000001 "65".
-- Since there are character sets with more than 256 characters in the character set one cannot in general simply say that each character is a byte.
-- Another charset is Unicode. Every platonic letter in every alphabet is assigned a magic number by the Unicode consortium which is written like this: U+0639. This magic number is called a **code point**. The U+ means “Unicode” and the numbers are hexadecimal. There is no real limit on the number of letters that Unicode can define and in fact they have gone beyond 65,536 **so not every unicode letter can really be squeezed into two bytes**. Unicode just presents the characters into numbers and it says nothing about how these numbers should be implemented in a computer memory.
-- Character encoding is how to encode characters included in the charsets into sequences of bytes "actual bytes in the memory".  For example, UTF-8 or windows-1252.
-- ASCII was encoded in early days in one byte "the number represented by the charset" so it can be considered also an encoding "just in the range of 0-127".
-- UTF-8 uses 1 byte when encoding an ASCII character, giving the same output as any other ASCII encoding. But for other characters, it will use the first bit to indicate that a 2nd byte will follow.
-- When you encode your data, you use an encoding, but when you decode data, you will need to know what encoding was used, and use that same encoding to decode it. So **It does not make sense to have a string without knowing what encoding it uses**.
-- Mojibake problem happens when you encode the string in a specific encoding and decode it with a different one. It can interpret a char encoded in two-byte-encoding as two chars in one-byte-encoding.
-- For more info, check [What is character encoding and why should I bother with it](https://stackoverflow.com/a/31760986/6273509) and [The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets](http://bit.ly/2RdHVC8)
-
 ## Mime Type
 
 - A MIME type "Content-Type Header in the response" is a label used to identify a type of data. It is used so software can know how to handle the data. It serves the same purpose on the Internet that file extensions do on Microsoft Windows.
